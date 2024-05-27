@@ -13,10 +13,10 @@ import {
 } from "../types";
 import Alert from "./Alert";
 import Button from "./Button";
-import Form from "./FormElements/Form";
-import FormHelper from "./FormElements/FormHelper";
-import Input from "./FormElements/Input";
-import InputGroup from "./FormElements/InputGroup";
+import Form from "./formElements/Form";
+import FormHelper from "./formElements/FormHelper";
+import Input from "./formElements/Input";
+import InputGroup from "./formElements/InputGroup";
 
 const CreateAccountForm = () => {
   const [loading, setLoading] = useState(false);
