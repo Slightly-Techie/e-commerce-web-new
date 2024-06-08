@@ -10,7 +10,7 @@ import Avatar from "../assets/Avatar.png";
 export default function Sidebar() {
   const favorite = 0;
   return (
-    <aside className="fixed flex h-screen w-[260px] flex-col justify-between rounded-md bg-white p-4">
+    <aside className="fixed hidden h-screen w-[260px] flex-col justify-between rounded-md bg-white p-4 md:flex">
       <ul className="flex flex-col gap-4 font-medium text-gray600">
         <li>
           <NavLink

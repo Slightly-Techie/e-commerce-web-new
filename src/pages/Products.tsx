@@ -127,10 +127,10 @@ export default function Products() {
   return (
     <div className="flex gap-6 bg-gray100">
       <Sidebar />
-      <main className="flex-1 bg-white px-6 py-4 pl-[260px] xl:border xl:border-red-500">
+      <main className="flex-1 bg-white px-6 py-4 md:pl-[260px]">
         <section className="mx-auto xl:w-[85%]">
           <Header title="Top Deals" discount={90} />
-          <ScrollArea className="w-[62rem]">
+          <ScrollArea className="w-full md:w-[42rem] lg:w-[62rem]">
             <article className="mb-4 mt-8 flex gap-4 lg:justify-between">
               {TopDeals.map((product, index) => {
                 return <ProductItem key={index} {...product} />;
