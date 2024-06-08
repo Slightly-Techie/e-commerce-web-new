@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import "./index.css";
 import App from "./pages/App.tsx";
+import Products from "./pages/Products.tsx";
 import Signup from "./pages/Signup.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
@@ -11,6 +12,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/sign-up" element={<Signup />} />
+        <Route path="/dashboard/products" element={<Products />} />
         <Route
           path="*"
           element={
