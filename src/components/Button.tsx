@@ -1,30 +1,26 @@
-import { ButtonSizeStyles, ButtonTypeStyles } from "../lib/styles";
-import { cn } from "../lib/utils";
-import { ButtonSize, ButtonType } from "../types";
+import React from "react";
 
-type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  btnType?: ButtonType;
-  btnSize?: ButtonSize;
-};
+interface ButtonProps {
+  label: string;
+  icon?: string;
+  secondary?: boolean;
+  invert?: boolean;
+  onClick?: () => void;
+}
 
-const Button = ({
-  btnType = ButtonType.primary,
-  btnSize = ButtonSize.small,
-  className,
-  ...props
-}: ButtonProps) => {
+const Button: React.FC<ButtonProps> = ({
+  label,
+  icon,
+  secondary,
+  invert,
+  onClick,
+}) => {
   return (
     <button
-      disabled={btnType === ButtonType.disabled}
-      className={cn(
-        "rounded-[4px] border border-transparent py-4 text-white",
-        ButtonSizeStyles[btnSize],
-        ButtonTypeStyles[btnType],
-        className
-      )}
-      {...props}
+      className={`flex w-full items-center justify-center gap-2.5 rounded-lg px-4 py-2.5 lg:w-fit ${!secondary ? "bg-[#111111]" : "bg-gray75"} ${!secondary ? "text-white" : "text-[#111111]"} ${invert && "flex-row-reverse"}`}
+      onClick={onClick}
     >
-      {props.children}
+      {icon && <img src={icon} alt="" />} {label}
     </button>
   );
 };
