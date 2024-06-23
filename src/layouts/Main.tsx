@@ -1,6 +1,6 @@
 import Container from "../components/Container";
 import { Outlet } from "react-router-dom";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../components/sidebar/Sidebar";
 // import { useState } from "react";
 
 const Main = () => {
@@ -14,7 +14,7 @@ const Main = () => {
         {/* <button onClick={toggleSidebar} className="fixed top-[10px] right-[100px] z-[999]">
           Toggle
         </button> */}
-        <Sidebar open={true} />
+        <Sidebar />
         <Outlet />
       </div>
     </Container>

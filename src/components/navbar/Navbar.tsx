@@ -24,7 +24,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed left-0 top-0 z-40 flex w-full items-center justify-between bg-white p-4">
+    <nav className="fixed left-0 top-0 z-50 flex w-full items-center justify-between bg-white p-4">
       <Container>
         <div className="flex items-center justify-between">
           <div className="flex w-full max-w-2xl items-center gap-4 md:gap-8 xl:max-w-3xl">

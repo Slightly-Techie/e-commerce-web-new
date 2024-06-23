@@ -43,7 +43,7 @@ const ProductItem = ({
         <div className="mb-8 mt-4 flex items-center gap-1.5">
           <span className="text-lg font-bold">{price}</span>
           {discountedPrice && (
-            <span className="text-sm font-medium text-gray300 line-through">
+            <span className="text-sm font-medium text-gray400 line-through">
               {discountedPrice}
             </span>
           )}
@@ -54,7 +54,7 @@ const ProductItem = ({
           secondary
           invert
           icon={cartIcon}
-          className="w-full"
+          className="w-full font-semibold"
         />
       </div>
     </div>

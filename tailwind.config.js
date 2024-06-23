@@ -20,8 +20,11 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        "product-sans": "Product Sans",
+        "product-sans": ['"Product Sans"', 'sans-serif'],
         anton: "Anton",
+      },
+      height: {
+        'custom-height': "calc(100dvh - 100px)"
       },
       colors: {
         // Error

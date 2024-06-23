@@ -47,7 +47,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
       {isOpen && <Backdrop closeMenu={closeMenuHandler} />}
 
       <div
-        className="absolute -left-full top-0 flex h-dvh w-[80%] max-w-sm flex-col bg-white p-4"
+        className="absolute -left-full top-0 flex h-dvh w-[80%] max-w-sm flex-col bg-white p-4 z-[999]"
         ref={navigationRef}
       >
         <div className="mb-12 flex items-center justify-between">

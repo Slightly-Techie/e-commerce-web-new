@@ -1,4 +1,5 @@
 import React from "react";
+import { cn } from "../lib";
 
 interface ButtonProps {
   className?: string;
@@ -21,7 +22,15 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
   return (
     <button
-      className={`flex items-center justify-center gap-2.5 rounded-lg bg-[#111111] font-medium hover:opacity-90 ${secondary && "bg-gray75"} ${secondary ? "text-[#111111]" : "text-white"} ${!ghost ? "px-4" : "px-0"} ${!ghost ? "py-2.5" : "py-0"} ${ghost && "bg-transparent"} ${ghost && "text-gray500"} ${invert && "flex-row-reverse"} ${className}`}
+      className={cn(
+        "flex items-center justify-center gap-2.5 rounded-lg bg-[#111111] font-medium text-white hover:opacity-90",
+        secondary && "bg-gray100",
+        secondary && "text-[#111111]",
+        !ghost ? "px-4 py-2.5" : "px-0 py-0",
+        ghost && "bg-transparent text-gray-500",
+        invert && "flex-row-reverse",
+        className,
+      )}
       onClick={onClick}
     >
       {icon && <img src={icon} alt="" />} {label}
