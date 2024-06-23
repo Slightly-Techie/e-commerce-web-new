@@ -4,12 +4,9 @@ import Backdrop from "../Backdrop";
 import { Link } from "react-router-dom";
 import Balance from "./Balance";
 import Location from "./Location";
-import NotificationIcon from "./NotificationIcon";
 import Button from "../Button";
 import closeIcon from "../../assets/icons/navbar/close.svg";
 import personIcon from "../../assets/icons/navbar/person.svg";
-import CartIcon from "./CartIcon";
-import SearchBar from "./SearchBar";
 
 interface MobileMenuProps {
   isAuthenticated: boolean;
@@ -64,12 +61,8 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
         </div>
 
         <div className="grid gap-2">
-          <SearchBar />
-
           {isAuthenticated && <Balance />}
-          <NotificationIcon closeMenu={closeMenuHandler} />
-          <CartIcon closeMenu={closeMenuHandler} />
-          {/* <MobileNavItem label="" count={0} icon={bellIcon} /> */}
+          {!isAuthenticated && <Button label="Sign In" icon={personIcon} />}
         </div>
 
         <div className="mt-auto">
