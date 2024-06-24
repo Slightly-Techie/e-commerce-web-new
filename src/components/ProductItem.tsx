@@ -40,7 +40,7 @@ const ProductItem = ({
 
       <div className="mt-4">
         <p className="font-medium text-gray600">{name}</p>
-        <div className="mb-8 mt-4 flex items-center gap-1.5">
+        <div className="mb-8 mt-2 flex items-center gap-1.5">
           <span className="text-lg font-bold">{price}</span>
           {discountedPrice && (
             <span className="text-sm font-medium text-gray400 line-through">

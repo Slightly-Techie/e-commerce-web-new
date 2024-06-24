@@ -7,6 +7,7 @@ import Location from "./Location";
 import Button from "../Button";
 import closeIcon from "../../assets/icons/navbar/close.svg";
 import personIcon from "../../assets/icons/navbar/person.svg";
+import Heart from "../../assets/icons/sidebar/heart.svg?react";
 
 interface MobileMenuProps {
   isAuthenticated: boolean;
@@ -60,10 +61,14 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
           />
         </div>
 
-        <div className="grid gap-2">
+        <div className="grid gap-2 mb-8">
           {isAuthenticated && <Balance />}
           {!isAuthenticated && <Button label="Sign In" icon={personIcon} />}
         </div>
+
+        <Link to='/favorites' className="flex gap-4" onClick={closeMenuHandler}>
+          <Heart /> <span>Favorites</span>
+        </Link>
 
         <div className="mt-auto">
           <Location />

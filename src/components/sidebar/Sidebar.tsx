@@ -1,88 +1,67 @@
-import { Link, NavLink } from "react-router-dom";
-import Backdrop from "../Backdrop";
+import { NavLink } from "react-router-dom";
 import { SIDEBAR_LINKS } from "../../constants";
 import { cn } from "../../lib";
-import { useRef, useState } from "react";
-import logo from "../../assets/logo.svg";
-import closeIcon from "../../assets/icons/navbar/close.svg";
 import STMember from "./STMember";
+import { useEffect, useState } from "react";
+import IndicatorIcon from '../../assets/icons/sidebar/Indicator.svg'
 
 const Sidebar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const sidebarRef = useRef<HTMLDivElement>(null);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-  const openSidebarHandler = () => {
-    sidebarRef.current!.style.transition = "300ms ease-in-out";
-    setIsOpen(true);
-  };
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
 
-  const closeSidebarHandler = () => {
-    if (window.innerWidth < 1024) {
-      sidebarRef.current!.style.transition = "300ms ease-in-out";
-      setIsOpen(false);
-    }
-  };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
-    <>
-      {isOpen && (
-        <div className="lg:hidden">
-          <Backdrop closeMenu={closeSidebarHandler} />
-        </div>
-      )}
-
-      <div
-        className="absolute right-5 top-16 z-20 lg:hidden"
-        onClick={openSidebarHandler}
-      >
-        Open
-      </div>
-
       <div
         className={cn(
-          "fixed top-0 z-50 flex h-dvh max-h-[896px] w-[80%] max-w-[260px] flex-col bg-white p-4 font-product-sans lg:left-auto lg:top-auto lg:z-40 lg:h-custom-height lg:rounded-2xl",
-          isOpen ? "left-0" : "-left-full",
+          "fixed bottom-0 z-20 shadow-custom flex max-h-[896px] w-full lg:w-[260px] bg-white p-4 font-product-sans lg:left-auto lg:top-auto lg:h-custom-height lg:rounded-2xl lg:flex-col lg:bottom-auto lg:shadow-none",
         )}
-        ref={sidebarRef}
       >
-        <div className="mb-12 flex items-center justify-between lg:hidden">
-          <Link to="/" onClick={closeSidebarHandler}>
-            <img src={logo} alt="logo image" className="w-10" />
-          </Link>
+        <ul className="flex justify-between w-full max-w-lg mx-auto lg:max-w-none lg:flex-col lg:gap-3">
+          {SIDEBAR_LINKS.map(({ route, label, label2, icon }, index) => {
+           if(windowWidth < 1024 && label === 'Favorites') return
 
-          <img
-            src={closeIcon}
-            alt="close menu"
-            onClick={closeSidebarHandler}
-            className="w-3.5"
-          />
-        </div>
-
-        <ul className="grid gap-3">
-          {SIDEBAR_LINKS.map(({ route, name, icon }, index) => (
-            <li key={index}>
+           return <li key={index}>
               <NavLink
                 to={route}
-                onClick={closeSidebarHandler}
                 className={({ isActive }) =>
                   cn(
                     isActive
-                      ? "block rounded-xl border border-gray200 bg-gray100 p-3 font-bold text-[#181C20]"
-                      : "block p-3 text-gray500",
-                    "flex gap-2.5",
+                      ? "font-bold text-[#181C20] lg:rounded-xl lg:border lg:border-gray200 lg:bg-gray100"
+                      : "text-gray500",
+                    "flex flex-col items-center gap-2.5 lg:flex-row lg:p-3",
                   )
                 }
               >
-                {icon}
-                {name}
+                 {({ isActive }) => (
+                  <>
+                    {icon}
+                    <span className="text-sm md:text-base">
+                      {windowWidth > 1024 ? label2 : null} {label}
+                    </span>
+                   <img src={IndicatorIcon} alt="" className={cn(
+                      "lg:hidden",
+                      !isActive ? 'invisible' : 'visible'
+                    )} />
+                  </>
+                )}
               </NavLink>
             </li>
-          ))}
+          })}
         </ul>
 
+        <div className="hidden lg:block mt-auto">
         <STMember />
+        </div>
       </div>
-    </>
   );
 };
 

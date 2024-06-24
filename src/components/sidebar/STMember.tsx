@@ -3,10 +3,10 @@ import dottedIcon from "../../assets/icons/sidebar/3dots.svg";
 
 const STMember = () => {
   return (
-    <div className="mt-auto flex items-center justify-between px-4">
+    <div className="flex items-center justify-between px-4">
       <div className="flex items-center gap-3">
         <div className="h-[42px] w-[42px] overflow-hidden rounded-full">
-          <img src="/assets/STMember.jpg" alt="" />
+          <img src="/assets/user.jpg" alt="" />
         </div>
 
         <div>

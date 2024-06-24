@@ -59,7 +59,7 @@ const Laptops = () => {
       </div>
 
       <ScrollArea className="w-full whitespace-nowrap rounded-md">
-        <div className="flex w-max space-x-8 lg:space-x-12">
+        <div className="flex w-max space-x-8 lg:space-x-12 mb-4">
           {LaptopDeals.map((product, index) => (
             <ProductItem key={index} {...product} />
           ))}

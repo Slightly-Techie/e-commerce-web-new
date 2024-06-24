@@ -19,6 +19,9 @@ export default {
       height: {
         'custom-height': "calc(100dvh - 100px)"
       },
+       boxShadow: {
+        'custom': '0 9px 60px -12px rgba(0, 0, 0, 0.1)',
+      },
       colors: {
         // Error
         error50: "#FEF2F2",

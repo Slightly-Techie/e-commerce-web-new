@@ -6,27 +6,30 @@ import Truck from "./assets/icons/sidebar/truck-02.svg?react";
 
 export const SIDEBAR_LINKS = [
   {
-    name: "All Products",
+    label: "Products",
+    label2: "All",
     route: "/",
     icon: <Bag />,
   },
   {
-    name: "Explore",
+    label: "Explore",
     route: "explore",
     icon: <Search />,
   },
   {
-    name: "Favorite",
-    route: "favorite",
+    label: "Favorites",
+    route: "favorites",
     icon: <Heart />,
   },
   {
-    name: "Track Orders",
+    label: "Orders",
+    label2: "Track",
     route: "track",
     icon: <Truck />,
   },
   {
-    name: "Order History",
+    label: "History",
+    label2: "Order",
     route: "history",
     icon: <Clock />,
   },

@@ -10,7 +10,7 @@ const Main = () => {
 
   return (
     <Container>
-      <div className="mt-[100px] lg:mx-4 xl:mx-0">
+      <div className="mt-[166px] md:mt-[100px] lg:mx-4 xl:mx-0">
         {/* <button onClick={toggleSidebar} className="fixed top-[10px] right-[100px] z-[999]">
           Toggle
         </button> */}
