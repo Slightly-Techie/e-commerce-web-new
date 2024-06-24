@@ -29,32 +29,38 @@ const Sidebar = () => {
           {SIDEBAR_LINKS.map(({ route, label, label2, icon }, index) => {
            if(windowWidth < 1024 && label === 'Favorites') return
 
-           return <li key={index}>
-              <NavLink
-                to={route}
-                className={({ isActive }) =>
-                  cn(
-                    isActive
-                      ? "font-bold text-[#181C20] lg:rounded-xl lg:border lg:border-gray200 lg:bg-gray100"
-                      : "text-gray500",
-                    "flex flex-col items-center gap-2.5 lg:flex-row lg:p-3",
-                  )
-                }
-              >
+           return (
+             <li key={index}>
+               <NavLink
+                 to={route}
+                 className={({ isActive }) =>
+                   cn(
+                     isActive
+                       ? "font-bold text-[#181C20] lg:rounded-xl lg:border-gray200 lg:bg-gray100"
+                       : "text-gray500",
+                     "flex flex-col items-center gap-2.5 lg:flex-row lg:border lg:p-3 border-transparent",
+                   )
+                 }
+               >
                  {({ isActive }) => (
-                  <>
-                    {icon}
-                    <span className="text-sm md:text-base">
-                      {windowWidth > 1024 ? label2 : null} {label}
-                    </span>
-                   <img src={IndicatorIcon} alt="" className={cn(
-                      "lg:hidden",
-                      !isActive ? 'invisible' : 'visible'
-                    )} />
-                  </>
-                )}
-              </NavLink>
-            </li>
+                   <>
+                     {icon}
+                     <span className="text-sm md:text-base">
+                       {windowWidth > 1024 ? label2 : null} {label}
+                     </span>
+                     <img
+                       src={IndicatorIcon}
+                       alt=""
+                       className={cn(
+                         "lg:hidden",
+                         !isActive ? "invisible" : "visible",
+                       )}
+                     />
+                   </>
+                 )}
+               </NavLink>
+             </li>
+           );
           })}
         </ul>
 
