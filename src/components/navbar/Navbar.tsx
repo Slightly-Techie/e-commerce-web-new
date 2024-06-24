@@ -1,15 +1,15 @@
-import logo from "../../assets/logo.svg";
-import NotificationIcon from "./NotificationIcon.tsx";
-import CartIcon from "./CartIcon.tsx";
-import Balance from "./Balance.tsx";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import Button from "../Button.tsx";
-import hamburgerIcon from "../../assets/icons/navbar/menu.svg";
 import personIcon from "../../assets/icons/navbar/person.svg";
-import MobileMenu from "./MobileMenu.tsx";
-import SearchBar from "./SearchBar.tsx";
+import logo from "../../assets/logo.svg";
+import Button from "../Button.tsx";
 import Container from "../Container.tsx";
+import Balance from "./Balance.tsx";
+import CartIcon from "./CartIcon.tsx";
+import MobileMenu from "./MobileMenu.tsx";
+import NotificationIcon from "./NotificationIcon.tsx";
+import SearchBar from "./SearchBar.tsx";
+import userImg from "/assets/user.jpg";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -24,40 +24,48 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed left-0 top-0 z-50 flex w-full items-center justify-between bg-white p-4">
+    <nav className="fixed left-0 top-0 z-40 flex w-full items-center justify-between rounded-bl-2xl rounded-br-2xl bg-white p-4 md:rounded-bl-none md:rounded-br-none">
       <Container>
         <div className="flex items-center justify-between">
-          <div className="flex w-full max-w-2xl items-center gap-4 md:gap-8 xl:max-w-3xl">
+          <div className="flex items-center gap-4 md:w-full md:max-w-sm md:gap-8 lg:max-w-[540px] xl:max-w-5xl">
             <Link to="/">
               <img src={logo} alt="logo image" className="w-10" />
             </Link>
 
-            <div className="hidden w-full lg:block">
+            <div className="hidden w-full md:block">
               <SearchBar />
             </div>
           </div>
 
-          <div className="hidden items-center gap-4 lg:flex">
+          <div className="flex items-center gap-4">
             <NotificationIcon />
             <CartIcon />
-            {isAuthenticated ? (
-              <Balance />
-            ) : (
-              <Button label="Sign In" icon={personIcon} />
-            )}
-          </div>
-
-          <MobileMenu
-            isOpen={isMobileMenuOpen}
-            isAuthenticated={isAuthenticated}
-            closeMenu={closeMobileMenuHandler}
-          />
-
-          <div className="lg:hidden" onClick={openMobileMenuHandler}>
-            <img src={hamburgerIcon} alt="menu icon" className="w-8" />
+            <img
+              src={userImg}
+              alt=""
+              className="h-[44px] w-[44px] rounded-full object-cover md:hidden"
+              onClick={openMobileMenuHandler}
+            />
+            <div className="hidden md:block">
+              {isAuthenticated ? (
+                <Balance />
+              ) : (
+                <Button label="Sign In" icon={personIcon} />
+              )}
+            </div>
           </div>
         </div>
+
+        <div className="mt-8 md:hidden">
+          <SearchBar />
+        </div>
       </Container>
+
+      <MobileMenu
+        isOpen={isMobileMenuOpen}
+        isAuthenticated={isAuthenticated}
+        closeMenu={closeMobileMenuHandler}
+      />
     </nav>
   );
 };
