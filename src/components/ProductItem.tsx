@@ -1,7 +1,7 @@
-import Button from "./Button";
+import { Link } from "react-router-dom";
 import cartIcon from "../assets/icons/navbar/cart.svg";
-import favoriteIcon from "../assets/icons/favorite.svg";
-import notFavoriteIcon from "../assets/icons/notFavorite.svg";
+import Button from "./Button";
+import HeartButton from "./HeartButton";
 
 interface ProductItemProps {
   name: string;
@@ -16,14 +16,13 @@ interface ProductItemProps {
 const ProductItem = ({
   discount,
   discountedPrice,
-  favorite,
   image,
   name,
   price,
   quantity,
 }: ProductItemProps) => {
   return (
-    <div className="cursor-pointer">
+    <Link to="">
       <div className="relative grid h-[210px] w-[234px] place-items-center overflow-hidden rounded-2xl bg-gray100 p-3">
         <img src={image} alt="" />
 
@@ -33,8 +32,8 @@ const ProductItem = ({
           </span>
         )}
 
-        <div className="absolute bottom-4 right-4 grid h-[37px] w-[37px] cursor-pointer place-items-center rounded-full bg-white">
-          <img src={!favorite ? notFavoriteIcon : favoriteIcon} alt="" />
+        <div className="absolute bottom-4 right-4">
+          <HeartButton onClick={() => {}}/>
         </div>
       </div>
 
@@ -57,7 +56,7 @@ const ProductItem = ({
           className="w-full font-semibold"
         />
       </div>
-    </div>
+    </Link>
   );
 };
 
