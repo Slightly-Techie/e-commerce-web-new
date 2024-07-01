@@ -8,6 +8,7 @@ import Button from "../Button";
 import closeIcon from "../../assets/icons/navbar/close.svg";
 import personIcon from "../../assets/icons/navbar/person.svg";
 import Heart from "../../assets/icons/sidebar/heart.svg?react";
+import NotificationBadge from "../NotificationBadge";
 
 interface MobileMenuProps {
   isAuthenticated: boolean;
@@ -66,8 +67,12 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
           {!isAuthenticated && <Button label="Sign In" icon={personIcon} />}
         </div>
 
-        <Link to='/favorites' className="flex gap-4" onClick={closeMenuHandler}>
+        <Link to='/favorites' className="flex gap-4 relative" onClick={closeMenuHandler}>
           <Heart /> <span>Favorites</span>
+
+          <div className="absolute right-0 top-1/2 -translate-y-1/2">
+            <NotificationBadge counter="6" small/>
+          </div>
         </Link>
 
         <div className="mt-auto">
