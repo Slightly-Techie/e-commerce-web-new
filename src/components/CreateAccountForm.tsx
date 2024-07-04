@@ -29,8 +29,9 @@ const CreateAccountForm = () => {
   // const { changeStage } = useSignupStageStore();
   // const { login } = useUserStore();
 
-  const onSubmit: SubmitHandler<SignupFormFields> = () => {
+  const onSubmit: SubmitHandler<SignupFormFields> = async (data) => {
     // create user
+    console.log(data);
     setLoading(false);
   };
 
