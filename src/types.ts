@@ -61,6 +61,13 @@ export type RHFInputExtension = {
   required: boolean;
 };
 
+export type Review = {
+  text: string;
+  date: string;
+  image: string;
+  name: string;
+};
+
 export type SignupFormFields = {
   username?: string;
   email: string;
