@@ -60,15 +60,15 @@ const reviews = [
 ];
 
 export default function Reviews() {
-  const slider = document.getElementById("slider");
-
   function leftSlider() {
+    const slider = document.getElementById("slider");
     if (slider) {
       slider.scrollLeft = slider.scrollLeft - 300;
     }
   }
 
   function rightSlider() {
+    const slider = document.getElementById("slider");
     if (slider) {
       slider.scrollLeft = slider.scrollLeft + 300;
     }
