@@ -1,11 +1,11 @@
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Scrollbar } from "@radix-ui/react-scroll-area";
+import chevronRightIcon from "../../assets/icons/chevronRight.svg";
 import Acer from "../../assets/images/products/Acer.png";
 import Asus from "../../assets/images/products/Asus.png";
-import Mac from "../../assets/images/products/Macbook.png";
 import Dell from "../../assets/images/products/Dell.png";
+import Mac from "../../assets/images/products/Macbook.png";
 import Button from "../../components/Button";
-import chevronRightIcon from "../../assets/icons/chevronRight.svg";
-import { ScrollArea } from "../../components/ui/ScrollArea";
-import { Scrollbar } from "@radix-ui/react-scroll-area";
 import ProductItem from "../../components/ProductItem";
 
 const LaptopDeals = [
@@ -59,7 +59,7 @@ const Laptops = () => {
       </div>
 
       <ScrollArea className="w-full whitespace-nowrap rounded-md">
-        <div className="flex w-max space-x-8 lg:space-x-12 mb-4">
+        <div className="mb-4 flex w-max space-x-8 lg:space-x-12">
           {LaptopDeals.map((product, index) => (
             <ProductItem key={index} {...product} />
           ))}

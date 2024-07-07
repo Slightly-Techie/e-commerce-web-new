@@ -1,12 +1,12 @@
-import { ScrollArea, ScrollBar } from "../../components/ui/ScrollArea";
-import topDealIcon from "../../assets/icons/top-deal.svg";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import chevronRightIcon from "../../assets/icons/chevronRight.svg";
+import topDealIcon from "../../assets/icons/top-deal.svg";
+import Acer from "../../assets/images/products/Acer.png";
+import GooglePixel from "../../assets/images/products/GooglePixel.png";
 import Mac from "../../assets/images/products/Macbook.png";
 import PS5 from "../../assets/images/products/PS5.png";
-import GooglePixel from "../../assets/images/products/GooglePixel.png";
-import Acer from "../../assets/images/products/Acer.png";
-import ProductItem from "../../components/ProductItem";
 import Button from "../../components/Button";
+import ProductItem from "../../components/ProductItem";
 
 const TopProductDeals = [
   {
@@ -98,7 +98,7 @@ const TopDeals = () => {
       </div>
 
       <ScrollArea className="w-full whitespace-nowrap rounded-md">
-        <div className="flex w-max space-x-8 lg:space-x-12 mb-4">
+        <div className="mb-4 flex w-max space-x-8 lg:space-x-12">
           {TopProductDeals.map((product, index) => (
             <ProductItem key={index} {...product} />
           ))}
