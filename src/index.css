@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Product Sans';
+  src: url('/assets/fonts/Product Sans Regular.ttf');
+}
+
+body {
+  font-family: 'Product Sans', sans-serif;
+  background-color: #FAFAFA;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
