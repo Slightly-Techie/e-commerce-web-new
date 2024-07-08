@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import cartIcon from "../assets/icons/navbar/cart.svg";
 import Button from "./Button";
 import HeartButton from "./HeartButton";
 
 interface ProductItemProps {
+  id: string;
   name: string;
   discount: number;
   price: string;
@@ -14,6 +15,7 @@ interface ProductItemProps {
 }
 
 const ProductItem = ({
+  id,
   discount,
   discountedPrice,
   image,
@@ -21,8 +23,25 @@ const ProductItem = ({
   price,
   quantity,
 }: ProductItemProps) => {
+  const navigate = useNavigate();
+
+  const handleHeartButtonClick = () => {};
+
+  const navigateToProductDetails = (e: React.MouseEvent) => {
+    e.stopPropagation();
+
+    navigate(`/products/${id}`, {
+      state: {
+        name,
+        image,
+        price,
+        quantity
+      },
+    });
+  };
+
   return (
-    <Link to="">
+    <div onClick={navigateToProductDetails} className="cursor-pointer">
       <div className="relative grid h-[210px] w-[234px] place-items-center overflow-hidden rounded-2xl bg-gray100 p-3">
         <img src={image} alt="" />
 
@@ -33,7 +52,7 @@ const ProductItem = ({
         )}
 
         <div className="absolute bottom-4 right-4">
-          <HeartButton onClick={() => {}}/>
+          <HeartButton onClick={handleHeartButtonClick} />
         </div>
       </div>
 
@@ -56,7 +75,7 @@ const ProductItem = ({
           className="w-full font-semibold"
         />
       </div>
-    </Link>
+    </div>
   );
 };
 
