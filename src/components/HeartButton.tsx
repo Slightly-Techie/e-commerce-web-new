@@ -3,15 +3,17 @@ import favoriteIcon from "../assets/icons/favorite.svg";
 import notFavoriteIcon from "../assets/icons/notFavorite.svg";
 
 interface HeartButtonProps {
-  onClick: () => void;
+  onClick: (e: React.MouseEvent) => void;
 }
 
 const HeartButton: FC<HeartButtonProps> = ({ onClick }) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
-  const handleClick = () => {
+  const handleClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+
     setIsFavorite((prev) => !prev);
-    onClick()
+    onClick(e);
   };
 
   return (
