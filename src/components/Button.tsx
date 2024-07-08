@@ -1,15 +1,17 @@
 import React from "react";
 import { cn } from "../lib";
+import { ButtonType } from "../types";
 
-interface ButtonProps {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
-  label: string;
+  label?: string;
   icon?: string;
   secondary?: boolean;
   white?: boolean;
   ghost?: boolean;
   invert?: boolean;
   underline?: boolean;
+  btnType?: ButtonType;
   onClick?: () => void;
 }
 
@@ -23,9 +25,11 @@ const Button: React.FC<ButtonProps> = ({
   invert,
   onClick,
   underline,
+  ...props
 }) => {
   return (
     <button
+      {...props}
       className={cn(
         "flex items-center justify-center gap-2.5 rounded-lg bg-[#111111] font-medium text-white hover:opacity-90",
         secondary && "bg-gray100",
