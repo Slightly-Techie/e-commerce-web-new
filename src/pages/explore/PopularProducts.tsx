@@ -1,14 +1,15 @@
-import Button from "../../components/Button";
 import chevronRightIcon from "../../assets/icons/chevronRight.svg";
-import { ScrollArea, ScrollBar } from "../../components/ui/ScrollArea";
-import Dell from '../../assets/images/products/Dell.png'
-import PS5 from '../../assets/images/products/PS5.png'
-import GooglePixel from '../../assets/images/products/GooglePixel.png'
-import Airpods from '../../assets/images/products/airpods.png'
+import Dell from "../../assets/images/products/Dell.png";
+import GooglePixel from "../../assets/images/products/GooglePixel.png";
+import PS5 from "../../assets/images/products/PS5.png";
+import Airpods from "../../assets/images/products/airpods.png";
+import Button from "../../components/Button";
 import ProductItem from "../../components/ProductItem";
+import { ScrollArea, ScrollBar } from "../../components/ui/ScrollArea";
 
 const PopularProductDeals = [
   {
+    id: "1",
     name: "2022 Dell XPS 16” 32GB",
     discount: 0,
     price: "GHc 10,500.00",
@@ -18,6 +19,7 @@ const PopularProductDeals = [
     favorite: false,
   },
   {
+    id: "2",
     name: "Google Pixel 8pro 32GB",
     discount: 20,
     price: "GHc 7000.00",
@@ -27,6 +29,7 @@ const PopularProductDeals = [
     favorite: false,
   },
   {
+    id: "3",
     name: "PS5 Standard",
     discount: 90,
     price: "GHc 7,500.00",
@@ -36,6 +39,7 @@ const PopularProductDeals = [
     favorite: true,
   },
   {
+    id: "5",
     name: "Airpods pro",
     discount: 0,
     price: "GHc 2,200.00",
@@ -58,7 +62,7 @@ const PopularProducts = () => {
       </div>
 
       <ScrollArea className="w-full whitespace-nowrap rounded-md">
-        <div className="flex w-max space-x-8 lg:space-x-12 mb-4">
+        <div className="mb-4 flex w-max space-x-8 lg:space-x-12">
           {PopularProductDeals.map((product, index) => (
             <ProductItem key={index} {...product} />
           ))}
