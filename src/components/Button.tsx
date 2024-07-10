@@ -1,30 +1,43 @@
-import { ButtonSizeStyles, ButtonTypeStyles } from "../lib/styles";
-import { cn } from "../lib/utils";
-import { ButtonSize, ButtonType } from "../types";
+import React from "react";
+import { cn } from "../lib";
+import { ButtonType } from "../types";
 
-type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  className?: string;
+  label?: string;
+  icon?: string;
+  secondary?: boolean;
+  ghost?: boolean;
+  invert?: boolean;
   btnType?: ButtonType;
-  btnSize?: ButtonSize;
-};
+  onClick?: () => void;
+}
 
-const Button = ({
-  btnType = ButtonType.primary,
-  btnSize = ButtonSize.small,
+const Button: React.FC<ButtonProps> = ({
   className,
+  label,
+  icon,
+  secondary,
+  ghost,
+  invert,
+  onClick,
   ...props
-}: ButtonProps) => {
+}) => {
   return (
     <button
-      disabled={btnType === ButtonType.disabled}
-      className={cn(
-        "rounded-[4px] border border-transparent py-4 text-white",
-        ButtonSizeStyles[btnSize],
-        ButtonTypeStyles[btnType],
-        className
-      )}
       {...props}
+      className={cn(
+        "flex items-center justify-center gap-2.5 rounded-lg bg-[#111111] font-medium text-white hover:opacity-90",
+        secondary && "bg-gray100",
+        secondary && "text-[#111111]",
+        !ghost ? "px-4 py-2.5" : "px-0 py-0",
+        ghost && "bg-transparent text-gray-500",
+        invert && "flex-row-reverse",
+        className,
+      )}
+      onClick={onClick}
     >
-      {props.children}
+      {icon && <img src={icon} alt="" />} {label}
     </button>
   );
 };
