@@ -19,7 +19,7 @@ const ProductItem = ({
   image,
   name,
   price,
-  quantity,
+  // quantity,
 }: ProductItemProps) => {
   return (
     <Link to="">
