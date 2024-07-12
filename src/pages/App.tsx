@@ -9,6 +9,7 @@ import OrderHistory from "./history/OrderHistory";
 import Products from "./products/Products";
 import ProductDetails from "./products/product-details/ProductDetails";
 import TrackOrders from "./track/TrackOrders";
+import Cart from "./cart/Cart";
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
           </Route>
 
           <Route path="products/:id" element={<ProductDetails />} />
+          <Route path="cart" element={<Cart />} />
           <Route path="*" element={<Error404 />} />
         </Route>
       </Routes>
