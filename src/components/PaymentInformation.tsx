@@ -1,6 +1,12 @@
+import { Order } from "@/types";
 import { Smartphone } from "lucide-react";
 
-export default function PaymentInformation() {
+export default function PaymentInformation({
+  orderDetails,
+}: {
+  orderDetails: Order;
+}) {
+  const { subTotal, delivery, coinDiscount, total } = orderDetails;
   return (
     <div className="w-full md:w-1/2">
       <div className="flex justify-between rounded-t-md border border-gray200 bg-gray75 px-4 py-3 font-semibold">
@@ -20,14 +26,14 @@ export default function PaymentInformation() {
             <p>Coin discount</p>
           </div>
           <div className="flex flex-col gap-4 text-base text-[#111111]">
-            <p>GHC 45088.00</p>
-            <p>GHC 24.00</p>
-            <p>-GHC 0.00</p>
+            <p>{subTotal}</p>
+            <p>{delivery}</p>
+            <p>{coinDiscount}</p>
           </div>
         </div>
         <div className="mt-4 flex justify-between text-base font-bold">
           <p>Total</p>
-          <p>Ghc 4,600.00</p>
+          <p>{total}</p>
         </div>
       </div>
     </div>

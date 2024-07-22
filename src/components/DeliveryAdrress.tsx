@@ -1,4 +1,11 @@
-export default function DeliveryAdrress() {
+import { Order } from "@/types";
+
+export default function DeliveryAdrress({
+  orderDetails,
+}: {
+  orderDetails: Order;
+}) {
+  const { name, phone, address } = orderDetails;
   return (
     <div className="w-full md:w-1/2">
       <div className="rounded-t-md border border-gray200 bg-gray75 px-4 py-3 font-semibold">
@@ -11,9 +18,9 @@ export default function DeliveryAdrress() {
           <p>Address</p>
         </div>
         <div className="flex flex-col gap-4 text-base text-[#111111]">
-          <p>Michael Mensah</p>
-          <p>+ 233 55 553 8591</p>
-          <p className="line-clamp-1">Kasoa Akweley Roundabout KT 67</p>
+          <p>{name}</p>
+          <p>{phone}</p>
+          <p className="line-clamp-1">{address}</p>
         </div>
       </div>
     </div>
