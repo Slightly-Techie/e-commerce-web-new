@@ -143,7 +143,7 @@ export type UserSignupDetails = Pick<User, "email" | "username"> & {
 
 export type AlertArgs = { alertType: AlertType; alertText: string };
 
-type OrderStatus = "Delivered" | "Pending";
+export type OrderStatus = "Delivered" | "Pending";
 
 export interface Order {
   productName: string;
