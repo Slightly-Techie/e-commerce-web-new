@@ -1,5 +1,7 @@
 import { Order } from "@/types";
-import DeliveryStatus from "./DeliveryStatus";
+import DeliveryAdrressMobile from "./DeliveryAdrressMobile";
+import OrderDetailsMobile from "./OrderDetailsMobile";
+import PaymentDetailsMobile from "./PaymentDetailsMobile";
 import {
   Accordion,
   AccordionContent,
@@ -7,37 +9,52 @@ import {
   AccordionTrigger,
 } from "./ui/accordion";
 
-export default function OrderItemMobile(props: Order) {
-  const { orderId, image, productName, amount, date, status, quantity } = props;
+export default function OrderItemMobile({
+  orderId,
+  image,
+  productName,
+  amount,
+  date,
+  status,
+  quantity,
+  name,
+  address,
+  phone,
+  subTotal,
+  delivery,
+  coinDiscount,
+  total,
+}: Order) {
   return (
     <Accordion type="single" collapsible>
       <AccordionItem value={orderId}>
-        <AccordionTrigger className="flex items-center gap-2">
+        <AccordionTrigger className="flex items-center justify-start gap-6">
           <img className="h-[58px] w-[58px] rounded-md" src={image} />
           <div className="flex flex-col items-start gap-px">
             <p className="font-semibold text-[#111111]">{productName}</p>
             <p className="text-gray500">{amount}</p>
           </div>
         </AccordionTrigger>
-        <AccordionContent className="flex flex-col items-center justify-center gap-3 py-1">
-          <div className="mt-1 flex w-full justify-between">
-            <p className="text-gray500">Order ID</p>
-            <p className="text-[#111111]">{orderId}</p>
-          </div>
-          <div className="mt-1 flex w-full justify-between">
-            <p className="text-gray500">Items</p>
-            <p className="text-[#111111]">{quantity}</p>
-          </div>
-          <div className="mt-1 flex w-full justify-between">
-            <p className="text-gray500">Date</p>
-            <p className="text-[#111111]">{date}</p>
-          </div>
-          <div className="mt-1 flex w-full justify-between">
-            <p className="text-gray500">Status</p>
-            <p className="text-[#111111]">
-              <DeliveryStatus status={status} />
-            </p>
-          </div>
+        <AccordionContent>
+          <Accordion type="single" collapsible className="w-full">
+            <OrderDetailsMobile
+              orderId={orderId}
+              date={date}
+              quantity={quantity}
+              status={status}
+            />
+            <DeliveryAdrressMobile
+              name={name}
+              phone={phone}
+              address={address}
+            />
+            <PaymentDetailsMobile
+              subTotal={subTotal}
+              delivery={delivery}
+              coinDiscount={coinDiscount}
+              total={total}
+            />
+          </Accordion>
         </AccordionContent>
       </AccordionItem>
     </Accordion>

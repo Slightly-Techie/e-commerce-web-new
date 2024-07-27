@@ -4,8 +4,9 @@ import OrderItemMobile from "@/components/OrderItemMobile";
 
 import { Accordion } from "@/components/ui/accordion";
 import { Table } from "@/components/ui/table";
+import { Order } from "@/types";
 
-const orderhistory = [
+const orderhistory: Order[] = [
   {
     productName: "Apple macbook Pro 16” Laptop",
     category: "Computing",
