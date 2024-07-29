@@ -1,4 +1,3 @@
-import Asus from "@/assets/images/products/Asus.png";
 import {
   Table,
   TableBody,
@@ -7,37 +6,15 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Item } from "./Cart";
 import CartItem from "./CartItem";
 import QuantityControl from "./QuantityControl";
 
-const items = [
-  {
-    id: "1",
-    name: 'Q-base 45" wide monitor...',
-    image: Asus,
-    amount: 3,
-    unit_price: "4530.00",
-    final_price: "4530.00",
-  },
-  {
-    id: "2",
-    name: 'Q-base 45" wide monitor...',
-    image: Asus,
-    amount: 3,
-    unit_price: "4530.00",
-    final_price: "4530.00",
-  },
-  {
-    id: "2",
-    name: 'Q-base 45" wide monitor...',
-    image: Asus,
-    amount: 3,
-    unit_price: "4530.00",
-    final_price: "4530.00",
-  },
-];
+interface CartTableProps {
+  cartItems: Item[];
+}
 
-const CartTable = () => {
+const CartTable = ({ cartItems }: CartTableProps) => {
   return (
     <Table className="font-semibold text-[#111111]">
       <TableHeader>
@@ -58,25 +35,29 @@ const CartTable = () => {
       </TableHeader>
 
       <TableBody>
-        {items.map((item) => (
-          <TableRow className="text-base" key={item.id}>
-            <TableCell className="min-w-[340px]">
-              <CartItem {...item} />
-            </TableCell>
+        {cartItems.map((item) => {
+          const finalPrice = +item.price * item.quantity;
 
-            <TableCell className="min-w-[109px] text-center">
-              {item.unit_price}
-            </TableCell>
+          return (
+            <TableRow className="text-base" key={item.id}>
+              <TableCell className="min-w-[340px]">
+                <CartItem {...item} />
+              </TableCell>
 
-            <TableCell className="min-w-[126px]">
-              <QuantityControl amount={item.amount} />
-            </TableCell>
+              <TableCell className="min-w-[109px] text-center">
+                ₵{item.price}
+              </TableCell>
 
-            <TableCell className="min-w-[109px] text-center">
-              {item.final_price}
-            </TableCell>
-          </TableRow>
-        ))}
+              <TableCell className="min-w-[126px]">
+                <QuantityControl id={item.id} amount={item.quantity} />
+              </TableCell>
+
+              <TableCell className="min-w-[109px] text-center">
+                ₵{finalPrice}
+              </TableCell>
+            </TableRow>
+          );
+        })}
       </TableBody>
     </Table>
   );
