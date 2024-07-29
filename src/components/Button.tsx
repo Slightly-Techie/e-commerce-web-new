@@ -12,7 +12,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   invert?: boolean;
   underline?: boolean;
   btnType?: ButtonType;
-  onClick?: () => void;
+  onClick?: any;
 }
 
 const Button: React.FC<ButtonProps> = ({
