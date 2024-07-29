@@ -6,6 +6,7 @@ import Slider from "./Slider";
 
 interface HeaderProps {
   details: {
+    id: string;
     name: string;
     price: string;
     image: string;
@@ -14,7 +15,7 @@ interface HeaderProps {
 }
 
 const Header: FC<HeaderProps> = ({
-  details: { name, image, price, quantity },
+  details: { id, name, image, price, quantity },
 }) => {
   return (
     <div className="mx-4">
@@ -31,7 +32,13 @@ const Header: FC<HeaderProps> = ({
           </div>
 
           <div className="absolute bottom-0 right-6 z-20 hidden translate-y-[76%] 1280:block">
-            <Card name={name} price={price} quantity={quantity} />
+            <Card
+              id={id}
+              name={name}
+              price={price}
+              quantity={quantity}
+              image={image}
+            />
           </div>
           <div className="absolute -bottom-5 z-20 hidden translate-y-1/2 md:bottom-0 md:left-1/2 md:block md:-translate-x-1/2 1280:left-6 1280:-translate-x-0">
             <Slider />
