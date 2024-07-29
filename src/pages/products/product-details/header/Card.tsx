@@ -1,16 +1,41 @@
-import { FC } from "react";
+import QuantityControl from "@/pages/cart/QuantityControl";
+import { useCartStore } from "@/store/cartStore";
+import { FC, useEffect, useState } from "react";
 import FlagIcon from "../../../../assets/icons/Flag.svg";
 import starIcon from "../../../../assets/icons/star.svg";
 import truckIcon from "../../../../assets/icons/truck.svg";
 import Button from "../../../../components/Button";
 
 interface CardProps {
+  id: string;
   name: string;
   price: string;
+  image: string;
   quantity: number;
 }
 
-const Card: FC<CardProps> = ({ name, price, quantity }) => {
+const Card: FC<CardProps> = ({ id, name, price, image, quantity }) => {
+  const [addedToCart, setAddedToCart] = useState(false);
+
+  const cart = useCartStore((state) => state.cart);
+  const addToCart = useCartStore((state) => state.addItem);
+  const isAdded = useCartStore((state) => state.isAdded);
+
+  const cartITem = cart.find((cartItem) => cartItem.id === id);
+
+  const addToCartHandler = () => {
+    addToCart({ id, name, price, image, quantity: 1 });
+    setAddedToCart(isAdded(id));
+  };
+
+  useEffect(() => {
+    setAddedToCart(isAdded(id));
+  }, [id, isAdded]);
+
+  useEffect(() => {
+    setAddedToCart(cartITem ? true : false);
+  }, [cartITem]);
+
   return (
     <>
       <div className="rounded-xl border border-gray200 bg-white p-4 shadow-custom md:p-6 lg:p-8 1280:w-[450px]">
@@ -36,7 +61,7 @@ const Card: FC<CardProps> = ({ name, price, quantity }) => {
           <div>
             <span className="text-[#757575]">Price</span>
             <span className="mt-4 block text-[1.75rem] text-xl font-bold sm:text-2xl">
-              {price}
+              ₵{price}
             </span>
           </div>
           <div className="flex gap-1.5">
@@ -48,7 +73,19 @@ const Card: FC<CardProps> = ({ name, price, quantity }) => {
           </div>
         </div>
 
-        <Button label="Add to cart" className="w-full" />
+        {!addedToCart ? (
+          <Button
+            label="Add to cart"
+            className="w-full"
+            onClick={addToCartHandler}
+          />
+        ) : (
+          <QuantityControl
+            id={id}
+            amount={cartITem?.quantity || quantity}
+            btn
+          />
+        )}
       </div>
 
       <Button
@@ -56,7 +93,7 @@ const Card: FC<CardProps> = ({ name, price, quantity }) => {
         icon={FlagIcon}
         ghost
         underline
-        className="mt-6 text-gray600 w-fit"
+        className="mt-6 w-fit text-gray600"
       />
     </>
   );
