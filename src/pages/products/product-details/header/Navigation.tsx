@@ -1,4 +1,4 @@
-import { useState } from "react";
+import useFavorite from "@/hooks/useFavorite";
 import { useNavigate } from "react-router-dom";
 import chevronLeftIcon from "../../../../assets/icons/chevron-left.svg";
 import favoriteIcon from "../../../../assets/icons/favorite.svg";
@@ -7,13 +7,11 @@ import shareIcon from "../../../../assets/icons/share.svg";
 
 const Navigation = () => {
   const navigate = useNavigate();
-
-  const [isFavorite, setIsFavorite] = useState(false);
+  const { isFavorite, toggleFavoriteHandler } = useFavorite();
 
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
-
-    setIsFavorite((prev) => !prev);
+    toggleFavoriteHandler();
   };
 
   return (

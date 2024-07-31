@@ -2,7 +2,7 @@ import { FC } from "react";
 import { cn } from "../lib";
 
 interface NotificationBadgeProps {
-  counter: string;
+  counter: string | number;
   small?: boolean;
 }
 
