@@ -9,6 +9,7 @@ import ProductItem from "../../components/ProductItem";
 
 const PopularProductDeals = [
   {
+    id: "1",
     name: "2022 Dell XPS 16” 32GB",
     discount: 0,
     price: "GHc 10,500.00",
@@ -18,6 +19,7 @@ const PopularProductDeals = [
     favorite: false,
   },
   {
+    id: "2",
     name: "Google Pixel 8pro 32GB",
     discount: 20,
     price: "GHc 7000.00",
@@ -27,6 +29,7 @@ const PopularProductDeals = [
     favorite: false,
   },
   {
+    id: "3",
     name: "PS5 Standard",
     discount: 90,
     price: "GHc 7,500.00",
@@ -36,6 +39,7 @@ const PopularProductDeals = [
     favorite: true,
   },
   {
+    id: "5",
     name: "Airpods pro",
     discount: 0,
     price: "GHc 2,200.00",

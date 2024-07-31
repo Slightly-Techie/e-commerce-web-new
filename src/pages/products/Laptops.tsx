@@ -10,6 +10,7 @@ import ProductItem from "../../components/ProductItem";
 
 const LaptopDeals = [
   {
+    id: "1",
     name: 'Acer 14" 32GB Chromebook....',
     discount: 5,
     price: "GHc 2,500.00",
@@ -19,6 +20,7 @@ const LaptopDeals = [
     favorite: false,
   },
   {
+    id: "2",
     name: "W70031T Asus Pro art",
     discount: 0,
     price: "GHc 49,000.00",
@@ -28,6 +30,7 @@ const LaptopDeals = [
     favorite: false,
   },
   {
+    id: "3",
     name: "2019 Macbook Pro, 16”",
     discount: 20,
     price: "GHc 10,500.00",
@@ -37,6 +40,7 @@ const LaptopDeals = [
     favorite: true,
   },
   {
+    id: "4",
     name: "2022 Dell XPS 16” 32GB",
     discount: 0,
     price: "GHc 10,500.00",

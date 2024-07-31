@@ -5,11 +5,12 @@ import Acer from "../../assets/images/products/Acer.png";
 import GooglePixel from "../../assets/images/products/GooglePixel.png";
 import Mac from "../../assets/images/products/Macbook.png";
 import PS5 from "../../assets/images/products/PS5.png";
-import Button from "../../components/Button";
 import ProductItem from "../../components/ProductItem";
+import Button from "../../components/Button";
 
 const TopProductDeals = [
   {
+    id: "1",
     name: "2019 Macbook Pro, 16”",
     discount: 20,
     price: "GHc 10,500.00",
@@ -19,6 +20,7 @@ const TopProductDeals = [
     favorite: true,
   },
   {
+    id: "2",
     name: "PS5 Standard",
     discount: 90,
     price: "GHc 7,500.00",
@@ -28,6 +30,7 @@ const TopProductDeals = [
     favorite: true,
   },
   {
+    id: "3",
     name: "Google Pixel 8pro 32GB",
     discount: 20,
     price: "GHc 7000.00",
@@ -37,6 +40,7 @@ const TopProductDeals = [
     favorite: false,
   },
   {
+    id: "4",
     name: 'Acer 14" 32GB Chromebook...',
     discount: 5,
     price: "GHc 2,500.00",
@@ -46,6 +50,7 @@ const TopProductDeals = [
     favorite: false,
   },
   {
+    id: "5",
     name: 'Acer 14" 32GB Chromebook....',
     discount: 5,
     price: "GHc 2,500.00",
@@ -55,6 +60,7 @@ const TopProductDeals = [
     favorite: false,
   },
   {
+    id: "6",
     name: 'Acer 14" 32GB Chromebook....',
     discount: 5,
     price: "GHc 2,500.00",
@@ -64,6 +70,7 @@ const TopProductDeals = [
     favorite: false,
   },
   {
+    id: "7",
     name: 'Acer 14" 32GB Chromebook....',
     discount: 5,
     price: "GHc 2,500.00",
@@ -73,6 +80,7 @@ const TopProductDeals = [
     favorite: false,
   },
   {
+    id: "8",
     name: 'Acer 14" 32GB Chromebook....',
     discount: 5,
     price: "GHc 2,500.00",
