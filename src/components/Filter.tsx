@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { ButtonType, FilterFormFields } from "../types";
 import Button from "./Button";
+import SelectButton from "./FormElements/SelectButtons";
 import PriceRangeSlider from "./PriceRangeSlider";
-import SelectButton from "./formElements/SelectButtons";
 import {
   Accordion,
   AccordionContent,
@@ -53,7 +53,7 @@ export default function Filters() {
       )}
       <form
         data-collapsed={isCollapsed}
-        className={`group fixed z-20 h-[90vh]  w-[19.5rem] rounded-2xl border bg-white transition-all  data-[collapsed=true]:z-[-1] data-[collapsed=true]:w-0 data-[collapsed=true]:p-0  md:px-4 md:py-6 `}
+        className={`group fixed z-20 h-[90vh] w-[19.5rem] rounded-2xl border bg-white transition-all data-[collapsed=true]:z-[-1] data-[collapsed=true]:w-0 data-[collapsed=true]:p-0 md:px-4 md:py-6`}
         onSubmit={handleSubmit(onSubmit)}
       >
         <div className="flex flex-col justify-start group-[[data-collapsed=true]]:hidden">

@@ -52,7 +52,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           {props.type === "password" && (
             <button
               type="button"
-              className="text-primary pr-2"
+              className="pr-2 text-primary"
               onClick={() => {
                 if (customType === "password") {
                   setCustomType("text");

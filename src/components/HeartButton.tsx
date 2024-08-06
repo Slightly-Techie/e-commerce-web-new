@@ -1,17 +1,13 @@
-import { FC, useState } from "react";
+import useFavorite from "@/hooks/useFavorite";
 import favoriteIcon from "../assets/icons/favorite.svg";
 import notFavoriteIcon from "../assets/icons/notFavorite.svg";
 
-interface HeartButtonProps {
-  onClick: () => void;
-}
+const HeartButton = () => {
+  const { isFavorite, toggleFavoriteHandler } = useFavorite();
 
-const HeartButton: FC<HeartButtonProps> = ({ onClick }) => {
-  const [isFavorite, setIsFavorite] = useState(false);
-
-  const handleClick = () => {
-    setIsFavorite((prev) => !prev);
-    onClick()
+  const handleClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    toggleFavoriteHandler();
   };
 
   return (

@@ -4,12 +4,12 @@ import { REGEXPATTERNS } from "../lib/constants";
 import { AlertType, ButtonType, FormHelperType } from "../types";
 import Alert from "./Alert";
 import Button from "./Button";
-import Checkbox from "./formElements/Checkbox";
-import Form from "./formElements/Form";
-import FormHelper from "./formElements/FormHelper";
-import Input from "./formElements/Input";
-import InputGroup from "./formElements/InputGroup";
-import Label from "./formElements/Label";
+import Checkbox from "./FormElements/Checkbox";
+import Form from "./FormElements/Form";
+import FormHelper from "./FormElements/FormHelper";
+import Input from "./FormElements/Input";
+import InputGroup from "./FormElements/InputGroup";
+import Label from "./FormElements/Label";
 
 type FormValues = {
   email: string;

@@ -143,3 +143,23 @@ export type UserSignupDetails = Pick<User, "email" | "username"> & {
 };
 
 export type AlertArgs = { alertType: AlertType; alertText: string };
+
+export type OrderStatus = "Delivered" | "Pending";
+
+export interface Order {
+  productName: string;
+  category: string;
+  orderId: string;
+  date: string;
+  status: OrderStatus;
+  amount: string;
+  image: string;
+  name: string;
+  phone: string;
+  address: string;
+  subTotal: string;
+  delivery: string;
+  coinDiscount: string;
+  total: string;
+  quantity: number;
+}

@@ -1,6 +1,5 @@
+import { cn } from "@/lib/utils";
 import { TextSizeStyles } from "../../lib/styles";
-import { cn } from "../../lib/utils";
-
 type LabelProps = React.HTMLAttributes<HTMLLabelElement> & { htmlFor?: string };
 
 const Label = ({ className, htmlFor, ...props }: LabelProps) => {

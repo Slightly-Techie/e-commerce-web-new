@@ -1,6 +1,6 @@
 import * as SliderPrimitive from "@radix-ui/react-slider";
 import React from "react";
-import Input from "./formElements/Input";
+import Input from "./FormElements/Input";
 import { Slider } from "./ui/slider";
 export default function PriceRangeSlider({
   withManualInput = true,
@@ -42,7 +42,7 @@ export default function PriceRangeSlider({
           return (
             <div
               key={index}
-              className={` w-3 rounded-t-full transition-all duration-300 ${
+              className={`w-3 rounded-t-full transition-all duration-300 ${
                 isInRange ? "bg-success600" : "bg-gray200"
               }`}
               style={{
