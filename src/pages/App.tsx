@@ -4,13 +4,13 @@ import Layout from "../layouts/Layout";
 import Main from "../layouts/Main";
 import Error404 from "./Error404";
 import Favorite from "./Favorite";
+import Referrals from "./Referrals";
+import Cart from "./cart/Cart";
 import Explore from "./explore/Explore";
 import OrderHistory from "./history/OrderHistory";
 import Products from "./products/Products";
 import ProductDetails from "./products/product-details/ProductDetails";
 import TrackOrders from "./track/TrackOrders";
-import Cart from "./cart/Cart";
-import Checkout from "./checkout/Checkout";
 
 const App = () => {
   return (
@@ -25,6 +25,7 @@ const App = () => {
             <Route path="favorites" element={<Favorite />} />
             <Route path="track" element={<TrackOrders />} />
             <Route path="history" element={<OrderHistory />} />
+            <Route path="referrals" element={<Referrals />} />
           </Route>
 
           <Route path="products/:id" element={<ProductDetails />} />
