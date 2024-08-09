@@ -3,13 +3,48 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'Product Sans';
-  src: url('/assets/fonts/Product Sans Regular.ttf');
+  font-family: "Product Sans";
+  src: url("/assets/fonts/Product Sans Regular.ttf");
 }
 
 body {
-  font-family: 'Product Sans', sans-serif;
-  background-color: #FAFAFA;
+  font-family: "Product Sans", sans-serif;
+  background-color: #fafafa;
+}
+
+/* remove default input element icons */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
+}
+
+input[type="time"]::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* fix react leaflet z-index issue */
+.leaflet-control {
+  z-index: 0 !important;
+}
+
+.leaflet-pane {
+  z-index: 0 !important;
+}
+
+.leaflet-top,
+.leaflet-bottom {
+  z-index: 0 !important;
 }
 
 @layer base {
