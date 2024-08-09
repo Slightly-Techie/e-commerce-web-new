@@ -13,6 +13,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   underline?: boolean;
   btnType?: ButtonType;
   onClick?: any;
+  disabled?: boolean;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -25,13 +26,15 @@ const Button: React.FC<ButtonProps> = ({
   invert,
   onClick,
   underline,
+  disabled,
   ...props
 }) => {
   return (
     <button
       {...props}
+      disabled={disabled}
       className={cn(
-        "flex items-center justify-center gap-2.5 rounded-lg bg-[#111111] font-medium text-white hover:opacity-90",
+        "flex items-center justify-center gap-2.5 rounded-lg bg-[#111111] font-medium text-white hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-30",
         secondary && "bg-gray100",
         secondary && "text-[#111111]",
         white && "bg-white",
