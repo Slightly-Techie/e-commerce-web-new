@@ -10,6 +10,7 @@ import Products from "./products/Products";
 import ProductDetails from "./products/product-details/ProductDetails";
 import TrackOrders from "./track/TrackOrders";
 import Cart from "./cart/Cart";
+import Checkout from "./checkout/Checkout";
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
 
           <Route path="products/:id" element={<ProductDetails />} />
           <Route path="cart" element={<Cart />} />
+          <Route path="checkout" element={<Checkout />} />
           <Route path="*" element={<Error404 />} />
         </Route>
       </Routes>
