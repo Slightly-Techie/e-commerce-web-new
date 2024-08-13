@@ -44,7 +44,7 @@ export default function Coins() {
   ];
 
   return (
-    <article className="flex h-max w-2/5 flex-col gap-2 rounded-xl px-3 pb-4 pt-2 shadow-2xl">
+    <article className="flex h-max flex-col gap-2 rounded-xl px-3 pb-4 pt-2 shadow-2xl md:w-2/5">
       <img src={coin} className="w-[72px]" />
       <div className="flex flex-col gap-2">
         <h5 className="text-darkPrimary text-[20px] font-bold">
@@ -90,10 +90,10 @@ export default function Coins() {
             {pendingInvites.map((invite) => (
               <div
                 key={invite.id}
-                className="flex items-center justify-between text-sm"
+                className="flex items-center justify-between gap-4 text-sm"
               >
-                <p className="text-gray600">{invite.email}</p>
-                <p className="text-gray400">{invite.time}</p>
+                <p className="line-clamp-1 text-gray600">{invite.email}</p>
+                <p className="line-clamp-1 text-gray400">{invite.time}</p>
               </div>
             ))}
           </div>
