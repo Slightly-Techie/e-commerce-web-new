@@ -44,7 +44,7 @@ export default function Coins() {
   ];
 
   return (
-    <article className="flex h-max flex-col gap-2 rounded-xl px-3 pb-4 pt-2 shadow-2xl md:w-2/5">
+    <article className="shadow-coins flex h-max flex-col gap-2 rounded-xl p-6 md:w-2/5">
       <img src={coin} className="w-[72px]" />
       <div className="flex flex-col gap-2">
         <h5 className="text-darkPrimary text-[20px] font-bold">
