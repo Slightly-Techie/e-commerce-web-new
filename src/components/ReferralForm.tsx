@@ -7,7 +7,7 @@ export default function ReferralForm() {
         <div className="relative flex w-full flex-col gap-2">
           <label
             htmlFor="referral-link"
-            className="text-darkPrimary text-sm font-medium"
+            className="text-sm font-medium text-darkPrimary"
           >
             Share referral link
           </label>
@@ -22,7 +22,7 @@ export default function ReferralForm() {
         <div className="flex w-full flex-col gap-2">
           <label
             htmlFor="email"
-            className="text-darkPrimary text-sm font-medium"
+            className="text-sm font-medium text-darkPrimary"
           >
             Email your invite
           </label>
