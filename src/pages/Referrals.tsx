@@ -22,8 +22,8 @@ export default function Referrals() {
           <ReferralsSteps />
 
           {/* leaderboard */}
-          <section className="mt-12">
-            <h3 className="text-darkPrimary text-xl font-bold">Leaderboard</h3>
+          <section className="mt-20">
+            <h3 className="text-xl font-bold text-darkPrimary">Leaderboard</h3>
 
             {/* top-3 */}
             <ReferralsLeaders />

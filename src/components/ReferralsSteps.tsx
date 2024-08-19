@@ -25,8 +25,8 @@ const steps = [
 
 export default function ReferralsSteps() {
   return (
-    <article className="mt-6">
-      <h1 className="text-darkPrimary text-2xl font-bold">
+    <article className="mt-16">
+      <h1 className="text-2xl font-bold text-darkPrimary">
         It&apos;s easy to get started
       </h1>
       <div className="mt-3 flex flex-col gap-x-4 gap-y-6 md:grid md:grid-cols-2">
@@ -37,7 +37,7 @@ export default function ReferralsSteps() {
               alt={step.label}
               className="h-[58px] w-[58px]"
             />
-            <h4 className="text-darkPrimary z-10 text-lg font-bold">
+            <h4 className="z-10 text-lg font-bold text-darkPrimary">
               {step.label}
             </h4>
             <p className="z-10 text-gray600">{step.desc}</p>
