@@ -42,7 +42,7 @@ export default function Filter({ setState }: Props) {
   ];
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} className="">
       <div className="flex flex-col justify-start">
         <div className="mb-2 flex w-full">
           <img src="/assets/icons/filter-lines.svg" alt="" />

@@ -7,7 +7,7 @@ interface Props {
 
 export default function FilterPageHeader({ filterState, setState }: Props) {
   return (
-    <article className="flex items-baseline justify-between">
+    <article className="flex w-full flex-col items-baseline gap-y-8 sm:flex-row md:justify-between">
       <div>
         <h3 className="text-3xl font-bold text-[#111111] lg:text-[1.75rem]">
           Results for ‘<span>Laptop’</span>
