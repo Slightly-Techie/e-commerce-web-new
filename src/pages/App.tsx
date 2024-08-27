@@ -4,7 +4,7 @@ import Layout from "../layouts/Layout";
 import Main from "../layouts/Main";
 import Error404 from "./Error404";
 import Favorite from "./Favorite";
-import Filter from "./Filter";
+import FilterPage from "./FilterPage";
 import Referrals from "./Referrals";
 import Cart from "./cart/Cart";
 import Explore from "./explore/Explore";
@@ -29,7 +29,8 @@ const App = () => {
             <Route path="referrals" element={<Referrals />} />
           </Route>
 
-          <Route path="filter" element={<Filter />} />
+          <Route path="filter" element={<FilterPage />} />
+
           <Route path="products/:id" element={<ProductDetails />} />
           <Route path="cart" element={<Cart />} />
           <Route path="*" element={<Error404 />} />
