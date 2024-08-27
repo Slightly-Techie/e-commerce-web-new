@@ -42,7 +42,7 @@ export default function Filter({ setState }: Props) {
   ];
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="">
+    <form onSubmit={handleSubmit(onSubmit)}>
       <div className="flex flex-col justify-start">
         <div className="mb-2 flex w-full">
           <img src="/assets/icons/filter-lines.svg" alt="" />
@@ -54,11 +54,7 @@ export default function Filter({ setState }: Props) {
             onClick={() => setState(false)}
           />
         </div>
-        <Accordion
-          type="multiple"
-          className="w-full"
-          defaultValue={["Categories", "Price (GH¢)", "Discount Percentage"]}
-        >
+        <Accordion type="single" collapsible className="w-full">
           <FilterSection label="Categories">
             <div className="mt-2 flex w-full flex-wrap gap-4 rounded-xl">
               {categories &&
@@ -106,7 +102,7 @@ export default function Filter({ setState }: Props) {
             </div>
           </FilterSection>
         </Accordion>
-        <Button className="mt-4 w-full hover:bg-black" disabled={loading}>
+        <Button className="my-4 w-full hover:bg-black" disabled={loading}>
           {loading ? "Filtering..." : "Filter"}
         </Button>
       </div>
