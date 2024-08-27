@@ -13,14 +13,15 @@ export default {
     },
     extend: {
       fontFamily: {
-        "product-sans": ['"Product Sans"', 'sans-serif'],
+        "product-sans": ['"Product Sans"', "sans-serif"],
         anton: "Anton",
       },
       height: {
-        'custom-height': "calc(100dvh - 100px)"
+        "custom-height": "calc(100dvh - 100px)",
       },
-       boxShadow: {
-        'custom': '0 9px 60px -12px rgba(0, 0, 0, 0.1)',
+      boxShadow: {
+        custom: "0 9px 60px -12px rgba(0, 0, 0, 0.1)",
+        coins: "0px 25px 50px -12px rgba(15, 23, 42, 0.05)",
       },
       colors: {
         // Error
@@ -47,6 +48,7 @@ export default {
         infoBlueLight: "#F1F6FD",
         // Primary
         primaryLight: "#404040",
+        darkPrimary: "#111111",
         // Success
         success50: "#F0FDF4",
         success100: "#DCFCE7",
@@ -128,7 +130,7 @@ export default {
         sm: "640px", // Small screens and above (640px)
         md: "768px", // Medium screens and above (768px)
         lg: "1024px", // Large screens and above (1024px)
-        "1280": '1280px',
+        1280: "1280px",
         xl: "1400px", // Extra-large screens and above (1280px)
       },
     },
