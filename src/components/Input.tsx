@@ -1,7 +1,7 @@
 import { cn } from "@/lib";
 import { REGEXPATTERNS } from "@/lib/constants";
 import { FormValues } from "@/pages/checkout/steps/CheckoutSteps";
-import { FC } from "react";
+import { Dispatch, FC, SetStateAction, useCallback, useRef } from "react";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 
 interface InputProps {
@@ -13,6 +13,7 @@ interface InputProps {
   icon?: string;
   errors?: FieldErrors<FormValues>;
   required?: boolean;
+  setInputValue?: Dispatch<SetStateAction<string>>;
 }
 
 const Input: FC<InputProps> = ({
@@ -24,7 +25,27 @@ const Input: FC<InputProps> = ({
   icon,
   errors,
   required,
+  setInputValue,
 }) => {
+  const debounceTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const debouncedOnChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const value = e.target.value;
+
+      if (debounceTimeoutRef.current) {
+        clearTimeout(debounceTimeoutRef.current);
+      }
+
+      debounceTimeoutRef.current = setTimeout(() => {
+        if (setInputValue) {
+          setInputValue(value);
+        }
+      }, 300);
+    },
+    [setInputValue],
+  );
+
   return (
     <div>
       <label className="mb-1 block text-sm font-semibold text-[#111111]">
@@ -40,6 +61,13 @@ const Input: FC<InputProps> = ({
             ...(id === "payment_number" && {
               pattern: REGEXPATTERNS.phoneNumber,
             }),
+            onChange: (e) => {
+              debouncedOnChange(e);
+
+              e.target.dispatchEvent(
+                new Event("input", { bubbles: true, cancelable: true })
+              );
+            },
           })}
           type={type}
           placeholder={placeholder}
@@ -47,7 +75,7 @@ const Input: FC<InputProps> = ({
             "w-full rounded-lg border px-4 py-3 focus:outline",
             errors?.[id]
               ? "border-rose-500 outline-rose-500 placeholder:text-rose-500 focus:border-transparent"
-              : "border-gray300 placeholder:text-gray400 focus:outline-[#111111]",
+              : "border-gray300 placeholder:text-gray400 focus:outline-[#111111]"
           )}
         />
 

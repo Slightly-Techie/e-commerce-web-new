@@ -1,17 +1,22 @@
 import Input from "@/components/Input";
-import { FC } from "react";
-import UserLocation from "./UserLocation";
+import { Dispatch, FC, SetStateAction } from "react";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 import { FormValues } from "../CheckoutSteps";
-
-
+import UserLocation from "./UserLocation";
 
 interface DeliveryAddressProps {
+  userLocation: string;
+  setUserLocation: Dispatch<SetStateAction<string>>;
   register: UseFormRegister<FormValues>;
   errors: FieldErrors<FormValues>;
 }
 
-const DeliveryAddress: FC<DeliveryAddressProps> = ({ register, errors }) => {
+const DeliveryAddress: FC<DeliveryAddressProps> = ({
+  register,
+  errors,
+  userLocation,
+  setUserLocation,
+}) => {
   return (
     <>
       <form className="mb-12">
@@ -62,7 +67,11 @@ const DeliveryAddress: FC<DeliveryAddressProps> = ({ register, errors }) => {
         </div>
       </form>
 
-      <UserLocation />
+      <UserLocation
+        register={register}
+        userLocation={userLocation}
+        setUserLocation={setUserLocation}
+      />
     </>
   );
 };

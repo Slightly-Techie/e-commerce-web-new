@@ -1,4 +1,4 @@
-import { Dispatch, FC, SetStateAction, useEffect } from "react";
+import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import CheckoutButtons from "../CheckoutButtons";
 import DeliveryAddress from "./delivery-address/DeliveryAddress";
@@ -11,6 +11,7 @@ export interface FormValues {
   lastname: string;
   number: string;
   email: string;
+  location: string | null;
   delivery_date: Date | null;
   convinent_time: Date | null;
   network: string;
@@ -26,9 +27,12 @@ interface CheckoutStepsProps {
 const stepTitles = ["Delivery Address", "Delivery date & time", "Payment"];
 
 const CheckoutSteps: FC<CheckoutStepsProps> = ({ step, setStep }) => {
+  const [userLocation, setUserLocation] = useState("");
+
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm<FormValues>({
     defaultValues: {
@@ -36,6 +40,7 @@ const CheckoutSteps: FC<CheckoutStepsProps> = ({ step, setStep }) => {
       lastname: "",
       number: "",
       email: "",
+      location: null,
       delivery_date: null,
       convinent_time: null,
       network: "MTN",
@@ -62,6 +67,8 @@ const CheckoutSteps: FC<CheckoutStepsProps> = ({ step, setStep }) => {
       return;
     }
 
+    console.log(data);
+
     alert("Payment made");
   };
 
@@ -70,11 +77,20 @@ const CheckoutSteps: FC<CheckoutStepsProps> = ({ step, setStep }) => {
       <h3 className="mb-8 text-xl font-bold md:text-2xl">{`${step + 1}. ${stepTitles[step]}`}</h3>
 
       {step === Process.DeliveryAddress && (
-        <DeliveryAddress register={register} errors={errors} />
+        <DeliveryAddress
+          userLocation={userLocation}
+          setUserLocation={setUserLocation}
+          register={register}
+          errors={errors}
+        />
       )}
 
       {step === Process.DeliveryDateAndTime && (
-        <DeliveryDateAndTime register={register} errors={errors} />
+        <DeliveryDateAndTime
+          register={register}
+          control={control}
+          errors={errors}
+        />
       )}
 
       {step === Process.Payment && (

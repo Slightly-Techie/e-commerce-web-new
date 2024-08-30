@@ -1,6 +1,6 @@
 import Button from "@/components/Button";
 import { cn } from "@/lib";
-import { Dispatch, FC, SetStateAction, useState } from "react";
+import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
 import alertCircle from "../../../assets/icons/checkout/alert-circle.svg";
 import ticket1 from "../../../assets/icons/checkout/ticket-01.svg";
 import coin from "../../../assets/icons/navbar/coin.svg";
@@ -8,6 +8,7 @@ import { ICoin } from "./OrderTotal";
 
 interface SelectCoinProps {
   coins: ICoin[];
+  inputValue: string;
   setCoins: Dispatch<SetStateAction<{ value: string; isSelected: boolean }[]>>;
   setIsApplied: Dispatch<SetStateAction<boolean>>;
   setInputValue: Dispatch<SetStateAction<string>>;
@@ -15,11 +16,17 @@ interface SelectCoinProps {
 
 const SelectCoin: FC<SelectCoinProps> = ({
   coins,
+  inputValue,
   setCoins,
   setIsApplied,
   setInputValue,
 }) => {
   const [isSelected, setIsSelected] = useState(false);
+  const [selectedCoin, setSelectedCoin] = useState<string>();
+
+  let dynamicInputValue = inputValue || selectedCoin;
+
+  if (selectedCoin === "Other" && inputValue === "") dynamicInputValue = "";
 
   const selectCoinHandler = (value: string) => {
     const updatedCoins = coins.map((coin) => {
@@ -31,17 +38,35 @@ const SelectCoin: FC<SelectCoinProps> = ({
     });
 
     setCoins(updatedCoins);
+    setSelectedCoin(value);
   };
 
   const applyCoinHandler = () => {
     setIsApplied(true);
-
-    // if (selectedCoin === "Other") setSelectedCoin(inputValue);
   };
 
   const isOtherSelected = coins.find(
     (coin) => coin.value === "Other",
   )?.isSelected;
+
+  useEffect(() => {
+    const updatedCoins = coins.map((coin) => {
+      if (coin.value === "Other") {
+        if (inputValue && !coins.some((coin) => coin.value === inputValue)) {
+          return { ...coin, isSelected: true };
+        }
+        return { ...coin, isSelected: false };
+      } else {
+        return { ...coin, isSelected: coin.value === inputValue };
+      }
+    });
+
+    if (inputValue.trim() === "") {
+      setSelectedCoin('');
+    }
+
+    setCoins(updatedCoins);
+  }, [inputValue]);
 
   return (
     <div className="mb-[1.875rem]">
@@ -78,7 +103,8 @@ const SelectCoin: FC<SelectCoinProps> = ({
       <div className="flex flex-col gap-2.5 border-b border-b-gray200 pb-[1.875rem] sm:flex-row">
         <div className="relative w-full">
           <input
-            disabled={!isOtherSelected}
+            value={dynamicInputValue}
+            // disabled={!isOtherSelected && !selectedCoin}
             type="text"
             placeholder="Enter amount of coins"
             className="w-full rounded-lg border border-gray300 px-4 py-3 placeholder:text-gray400 focus:outline focus:outline-[#111111] disabled:cursor-not-allowed disabled:opacity-30"

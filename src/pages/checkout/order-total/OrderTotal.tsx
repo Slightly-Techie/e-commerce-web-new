@@ -30,6 +30,7 @@ const OrderTotal = () => {
         coins={coins}
         setCoins={setCoins}
         setIsApplied={setIsApplied}
+        inputValue={inputValue}
         setInputValue={setInputValue}
       />
 

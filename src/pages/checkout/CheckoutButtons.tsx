@@ -9,7 +9,11 @@ interface CheckoutButtonsProps {
   onSubmit: (data: any) => void;
 }
 
-const prevButtonLabels = [undefined, "Delivery Address", "Payment Method"];
+const prevButtonLabels = [
+  undefined,
+  "Delivery Address",
+  "Delivery Date & Time",
+];
 const nextButtonLabels = ["Delivery Address", "Payment Method", "Make Payment"];
 
 const CheckoutButtons: FC<CheckoutButtonsProps> = ({

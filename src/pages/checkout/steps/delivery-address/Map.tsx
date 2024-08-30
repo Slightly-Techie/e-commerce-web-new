@@ -1,17 +1,30 @@
-import { MapContainer, TileLayer } from "react-leaflet";
-
-import useLatLng from "@/hooks/useLatLng";
 import "leaflet/dist/leaflet.css";
+import { useEffect } from "react";
+import { MapContainer, Marker, TileLayer, useMap } from "react-leaflet";
+import { LatLngTuple } from "./UserLocation";
 
-const Map = () => {
-  const { latitude, longitude } = useLatLng();
+interface MapProps {
+  coordinates: LatLngTuple;
+}
 
-  if (!latitude && !longitude) return;
+const UpdateMapView = ({ coordinates }: { coordinates: LatLngTuple }) => {
+  const map = useMap();
+  useEffect(() => {
+    if (coordinates) {
+      map.setView(coordinates, map.getZoom(), {
+        animate: true,
+      });
+    }
+  }, [coordinates, map]);
 
+  return null;
+};
+
+const Map = ({ coordinates }: MapProps) => {
   return (
     <div className="h-[201px] w-full overflow-hidden rounded-2xl border">
       <MapContainer
-        center={[latitude!, longitude!]}
+        center={coordinates}
         zoom={13}
         scrollWheelZoom={false}
         className="h-[201px]"
@@ -20,11 +33,8 @@ const Map = () => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        {/* <Marker position={[latitude!, longitude!]}>
-          <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </Popup>
-        </Marker> */}
+        <UpdateMapView coordinates={coordinates} />
+        <Marker position={coordinates} />
       </MapContainer>
     </div>
   );
