@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import Swiper from "swiper";
 
 const useSwiper = () => {
   const [isPrevDisabled, setIsPrevDisabled] = useState(true);
@@ -10,9 +11,11 @@ const useSwiper = () => {
 
   useEffect(() => {
     if (swiperRef.current) {
-      const swiper = swiperRef.current.swiper;
-      swiper.params.navigation.prevEl = prevRef.current;
-      swiper.params.navigation.nextEl = nextRef.current;
+      const swiper = swiperRef.current as Swiper;
+      swiper.params.navigation = {
+        prevEl: prevRef.current,
+        nextEl: nextRef.current,
+      };
       swiper.navigation.init();
       swiper.navigation.update();
 
