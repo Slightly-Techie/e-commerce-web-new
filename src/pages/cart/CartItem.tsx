@@ -3,18 +3,12 @@ import heartFavIcon from "@/assets/icons/cart/heart-red.svg";
 import trashIcon from "@/assets/icons/cart/trash-gray.svg";
 import Button from "@/components/Button";
 import useFavorite from "@/hooks/useFavorite";
-import { useCartStore } from "@/store/cartStore";
-
-interface CartItemProps {
-  id: string;
-  name: string;
-  image: string;
-}
+import { CartItemProps, useCartStore } from "@/store/cartStore";
 
 const CartItem = ({ id, image, name }: CartItemProps) => {
   const { isFavorite, toggleFavoriteHandler } = useFavorite();
 
-  const removeFromCart = useCartStore((state) => state.removeItem);  
+  const removeFromCart = useCartStore((state) => state.removeItem);
 
   return (
     <div className="flex items-center gap-4">
@@ -38,7 +32,7 @@ const CartItem = ({ id, image, name }: CartItemProps) => {
             ghost
             className="w-fit gap-1.5 text-sm text-gray400"
             onClick={() => {
-              removeFromCart(id, true);              
+              removeFromCart(id, true);
             }}
           />
         </div>
