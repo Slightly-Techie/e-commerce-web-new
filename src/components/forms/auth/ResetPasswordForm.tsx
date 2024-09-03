@@ -11,10 +11,10 @@ import {
   TextSize,
 } from "../../../types";
 import Button from "../../Button";
-import Form from "../../formElements/Form";
-import FormHelper from "../../formElements/FormHelper";
-import Input from "../../formElements/Input";
-import InputGroup from "../../formElements/InputGroup";
+import Form from "../../FormElements/Form";
+import FormHelper from "../../FormElements/FormHelper";
+import Input from "../../FormElements/Input";
+import InputGroup from "../../FormElements/InputGroup";
 
 const ResetPasswordForm = ({ code }: { code: number | null }) => {
   const {
