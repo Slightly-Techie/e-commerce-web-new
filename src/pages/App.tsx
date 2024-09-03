@@ -6,6 +6,7 @@ import Error404 from "./Error404";
 import Favorite from "./Favorite";
 import Referrals from "./Referrals";
 import Cart from "./cart/Cart";
+import Checkout from "./checkout/Checkout";
 import Explore from "./explore/Explore";
 import OrderHistory from "./history/OrderHistory";
 import Products from "./products/Products";
