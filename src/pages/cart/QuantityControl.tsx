@@ -12,12 +12,12 @@ interface QuantityControlProps {
 
 const QuantityControl = ({ id, amount, btn }: QuantityControlProps) => {
   const [quantity, setQuantity] = useState(amount);
-  const addToCart = useCartStore((state) => state.addItem);
+  //   const addToCart = useCartStore((state) => state.addItem);
   const removeFromCart = useCartStore((state) => state.removeItem);
 
   const increaseQuantityHandler = () => {
     setQuantity((prev) => prev + 1);
-    addToCart({ id });
+    // addToCart({ id });
   };
 
   const decreaseQuantityHandler = () => {
