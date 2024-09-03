@@ -7,14 +7,6 @@ import { useNavigate } from "react-router-dom";
 import CartTable from "./CartTable";
 import OrderTotal from "./OrderTotal";
 
-export interface Item {
-  id: string;
-  name: string;
-  image: string;
-  quantity: number;
-  price: string;
-}
-
 const Cart = () => {
   const cart = useCartStore((state) => state.cart);
   const clearCartHandler = useCartStore((state) => state.clearCart);
