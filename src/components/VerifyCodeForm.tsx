@@ -7,10 +7,10 @@ import { useUserStore } from "../store/userStore";
 import { ButtonType, FormHelperType } from "../types";
 import Alert from "./Alert";
 import Button from "./Button";
-import Form from "./formElements/Form";
-import FormHelper from "./formElements/FormHelper";
-import Input from "./formElements/Input";
-import InputGroup from "./formElements/InputGroup";
+import Form from "./FormElements/Form";
+import FormHelper from "./FormElements/FormHelper";
+import Input from "./FormElements/Input";
+import InputGroup from "./FormElements/InputGroup";
 
 type FormValues = {
   code: string;
