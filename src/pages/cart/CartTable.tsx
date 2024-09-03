@@ -6,15 +6,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Item } from "./Cart";
+import { CartItemProps } from "@/store/cartStore";
 import CartItem from "./CartItem";
 import QuantityControl from "./QuantityControl";
 
-interface CartTableProps {
-  cartItems: Item[];
-}
-
-const CartTable = ({ cartItems }: CartTableProps) => {
+const CartTable = ({ cartItems }: { cartItems: CartItemProps[] }) => {
   return (
     <Table className="font-semibold text-[#111111]">
       <TableHeader>
@@ -36,7 +32,7 @@ const CartTable = ({ cartItems }: CartTableProps) => {
 
       <TableBody>
         {cartItems.map((item) => {
-          const finalPrice = +item.price * item.quantity;
+          const finalPrice = +(item?.price || 0) * (item?.quantity || 0);
 
           return (
             <TableRow className="text-base" key={item.id}>
@@ -49,7 +45,7 @@ const CartTable = ({ cartItems }: CartTableProps) => {
               </TableCell>
 
               <TableCell className="min-w-[126px]">
-                <QuantityControl id={item.id} amount={item.quantity} />
+                <QuantityControl id={item.id} amount={item?.quantity || 0} />
               </TableCell>
 
               <TableCell className="min-w-[109px] text-center">
