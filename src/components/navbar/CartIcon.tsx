@@ -12,7 +12,7 @@ const CartIcon: React.FC<CartIconProps> = ({ closeMenu }) => {
   const cart = useCartStore((state) => state.cart);
 
   const itemsQuantity = cart.reduce((acc, item) => {
-    return acc + item.quantity;
+    return acc + (item.quantity ?? 0);
   }, 0);
 
   return (
