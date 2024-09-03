@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-interface CartItem {
+export interface CartItemProps {
   id: string;
   name?: string;
   image?: string;
@@ -9,10 +9,10 @@ interface CartItem {
 }
 
 interface CartStore {
-  cart: CartItem[];
+  cart: CartItemProps[];
   totalPrice: number;
   isAdded: (id: string) => boolean;
-  addItem: (item: CartItem) => void;
+  addItem: (item: CartItemProps) => void;
   removeItem: (id: string, all?: boolean) => void;
   clearCart: () => void;
 }
@@ -26,7 +26,7 @@ export const useCartStore = create<CartStore>()((set, get) => ({
     return cart.some((cartItem) => cartItem.id === id);
   },
 
-  addItem: (item: CartItem) => {
+  addItem: (item: CartItemProps) => {
     set((state) => {
       const existingItem = state.cart.find(
         (cartItem) => cartItem.id === item.id,
