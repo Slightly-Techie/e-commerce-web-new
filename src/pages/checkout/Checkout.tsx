@@ -2,17 +2,14 @@ import chevronLeftIcon from "@/assets/icons/chevron-left.svg";
 import Button from "@/components/Button";
 import Container from "@/components/Container";
 import { cn } from "@/lib";
-import { useState } from "react";
+import useCheckoutStore from "@/store/CheckoutStore";
 import { useNavigate } from "react-router-dom";
 import OrderTotal from "./order-total/OrderTotal";
 import CheckoutSteps from "./steps/CheckoutSteps";
 import { Process } from "./steps/process";
 
 const Checkout = () => {
-  const [step, setStep] = useState(
-    JSON.parse(localStorage.getItem("checkout-step")!) ||
-      Process.DeliveryAddress,
-  );
+  const { step, ...checkoutState } = useCheckoutStore();
 
   const navigate = useNavigate();
 
@@ -53,7 +50,7 @@ const Checkout = () => {
         </div>
 
         <div className="mt-6 flex flex-col items-start gap-4 lg:flex-row">
-          <CheckoutSteps step={step} setStep={setStep} />
+          <CheckoutSteps {...checkoutState} step={step} />
           <OrderTotal />
         </div>
       </Container>
