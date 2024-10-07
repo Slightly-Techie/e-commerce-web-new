@@ -27,7 +27,7 @@ const Input: FC<InputProps> = ({
   required,
   setInputValue,
 }) => {
-  const debounceTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const debounceTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const debouncedOnChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -65,7 +65,7 @@ const Input: FC<InputProps> = ({
               debouncedOnChange(e);
 
               e.target.dispatchEvent(
-                new Event("input", { bubbles: true, cancelable: true })
+                new Event("input", { bubbles: true, cancelable: true }),
               );
             },
           })}
@@ -75,13 +75,14 @@ const Input: FC<InputProps> = ({
             "w-full rounded-lg border px-4 py-3 focus:outline",
             errors?.[id]
               ? "border-rose-500 outline-rose-500 placeholder:text-rose-500 focus:border-transparent"
-              : "border-gray300 placeholder:text-gray400 focus:outline-[#111111]"
+              : "border-gray300 placeholder:text-gray400 focus:outline-[#111111]",
           )}
         />
 
         {icon && (
           <img
             src={icon}
+            alt=""
             className="absolute right-4 top-1/2 -translate-y-1/2"
           />
         )}
