@@ -4,13 +4,8 @@ import Input from "@/components/Input";
 import Select from "@/components/Select";
 import { cn } from "@/lib";
 import { FC, useState } from "react";
-import { FieldErrors, UseFormRegister } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { FormValues } from "./CheckoutSteps";
-
-interface PaymentProps {
-  register: UseFormRegister<FormValues>;
-  errors: FieldErrors<FormValues>;
-}
 
 const paymentMethods = [
   { id: "mobile-money", method: "Mobile Money", icon: phoneIcon },
@@ -19,8 +14,21 @@ const paymentMethods = [
 
 const networks = ["MTN", "Telecel", "AirtelTigo"];
 
-const Payment: FC<PaymentProps> = ({ register, errors }) => {
+const PaymentForm: FC = () => {
   const [paymentMethod, setPaymentMethod] = useState(paymentMethods[0].id);
+
+  const {
+    register,
+    formState: { errors },
+  } = useForm<FormValues>({
+    defaultValues: {
+      firstname: "",
+      lastname: "",
+      number: "",
+      email: "",
+      location: null,
+    },
+  });
 
   return (
     <>
@@ -83,4 +91,4 @@ const Payment: FC<PaymentProps> = ({ register, errors }) => {
   );
 };
 
-export default Payment;
+export default PaymentForm;
