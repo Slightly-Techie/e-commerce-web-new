@@ -62,7 +62,7 @@ const SelectCoin: FC<SelectCoinProps> = ({
     });
 
     if (inputValue.trim() === "") {
-      setSelectedCoin('');
+      setSelectedCoin("");
     }
 
     setCoins(updatedCoins);
@@ -103,7 +103,7 @@ const SelectCoin: FC<SelectCoinProps> = ({
       <div className="flex flex-col gap-2.5 border-b border-b-gray200 pb-[1.875rem] sm:flex-row">
         <div className="relative w-full">
           <input
-            value={dynamicInputValue}
+            // value={dynamicInputValue}
             // disabled={!isOtherSelected && !selectedCoin}
             type="text"
             placeholder="Enter amount of coins"
