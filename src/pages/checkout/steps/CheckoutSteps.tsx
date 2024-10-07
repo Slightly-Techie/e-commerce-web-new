@@ -1,11 +1,19 @@
-import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import CheckoutButtons from "../CheckoutButtons";
+import { CheckoutState } from "@/lib/index";
+import { FC } from "react";
+import { Outlet } from "react-router-dom";
 import DeliveryAddress from "./delivery-address/DeliveryAddress";
 import DeliveryDateAndTime from "./DeliveryDateAndTime";
 import Payment from "./Payment";
-import { Process } from "./process";
 
+// instead of having one form state for each step, we can have a single form state for all steps
+// this will make it easier to manage the form data
+//  and it will prevent the need to pass form data between steps
+
+// the react-router-dom library can be used to manage the steps
+// and the form data can be stored in the URL query parameters or in the browser's local storage
+
+// so each step can be a separate component that renders based on the URL path
+// and validates the form data based on the URL query parameters or the local storage data
 export interface FormValues {
   firstname: string;
   lastname: string;
@@ -19,90 +27,15 @@ export interface FormValues {
   credit_card_number: string;
 }
 
-interface CheckoutStepsProps {
-  step: number;
-  setStep: Dispatch<SetStateAction<Process>>;
-}
-
 const stepTitles = ["Delivery Address", "Delivery date & time", "Payment"];
 
-const CheckoutSteps: FC<CheckoutStepsProps> = ({ step, setStep }) => {
-  const [userLocation, setUserLocation] = useState("");
+const stepPages = [<DeliveryAddress />, <DeliveryDateAndTime />, <Payment />];
 
-  const {
-    register,
-    handleSubmit,
-    control,
-    formState: { errors },
-  } = useForm<FormValues>({
-    defaultValues: {
-      firstname: "",
-      lastname: "",
-      number: "",
-      email: "",
-      location: null,
-      delivery_date: null,
-      convinent_time: null,
-      network: "MTN",
-      payment_number: "",
-      credit_card_number: "",
-    },
-  });
-
-  const onPrevStep = () => {
-    setStep((prev) => prev - 1);
-  };
-
-  const onNextStep = () => {
-    setStep((prev) => prev + 1);
-  };
-
-  useEffect(() => {
-    localStorage.setItem("checkout-step", JSON.stringify(step));
-  }, [step]);
-
-  const submitHandler = (data: any) => {
-    if (step !== Process.Payment) {
-      onNextStep();
-      return;
-    }
-
-    console.log(data);
-
-    alert("Payment made");
-  };
-
+const CheckoutSteps: FC<CheckoutState> = ({ step }) => {
   return (
     <div className="w-full max-w-[943px] rounded-[14px] border border-gray200 bg-white p-4 md:p-8">
       <h3 className="mb-8 text-xl font-bold md:text-2xl">{`${step + 1}. ${stepTitles[step]}`}</h3>
-
-      {step === Process.DeliveryAddress && (
-        <DeliveryAddress
-          userLocation={userLocation}
-          setUserLocation={setUserLocation}
-          register={register}
-          errors={errors}
-        />
-      )}
-
-      {step === Process.DeliveryDateAndTime && (
-        <DeliveryDateAndTime
-          register={register}
-          control={control}
-          errors={errors}
-        />
-      )}
-
-      {step === Process.Payment && (
-        <Payment register={register} errors={errors} />
-      )}
-
-      <CheckoutButtons
-        step={step}
-        process={Process}
-        prevStep={onPrevStep}
-        onSubmit={handleSubmit(submitHandler)}
-      />
+      <Outlet />
     </div>
   );
 };
