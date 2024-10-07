@@ -1,31 +1,49 @@
 import Input from "@/components/Input";
-import { Dispatch, FC, SetStateAction } from "react";
-import { FieldErrors, UseFormRegister } from "react-hook-form";
+import { Routes } from "@/lib/routes";
+import { FC, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import CheckoutButtons from "../../CheckoutButtons";
 import { FormValues } from "../CheckoutSteps";
 import UserLocation from "./UserLocation";
 
-interface DeliveryAddressProps {
-  userLocation: string;
-  setUserLocation: Dispatch<SetStateAction<string>>;
-  register: UseFormRegister<FormValues>;
-  errors: FieldErrors<FormValues>;
-}
+const DeliveryAddressForm: FC = () => {
+  const [userLocation, setUserLocation] = useState("");
+  const navigate = useNavigate();
 
-const DeliveryAddress: FC<DeliveryAddressProps> = ({
-  register,
-  errors,
-  userLocation,
-  setUserLocation,
-}) => {
+  const {
+    register,
+    formState: { errors, isValid },
+    handleSubmit,
+  } = useForm<FormValues>({
+    defaultValues: {
+      firstname: "",
+      lastname: "",
+      number: "",
+      email: "",
+      location: null,
+    },
+  });
+
+  const onSubmit = () => {
+    navigate(Routes.CHECKOUT_DELIVERY_DATE_AND_TIME);
+  };
+
   return (
     <>
-      <form className="mb-12">
+      <form
+        className="mb-12"
+        onSubmit={handleSubmit(onSubmit, (e) => {
+          console.error(e);
+        })}
+      >
         <div className="grid gap-6 md:grid-cols-2 md:gap-8">
           <Input
             register={register}
             errors={errors}
             id="firstname"
             label="First Name"
+            type="text"
             placeholder="Eg James"
             required
           />
@@ -65,15 +83,17 @@ const DeliveryAddress: FC<DeliveryAddressProps> = ({
             </span>
           </div>
         </div>
-      </form>
 
-      <UserLocation
-        register={register}
-        userLocation={userLocation}
-        setUserLocation={setUserLocation}
-      />
+        <UserLocation
+          register={register}
+          userLocation={userLocation}
+          setUserLocation={setUserLocation}
+        />
+
+        <CheckoutButtons isFormValid={isValid} />
+      </form>
     </>
   );
 };
 
-export default DeliveryAddress;
+export default DeliveryAddressForm;
