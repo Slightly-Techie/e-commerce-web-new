@@ -1,32 +1,39 @@
 import { DatePickerDemo } from "@/components/DatePicker";
 import { TimePicker12Demo } from "@/components/time-picker-12h-demo";
 import { cn } from "@/lib";
+import { Routes } from "@/lib/routes";
 import { FC, useState } from "react";
-import {
-  Control,
-  Controller,
-  FieldErrors,
-  UseFormRegister,
-} from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import CheckoutButtons from "../CheckoutButtons";
 import { FormValues } from "./CheckoutSteps";
 
-interface DeliveryDateAndTimeProps {
-  register: UseFormRegister<FormValues>;
-  control: Control<FormValues>;
-  errors: FieldErrors<FormValues>;
-}
-
-const DeliveryDateAndTime: FC<DeliveryDateAndTimeProps> = ({
-  register,
-  control,
-  errors,
-}) => {
+const DeliveryDateAndTimeForm: FC = () => {
   const [date, setDate] = useState<Date>();
+  const [time, setTime] = useState<Date>();
+  const navigate = useNavigate();
 
-  console.log(date);
+  const {
+    control,
+    formState: { errors, isValid },
+    handleSubmit,
+  } = useForm<FormValues>({
+    defaultValues: {
+      delivery_date: null,
+    },
+  });
+
+  const onSubmit = () => {
+    navigate(Routes.CHECKOUT_PAYMENT);
+  };
 
   return (
-    <form className="grid items-end gap-6 md:grid-cols-2 md:gap-8">
+    <form
+      className="grid gap-6 md:grid-cols-2 md:gap-8"
+      onSubmit={handleSubmit(onSubmit, (e) => {
+        console.error(e);
+      })}
+    >
       <div>
         <label className="mb-1 block text-sm font-semibold text-[#111111]">
           Delivery Date
@@ -42,7 +49,11 @@ const DeliveryDateAndTime: FC<DeliveryDateAndTimeProps> = ({
                 "w-full rounded-lg px-4 py-[1.6rem]",
                 errors.delivery_date ? "border-rose-500" : "border-gray-300",
               )}
-              {...field}
+              value={date}
+              onChange={(date) => {
+                setDate(date as Date);
+                field.onChange(date);
+              }}
             />
           )}
         />
@@ -53,26 +64,18 @@ const DeliveryDateAndTime: FC<DeliveryDateAndTimeProps> = ({
         )}
       </div>
 
-      {/* <Input
-        register={register}
-        errors={errors}
-        icon={clockIcon}
-        id="convinent_time"
-        label="Convinent Time"
-        type="time"
-        placeholder="1:00 PM - 4:00 PM"
-        required
-      /> */}      
-
       <div>
         <label className="text-sm font-semibold text-[#111]">
           Delivery Time
         </label>
         <TimePicker12Demo date={date} setDate={setDate} />
-        <p className="text-sm mt-1">Delivery time is required</p>
+        <p className="mt-1 text-sm">Delivery time is required</p>
       </div>
+
+      <div />
+      <CheckoutButtons isFormValid={isValid} />
     </form>
   );
 };
 
-export default DeliveryDateAndTime;
+export default DeliveryDateAndTimeForm;
