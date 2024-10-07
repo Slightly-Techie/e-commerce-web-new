@@ -26,8 +26,6 @@ const UserLocation = ({
   const [coordinates, setCoordinates] =
     useState<LatLngTuple>(defaultCoordinates);
 
-  console.log(userLocation);
-
   useEffect(() => {
     const fetchCoordinates = async () => {
       try {
