@@ -1,46 +1,45 @@
-import Button from "@/components/Button";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib";
+import useCheckoutStore from "@/store/CheckoutStore";
 import { FC } from "react";
 
 interface CheckoutButtonsProps {
-  step: number;
-  process: any;
-  prevStep: () => void;
-  onSubmit: (data: any) => void;
+  isFormValid: boolean;
 }
 
-const prevButtonLabels = [
-  undefined,
-  "Delivery Address",
-  "Delivery Date & Time",
-];
-const nextButtonLabels = ["Delivery Address", "Payment Method", "Make Payment"];
+const CheckoutButtons: FC<CheckoutButtonsProps> = (props) => {
+  const checkoutState = useCheckoutStore();
 
-const CheckoutButtons: FC<CheckoutButtonsProps> = ({
-  step,
-  process,
-  prevStep,
-  onSubmit,
-}) => {
+  const handleNextStep = () => {
+    // Assuming onFormSubmit handles validation and returns a boolean
+    if (props.isFormValid) {
+      checkoutState.nextStep();
+    }
+  };
+
   return (
     <div className="mt-12 flex w-full flex-col gap-4 sm:ml-auto sm:w-fit sm:flex-row">
-      {step > process.DeliveryAddress && (
+      {checkoutState.prevStepLabel && (
         <Button
-          label={prevButtonLabels[step]}
-          className="border border-gray300 bg-transparent font-semibold text-primaryLight"
-          onClick={prevStep}
-        />
+          className="rounded-lg border border-gray300 bg-transparent px-6 py-2 font-semibold text-primaryLight"
+          onClick={checkoutState.prevStep}
+        >
+          {checkoutState.prevStepLabel}
+        </Button>
       )}
 
       <Button
-        label={nextButtonLabels[step]}
         className={`${cn(
-          step < process.Payment
+          "rounded-lg px-6 py-2 hover:bg-[#242424] hover:text-white",
+          checkoutState.step === checkoutState.maxStep
             ? "bg-gray100 font-semibold text-gray500"
             : "bg-[#111111] font-medium text-white",
         )}`}
-        onClick={onSubmit}
-      />
+        type="submit"
+        onClick={handleNextStep}
+      >
+        {checkoutState.nextStepLabel}
+      </Button>
     </div>
   );
 };
