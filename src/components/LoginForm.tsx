@@ -1,15 +1,15 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { REGEXPATTERNS } from "../lib/constants";
-import { AlertType, ButtonType, FormHelperType } from "../types";
+import { AlertType, FormHelperType } from "../types";
 import Alert from "./Alert";
-import Button from "./Button";
 import Checkbox from "./FormElements/Checkbox";
 import Form from "./FormElements/Form";
 import FormHelper from "./FormElements/FormHelper";
 import Input from "./FormElements/Input";
 import InputGroup from "./FormElements/InputGroup";
 import Label from "./FormElements/Label";
+import { Button } from "./ui/button";
 
 type FormValues = {
   email: string;
@@ -101,11 +101,11 @@ const LoginForm = () => {
 
       <Button
         className="w-full"
-        btnType={
-          loading || errors.email || errors.password
-            ? ButtonType.disabled
-            : ButtonType.primary
-        }
+        // btnType={
+        //   loading || errors.email || errors.password
+        //     ? ButtonType.disabled
+        //     : ButtonType.primary
+        // }
       >
         {loading ? "Logging in..." : "Login"}
       </Button>
