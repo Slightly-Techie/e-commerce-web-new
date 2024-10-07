@@ -27,6 +27,7 @@ const Button: React.FC<ButtonProps> = ({
   onClick,
   underline,
   disabled,
+  children,
   ...props
 }) => {
   return (
@@ -53,7 +54,7 @@ const Button: React.FC<ButtonProps> = ({
             'relative after:absolute after:bottom-0 after:right-0 after:h-[1px] after:w-full after:bg-gray500 after:content-[""]',
         )}
       >
-        {label}
+        {label || children}
       </span>
     </button>
   );
