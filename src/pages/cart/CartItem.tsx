@@ -4,6 +4,7 @@ import trashIcon from "@/assets/icons/cart/trash-gray.svg";
 import Button from "@/components/Button";
 import useFavorite from "@/hooks/useFavorite";
 import { CartItemProps, useCartStore } from "@/store/cartStore";
+import { ButtonType } from "@/types";
 
 const CartItem = ({ id, image, name }: CartItemProps) => {
   const { isFavorite, toggleFavoriteHandler } = useFavorite();
