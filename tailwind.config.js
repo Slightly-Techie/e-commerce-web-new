@@ -125,6 +125,7 @@ export default {
       },
       backgroundImage: {
         stn: "url(/src/assets/stn_avengers.png)",
+        signup: "url(/src/assets/images/sign-up-bg.webp)",
       },
       screens: {
         sm: "640px", // Small screens and above (640px)

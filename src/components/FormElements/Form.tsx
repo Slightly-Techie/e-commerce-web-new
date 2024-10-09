@@ -13,7 +13,7 @@ const Form = forwardRef<HTMLFormElement, FormProps>(
       <form
         ref={ref}
         className={cn(
-          "form mt-32 h-fit w-full max-w-[550px] space-y-6 rounded-lg border border-gray300 bg-white p-12 text-black",
+          "form h-fit w-full max-w-[550px] space-y-6 rounded-lg border border-gray300 bg-white p-12 text-black",
           className,
         )}
         {...props}

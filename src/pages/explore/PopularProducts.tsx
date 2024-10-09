@@ -1,4 +1,5 @@
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { ButtonType } from "@/types";
 import chevronRightIcon from "../../assets/icons/chevronRight.svg";
 import Dell from "../../assets/images/products/Dell.png";
 import GooglePixel from "../../assets/images/products/GooglePixel.png";
@@ -58,7 +59,12 @@ const PopularProducts = () => {
           Popular Products
         </h3>
 
-        <Button label="View All" ghost icon={chevronRightIcon} invert />
+        <Button
+          label="View All"
+          btnType={ButtonType.ghost}
+          icon={chevronRightIcon}
+          invert
+        />
       </div>
 
       <ScrollArea className="w-full whitespace-nowrap rounded-md">

@@ -1,9 +1,14 @@
 import alertCircleIcon from "@/assets/icons/alert-circle.svg";
 import Button from "@/components/Button";
 import { useCartStore } from "@/store/cartStore";
+import { ButtonType } from "@/types";
+import { useNavigate } from "react-router-dom";
 
 const OrderTotal = () => {
+  const cart = useCartStore((state) => state.cart);
   const totalPrice = useCartStore((state) => state.totalPrice);
+
+  const navigate = useNavigate();
 
   return (
     <div className="rounded-[14px] border border-gray200 bg-white p-6 lg:w-[449px]">
@@ -14,7 +19,7 @@ const OrderTotal = () => {
       <Button
         label="Delivery fees not included yet."
         icon={alertCircleIcon}
-        secondary
+        btnType={ButtonType.secondary}
         className="mb-[1.875rem] w-full cursor-auto text-sm font-semibold text-gray500 hover:opacity-100 sm:text-base"
       />
 
@@ -34,7 +39,12 @@ const OrderTotal = () => {
           <span>₵{totalPrice.toFixed(2)}</span>
         </div>
 
-        <Button label="Check out now" className="font-semibold" />
+        <Button
+          disabled={cart.length === 0}
+          label="Check out now"
+          className="font-semibold disabled:opacity-100"
+          onClick={() => navigate("/checkout")}
+        />
       </div>
     </div>
   );

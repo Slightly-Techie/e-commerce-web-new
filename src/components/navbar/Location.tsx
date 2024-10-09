@@ -1,22 +1,16 @@
-import { useEffect, useState } from "react";
+import useLatLng from "@/hooks/useLatLng";
+import { cn } from "@/lib";
+import { FC, useEffect, useState } from "react";
 import locationIcon from "../../assets/icons/navbar/location.svg";
 
-const Location = () => {
-  const [latitude, setLatitude] = useState<number | null>();
-  const [longitude, setLongitude] = useState<number | null>();
+interface LocationProps {
+  noPadding?: boolean;
+}
+
+const Location: FC<LocationProps> = ({ noPadding }) => {
   const [location, setLocation] = useState<any>();
 
-  const successCallback = (position: GeolocationPosition) => {
-    setLatitude(position.coords.latitude);
-    setLongitude(position.coords.longitude);
-  };
-
-  const errorCallback = (error: GeolocationPositionError) => {
-    setLatitude(null);
-    setLongitude(null);
-  };
-
-  navigator.geolocation.watchPosition(successCallback, errorCallback);
+  const { latitude, longitude } = useLatLng();
 
   useEffect(() => {
     if (!latitude && !longitude) return;
@@ -40,7 +34,11 @@ const Location = () => {
   }, [latitude, longitude]);
 
   return (
-    <div className="flex w-full items-center gap-2.5 px-2 md:px-3">
+    <div
+      className={`flex w-full items-center gap-2.5 ${cn(
+        !noPadding && "px-2 md:px-3",
+      )}`}
+    >
       <img src={locationIcon} alt="" />
       <span className="font-medium text-gray600">
         {!location ? "N/A" : location.country}

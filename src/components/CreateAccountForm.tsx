@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { SignUpContext } from "@/pages/Signup";
+import { useContext } from "react";
+import { SubmitHandler } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { REGEXPATTERNS } from "../lib/constants";
 import { TextSizeStyles } from "../lib/styles";
@@ -19,25 +20,28 @@ import Input from "./FormElements/Input";
 import InputGroup from "./FormElements/InputGroup";
 
 const CreateAccountForm = () => {
-  const [loading, setLoading] = useState(false);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<SignupFormFields>();
-
-  // const { changeStage } = useSignupStageStore();
-  // const { login } = useUserStore();
-
   const onSubmit: SubmitHandler<SignupFormFields> = () => {
-    // create user
-    setLoading(false);
+    toggleAccountType();
   };
 
   const { showAlert } = useAlertStore();
 
+  const { toggleAccountType, form } = useContext(SignUpContext);
+
+  if (form === undefined) return null;
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = form;
+
   return (
-    <Form title="Create Account" onSubmit={handleSubmit(onSubmit)}>
+    <Form
+      title="Create Account"
+      onSubmit={handleSubmit(onSubmit)}
+      className="px-4 md:px-12"
+    >
       {/* {errors && <Alert type={AlertType.error}>{errors.message}</Alert>} */}
       <Alert
         type={AlertType.info}
@@ -73,6 +77,21 @@ const CreateAccountForm = () => {
 
         <InputGroup>
           <Input
+            {...register("referral_code")}
+            label="Referral Code"
+            id="referral"
+            icon={<img src="assets/icons/referral.svg" alt="..." />}
+            placeholder="Enter your referral code"
+          />
+          {errors.referral_code && (
+            <FormHelper type={FormHelperType.error}>
+              {errors.referral_code.message}
+            </FormHelper>
+          )}
+        </InputGroup>
+
+        <InputGroup>
+          <Input
             {...register("email", {
               required: "Email is required",
               pattern: {
@@ -98,11 +117,11 @@ const CreateAccountForm = () => {
               required: "Password is required",
               minLength: {
                 value: 8,
-                message: "Passsword cannot be less than 8 characters",
+                message: "Password cannot be less than 8 characters",
               },
               pattern: {
                 value: REGEXPATTERNS.password,
-                message: "Password should a be a mix of letters and symbols",
+                message: "Password should be a mix of letters and symbols",
               },
             })}
             label="Password"
@@ -121,14 +140,9 @@ const CreateAccountForm = () => {
 
       <Button
         className="w-full"
-        disabled={loading}
-        btnType={
-          errors.email || errors.password || errors.username || loading
-            ? ButtonType.disabled
-            : ButtonType.primary
-        }
+        btnType={!isValid ? ButtonType.disabled : ButtonType.primary}
       >
-        {loading ? "Submitting" : "Submit"}
+        Continue
       </Button>
 
       <p className={"text-gray500 " + TextSizeStyles[TextSize.small]}>

@@ -1,13 +1,18 @@
 import React from "react";
+import { CookiesProvider } from "react-cookie";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
+import { RouterProvider } from "react-router-dom";
+import { Toaster } from "./components/ui/sonner.tsx";
 import "./index.css";
-import App from "./pages/App.tsx";
+import AppRouter from "./pages/AppRouter.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <>
+      <CookiesProvider defaultSetOptions={{ path: "/" }}>
+        <RouterProvider router={AppRouter} />
+      </CookiesProvider>
+      <Toaster />
+    </>
   </React.StrictMode>,
 );

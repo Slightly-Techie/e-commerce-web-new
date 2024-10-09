@@ -1,6 +1,6 @@
 import { SignupStage } from "../types";
 
-export const SETUPACCOUNTROUTES: Record<SignupStage, string> = {
+const SETUPACCOUNTROUTES: Record<SignupStage, string> = {
   "enter details": "/sign-up",
   "verify code": "/verify-code",
   "choose account type": "/setup-account",
@@ -8,3 +8,22 @@ export const SETUPACCOUNTROUTES: Record<SignupStage, string> = {
   "setup st account": "/setup-account/st-member",
   "setup complete": "/setup-account/complete",
 };
+
+enum Routes {
+  HOME = "/",
+  LOGIN = "/login",
+  SIGN_UP = "/sign-up",
+  EXPLORE = "/explore",
+  FAVORITES = "/favorites",
+  TRACK = "/track",
+  HISTORY = "/history",
+  REFERRALS = "/referrals",
+  PRODUCT_DETAILS = "/products/:id",
+  CART = "/cart",
+  CHECKOUT = "checkout",
+  CHECKOUT_DELIVERY_ADDRESS = "/checkout",
+  CHECKOUT_DELIVERY_DATE_AND_TIME = "/checkout/delivery-date-and-time",
+  CHECKOUT_PAYMENT = "/checkout/payment",
+}
+
+export { Routes, SETUPACCOUNTROUTES };

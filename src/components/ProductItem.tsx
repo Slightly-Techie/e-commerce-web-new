@@ -1,5 +1,6 @@
 import QuantityControl from "@/pages/cart/QuantityControl";
 import { useCartStore } from "@/store/cartStore";
+import { ButtonType } from "@/types";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import cartIcon from "../assets/icons/navbar/cart.svg";
@@ -50,7 +51,7 @@ const ProductItem = ({
     });
   };
 
-  const addToCartHandler = (e: Event) => {
+  const addToCartHandler = (e: React.MouseEvent) => {
     e.stopPropagation();
     addToCart({
       id,
@@ -101,7 +102,7 @@ const ProductItem = ({
         {!addedToCart ? (
           <Button
             label="Add to cart"
-            secondary
+            btnType={ButtonType.secondary}
             invert
             icon={cartIcon}
             className="w-full font-semibold"

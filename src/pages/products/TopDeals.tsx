@@ -1,12 +1,13 @@
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { ButtonType } from "@/types";
 import chevronRightIcon from "../../assets/icons/chevronRight.svg";
 import topDealIcon from "../../assets/icons/top-deal.svg";
 import Acer from "../../assets/images/products/Acer.png";
 import GooglePixel from "../../assets/images/products/GooglePixel.png";
 import Mac from "../../assets/images/products/Macbook.png";
 import PS5 from "../../assets/images/products/PS5.png";
-import ProductItem from "../../components/ProductItem";
 import Button from "../../components/Button";
+import ProductItem from "../../components/ProductItem";
 
 const TopProductDeals = [
   {
@@ -102,7 +103,12 @@ const TopDeals = () => {
           <img src={topDealIcon} alt="" />
         </div>
 
-        <Button label="View All" ghost icon={chevronRightIcon} invert />
+        <Button
+          label="View All"
+          btnType={ButtonType.ghost}
+          icon={chevronRightIcon}
+          invert
+        />
       </div>
 
       <ScrollArea className="w-full whitespace-nowrap rounded-md">

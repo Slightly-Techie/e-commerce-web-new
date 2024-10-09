@@ -13,44 +13,45 @@ const AuthLayout = ({ children, buttonRoute, buttonText }: AuthLayoutProps) => {
   const navigate = useNavigate();
 
   return (
-    <div className="bg-[url(assets/images/sign-up-bg.jpg)] bg-cover bg-center bg-no-repeat text-white">
-      <div className="mx-auto grid min-h-screen max-w-screen-xl grid-cols-2 px-[40px] lg:px-[60px]">
-        <div className="flex flex-col justify-between pb-8 pt-[200px]">
-          <div className="space-y-4">
-            <Text size={TextSize.large}>Welcome to</Text>
-            <h1 className="  max-w-[460px] text-5xl leading-[50px] md:text-[70px] md:leading-[84px]">
-              <span className="line-through">Slightly</span> Techie Ecommerce
-              space
-            </h1>
-          </div>
-
-          <Text size={TextSize.small}>
-            Sign up to join Slightly Techie at{" "}
-            <Link
-              className="font-bold"
-              target="_blank"
-              rel="noreferrer"
-              to="https://app.slightlytechie.com"
+    <div className="bg-signup flex min-h-svh flex-col bg-cover bg-center bg-no-repeat text-white">
+      <div className="py-8 pr-4 md:pr-[40px]">
+        <div className="header grid place-content-end">
+          {buttonText && buttonRoute && (
+            <Button
+              btnType={ButtonType.secondary}
+              onClick={() => navigate(buttonRoute)}
+              className="w-fit"
             >
-              app.slightlytechie.com
-            </Link>
-          </Text>
+              {buttonText}
+            </Button>
+          )}
         </div>
+      </div>
+      <div className="flex h-full flex-1 justify-center lg:pt-24">
+        <div className="grid px-4 md:px-[40px] lg:max-w-screen-xl lg:grid-cols-2 lg:gap-12 lg:px-[60px]">
+          <div className="hidden h-full w-fit flex-col gap-6 place-self-end pb-8 lg:flex">
+            <div className="space-y-4">
+              <Text size={TextSize.large}>Welcome to</Text>
+              <h1 className="max-w-[460px] text-5xl leading-[50px] md:text-[70px] md:leading-[84px]">
+                <span className="line-through">Slightly</span> Techie Ecommerce
+                space
+              </h1>
+            </div>
 
-        <div className="py-8">
-          <div className="header grid place-content-end">
-            {buttonText && buttonRoute && (
-              <Button
-                btnType={ButtonType.secondary}
-                onClick={() => navigate(buttonRoute)}
-                className="w-fit text-white"
+            <Text size={TextSize.small}>
+              Sign up to join Slightly Techie at{" "}
+              <Link
+                className="font-bold"
+                target="_blank"
+                rel="noreferrer"
+                to="https://app.slightlytechie.com"
               >
-                {buttonText}
-              </Button>
-            )}
+                app.slightlytechie.com
+              </Link>
+            </Text>
           </div>
 
-          {children}
+          <div className="">{children}</div>
         </div>
       </div>
     </div>

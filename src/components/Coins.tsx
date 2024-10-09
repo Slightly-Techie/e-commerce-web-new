@@ -44,13 +44,13 @@ export default function Coins() {
   ];
 
   return (
-    <article className="shadow-coins flex h-max flex-col gap-2 rounded-xl p-6 md:w-2/5">
+    <article className="flex h-max flex-col gap-2 rounded-xl p-6 shadow-coins md:w-2/5">
       <img src={coin} className="w-[72px]" />
       <div className="flex flex-col gap-2">
-        <h5 className="text-darkPrimary text-[20px] font-bold">
+        <h5 className="text-[20px] font-bold text-darkPrimary">
           Total referral STC coins
         </h5>
-        <h1 className="text-darkPrimary text-3xl font-bold">0</h1>
+        <h1 className="text-3xl font-bold text-darkPrimary">0</h1>
         <p className="text-gray500">
           Invite your friends to Slightly techie market place. If they sign up
           and make a purchase of 50gh, you going to receive 5 STC coins

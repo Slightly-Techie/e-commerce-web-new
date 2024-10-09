@@ -59,7 +59,7 @@ const Laptops = () => {
           Laptops
         </h3>
 
-        <Button label="View All" ghost icon={chevronRightIcon} invert />
+        <Button label="View All" icon={chevronRightIcon} invert />
       </div>
 
       <ScrollArea className="w-full whitespace-nowrap rounded-md">
