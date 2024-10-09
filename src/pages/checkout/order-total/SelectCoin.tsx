@@ -1,5 +1,6 @@
 import Button from "@/components/Button";
 import { cn } from "@/lib";
+import { ButtonType } from "@/types";
 import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
 import alertCircle from "../../../assets/icons/checkout/alert-circle.svg";
 import ticket1 from "../../../assets/icons/checkout/ticket-01.svg";
@@ -121,7 +122,7 @@ const SelectCoin: FC<SelectCoinProps> = ({
         <Button
           disabled={!isSelected}
           label="Apply"
-          ghost
+          btnType={ButtonType.ghost}
           className="gap-0 rounded-lg border border-gray300 px-5 py-3 text-primaryLight hover:opacity-85"
           onClick={applyCoinHandler}
         />
