@@ -1,5 +1,5 @@
 import { Routes } from "@/lib/routes";
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, redirect } from "react-router-dom";
 import Layout from "../layouts/Layout";
 import Main from "../layouts/Main";
 import Error404 from "./Error404";
@@ -87,7 +87,9 @@ const AppRouter = createBrowserRouter([
       },
       {
         path: "*",
-        element: <Error404 />,
+        loader: () => {
+          return redirect(Routes.HOME);
+        },
       },
     ],
   },
@@ -98,6 +100,24 @@ const AppRouter = createBrowserRouter([
   {
     path: Routes.SIGN_UP,
     element: <Signup />,
+  },
+  {
+    path: "account-setup",
+    children: [
+      {
+        index: true,
+        path: "st-account",
+        element: <div>Setup ST Account</div>,
+      },
+      {
+        path: "non-st-account",
+        element: <div>Setup Non ST Account</div>,
+      },
+    ],
+  },
+  {
+    path: "*",
+    element: <Error404 />,
   },
 ]);
 
