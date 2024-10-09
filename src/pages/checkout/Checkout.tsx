@@ -3,6 +3,7 @@ import Button from "@/components/Button";
 import Container from "@/components/Container";
 import { cn } from "@/lib";
 import useCheckoutStore from "@/store/CheckoutStore";
+import { ButtonType } from "@/types";
 import { useNavigate } from "react-router-dom";
 import OrderTotal from "./order-total/OrderTotal";
 import CheckoutSteps from "./steps/CheckoutSteps";
@@ -19,7 +20,7 @@ const Checkout = () => {
         <Button
           label="Continue Shopping"
           icon={chevronLeftIcon}
-          white
+          btnType={ButtonType.white}
           className="mb-8 border border-gray300 font-semibold"
           onClick={() => navigate("/")}
         />
