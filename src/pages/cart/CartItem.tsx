@@ -4,6 +4,7 @@ import trashIcon from "@/assets/icons/cart/trash-gray.svg";
 import Button from "@/components/Button";
 import useFavorite from "@/hooks/useFavorite";
 import { CartItemProps, useCartStore } from "@/store/cartStore";
+import { ButtonType } from "@/types";
 
 const CartItem = ({ id, image, name }: CartItemProps) => {
   const { isFavorite, toggleFavoriteHandler } = useFavorite();
@@ -22,14 +23,14 @@ const CartItem = ({ id, image, name }: CartItemProps) => {
           <Button
             label="Save item"
             icon={!isFavorite ? heartIcon : heartFavIcon}
-            ghost
+            btnType={ButtonType.ghost}
             className="w-fit gap-1.5 text-sm text-gray400"
             onClick={toggleFavoriteHandler}
           />
           <Button
             label="Remove item"
             icon={trashIcon}
-            ghost
+            btnType={ButtonType.ghost}
             className="w-fit gap-1.5 text-sm text-gray400"
             onClick={() => {
               removeFromCart(id, true);
