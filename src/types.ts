@@ -20,6 +20,8 @@ export enum ButtonType {
   primary = "primary",
   secondary = "secondary",
   disabled = "disabled",
+  white = "white",
+  ghost = "ghost",
 }
 
 export enum ButtonSize {
@@ -62,10 +64,30 @@ export type RHFInputExtension = {
 };
 
 export type SignupFormFields = {
-  username: string;
   email: string;
+  username: string;
   password: string;
+  password2: string;
+  referral_code?: string;
+  member_type: MemberType;
 };
+
+export type SignUpSuccessResponse = {
+  id: string;
+  email: string;
+  token: {
+    access: string;
+    refresh: string;
+  };
+  username: string;
+};
+
+export type SignUpErrorResponse = {
+  [key: string]: string[];
+};
+
+export type SignUpResponse = SignUpSuccessResponse | SignUpErrorResponse;
+
 export type FilterFormFields = {
   categories?: string;
   price?: number[];
@@ -162,3 +184,13 @@ export interface Order {
   total: string;
   quantity: number;
 }
+
+export enum MemberType {
+  TECHIE = "ST",
+  NON_TECHIE = "NT",
+}
+
+export type LoginResponse = {
+  token: string;
+  user: User;
+};
