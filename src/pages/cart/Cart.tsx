@@ -3,6 +3,7 @@ import xCloseIcon from "@/assets/icons/x-close.svg";
 import Button from "@/components/Button";
 import Container from "@/components/Container";
 import { useCartStore } from "@/store/cartStore";
+import { ButtonType } from "@/types";
 import { useNavigate } from "react-router-dom";
 import CartTable from "./CartTable";
 import OrderTotal from "./OrderTotal";
@@ -23,7 +24,7 @@ const Cart = () => {
         <Button
           label="Continue Shopping"
           icon={chevronLeftIcon}
-          white
+          btnType={ButtonType.white}
           className="mb-8 border border-gray300 font-semibold"
           onClick={() => navigate("/")}
         />
@@ -39,7 +40,7 @@ const Cart = () => {
                 <Button
                   label="Clear Cart"
                   icon={xCloseIcon}
-                  ghost
+                  btnType={ButtonType.ghost}
                   className="w-fit font-medium text-error500"
                   onClick={clearCartHandler}
                 />
