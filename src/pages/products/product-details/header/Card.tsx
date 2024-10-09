@@ -1,5 +1,6 @@
 import QuantityControl from "@/pages/cart/QuantityControl";
 import { useCartStore } from "@/store/cartStore";
+import { ButtonType } from "@/types";
 import { FC, useEffect, useState } from "react";
 import FlagIcon from "../../../../assets/icons/Flag.svg";
 import starIcon from "../../../../assets/icons/star.svg";
@@ -91,8 +92,8 @@ const Card: FC<CardProps> = ({ id, name, price, image, quantity }) => {
       <Button
         label="Question about this product?"
         icon={FlagIcon}
-        ghost
         underline
+        btnType={ButtonType.ghost}
         className="mt-6 w-fit text-gray600"
       />
     </>
