@@ -4,7 +4,7 @@ import Alert from "./Alert";
 
 const AlertProvider = () => {
   const { alerts, hideAlert } = useAlertStore();
-  const timerRef = useRef<number | null>(null);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     if (timerRef.current) {
