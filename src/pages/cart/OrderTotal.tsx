@@ -1,6 +1,7 @@
 import alertCircleIcon from "@/assets/icons/alert-circle.svg";
 import Button from "@/components/Button";
 import { useCartStore } from "@/store/cartStore";
+import { ButtonType } from "@/types";
 import { useNavigate } from "react-router-dom";
 
 const OrderTotal = () => {
@@ -18,7 +19,7 @@ const OrderTotal = () => {
       <Button
         label="Delivery fees not included yet."
         icon={alertCircleIcon}
-        secondary
+        btnType={ButtonType.secondary}
         className="mb-[1.875rem] w-full cursor-auto text-sm font-semibold text-gray500 hover:opacity-100 sm:text-base"
       />
 
