@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 import { REGEXPATTERNS } from "../lib/constants";
 import { AlertType, FormHelperType } from "../types";
 import Alert from "./Alert";
+import Button from "./Button";
 import Checkbox from "./FormElements/Checkbox";
 import Form from "./FormElements/Form";
 import FormHelper from "./FormElements/FormHelper";
 import Input from "./FormElements/Input";
 import InputGroup from "./FormElements/InputGroup";
 import Label from "./FormElements/Label";
-import { Button } from "./ui/button";
 
 type FormValues = {
   email: string;
