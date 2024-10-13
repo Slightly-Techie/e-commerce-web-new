@@ -17,6 +17,9 @@ import OrderHistory from "./history/OrderHistory";
 import Products from "./products/Products";
 import ProductDetails from "./products/product-details/ProductDetails";
 import TrackOrders from "./track/TrackOrders";
+import Checkout_layout from "../components/checkout/checkout_layout";
+import St_member_checkout from "../components/checkout/st_member_checkout";
+import Non_st_member_checkout from "../components/checkout/non_st_member_checkout";
 
 const AppRouter = createBrowserRouter([
   {
@@ -107,11 +110,19 @@ const AppRouter = createBrowserRouter([
       {
         index: true,
         path: "st-account",
-        element: <div>Setup ST Account</div>,
+        element:
+          (
+            <Checkout_layout>
+              <St_member_checkout />
+            </Checkout_layout>
+          )
       },
       {
         path: "non-st-account",
-        element: <div>Setup Non ST Account</div>,
+        element:
+          (<Checkout_layout>
+            <Non_st_member_checkout />
+          </Checkout_layout>),
       },
     ],
   },
