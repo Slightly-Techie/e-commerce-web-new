@@ -13,8 +13,8 @@ export default function Checkout_layout({ children }: Props) {
                 </div>
             </header>
 
-            <main className="flex-grow flex justify-center items-center">
-                <div className="md:p-10 py-8 w-full max-w-md h-auto mx-auto sm:-mt-24 flex flex-col">
+            <main className="mx-auto">
+                <div className="container">
                     {children}
                 </div>
             </main>
