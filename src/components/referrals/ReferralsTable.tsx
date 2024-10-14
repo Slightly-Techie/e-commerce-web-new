@@ -5,7 +5,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { MoveDown, MoveUp } from "lucide-react";
-import { Checkbox } from "./ui/checkbox";
+import { Checkbox } from "../ui/checkbox";
 import {
   Table,
   TableBody,
@@ -13,7 +13,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "./ui/table";
+} from "../ui/table";
 
 interface Referrals {
   rank: string;
@@ -89,7 +89,7 @@ const columns: ColumnDef<Referrals>[] = [
     cell: ({ row }) => {
       const obj = row.original;
       return (
-        <span className="text-darkPrimary flex items-baseline gap-1 font-medium">
+        <span className="flex items-baseline gap-1 font-medium text-darkPrimary">
           {obj.tag === "up" && (
             <MoveUp className="text-[#12B76A]" size={10} strokeWidth={3} />
           )}

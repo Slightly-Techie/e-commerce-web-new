@@ -1,5 +1,8 @@
+import useAuth from "@/hooks/auth/useAuth";
+import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { toast } from "sonner";
 import { REGEXPATTERNS } from "../lib/constants";
 import { AlertType, FormHelperType } from "../types";
 import Alert from "./Alert";
@@ -17,10 +20,8 @@ type FormValues = {
 };
 
 const LoginForm = () => {
-  // did this inorder not to touch the jsx
-  const loading = false;
-  //   const { showAlert } = useAlertStore();
-  //   const { login, updateToken } = useUserStore();
+  const [isLoading, setisLoading] = useState(false);
+  const auth = useAuth();
 
   const {
     handleSubmit,
@@ -28,10 +29,18 @@ const LoginForm = () => {
     formState: { errors },
   } = useForm<FormValues>();
 
-  //   const { changeStage } = useSignupStageStore();
+  const onSubmit: SubmitHandler<FormValues> = async (formData) => {
+    setisLoading(true);
 
-  const onSubmit: SubmitHandler<FormValues> = (formData) => {
-    console.log("logging in", formData);
+    try {
+      const response = await auth.login(formData.email, formData.password);
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+      toast.error("An error occurred. Please try again later.");
+    } finally {
+      setisLoading(false);
+    }
   };
 
   return (
@@ -40,8 +49,6 @@ const LoginForm = () => {
         For ST Members. Please double-check that you are using the same email
         address that you used to sign up for CRM.
       </Alert>
-
-      <p>schema: {import.meta.env.VITE_BASE_URL}</p>
 
       <div className="space-y-4">
         <InputGroup>
@@ -100,14 +107,15 @@ const LoginForm = () => {
       </div>
 
       <Button
-        className="w-full"
+        className={`w-full ${isLoading && "cursor-not-allowed"}`}
+        disabled={isLoading}
         // btnType={
         //   loading || errors.email || errors.password
         //     ? ButtonType.disabled
         //     : ButtonType.primary
         // }
       >
-        {loading ? "Logging in..." : "Login"}
+        {isLoading ? "Logging in..." : "Login"}
       </Button>
     </Form>
   );

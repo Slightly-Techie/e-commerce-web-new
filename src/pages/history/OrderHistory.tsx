@@ -1,6 +1,6 @@
-import OrderHistoryHeader from "@/components/OrderHistoryHeader";
-import OrderItemDesktop from "@/components/OrderItemDesktop";
-import OrderItemMobile from "@/components/OrderItemMobile";
+import OrderHistoryHeader from "@/components/order/OrderHistoryHeader";
+import OrderItemDesktop from "@/components/order/OrderItemDesktop";
+import OrderItemMobile from "@/components/order/OrderItemMobile";
 
 import { Accordion } from "@/components/ui/accordion";
 import { Table } from "@/components/ui/table";

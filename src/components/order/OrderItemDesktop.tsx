@@ -1,12 +1,12 @@
 import { Order } from "@/types";
-import DeliveryAdrress from "./DeliveryAdrress";
-import OrderDetails from "./OrderDetails";
-import PaymentInformation from "./PaymentInformation";
 import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "./ui/accordion";
+} from "../ui/accordion";
+import DeliveryAdrress from "./DeliveryAdrress";
+import OrderDetails from "./OrderDetails";
+import PaymentInformation from "./PaymentInformation";
 
 export default function OrderItem(props: Order) {
   return (

@@ -1,10 +1,10 @@
 import { OrderStatus } from "@/types";
-import DeliveryStatus from "./DeliveryStatus";
 import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "./ui/accordion";
+} from "../ui/accordion";
+import DeliveryStatus from "./DeliveryStatus";
 
 type OrderDetails = {
   orderId: string;

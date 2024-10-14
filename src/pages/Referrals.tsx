@@ -1,8 +1,8 @@
-import Coins from "@/components/Coins";
-import ReferralForm from "@/components/ReferralForm";
-import ReferralHeader from "@/components/ReferralsHeader";
-import ReferralsSteps from "@/components/ReferralsSteps";
-import ReferralsTable from "@/components/ReferralsTable";
+import Coins from "@/components/referrals/Coins";
+import ReferralForm from "@/components/referrals/ReferralForm";
+import ReferralHeader from "@/components/referrals/ReferralsHeader";
+import ReferralsSteps from "@/components/referrals/ReferralsSteps";
+import ReferralsTable from "@/components/referrals/ReferralsTable";
 import ReferralsLeaders from "./ReferralsLeaders";
 
 export default function Referrals() {

@@ -1,4 +1,6 @@
 import {
+  ForgotPasswordFormFields,
+  ResetPassword,
   SignUpErrorResponse,
   SignupFormFields,
   SignUpResponse,
@@ -14,8 +16,8 @@ const useAuth = () => {
   const [cookies, setCookie] = useCookies(["token", "refreshToken", "id"]);
   const { data, error, mutate, isLoading } = useSWR(cookies.id, api.getProfile);
 
-  const login = async (username: string, password: string) => {
-    const response = await api.login({ username, password });
+  const login = async (email: string, password: string) => {
+    const response = await api.login({ email, password });
 
     // mutate(); // Revalidate the SWR cache
     return response.data;
@@ -46,6 +48,14 @@ const useAuth = () => {
     // mutate(); // Revalidate the SWR cache
   };
 
+  const forgetPassword = async (email: ForgotPasswordFormFields) => {
+    await api.forgetPassword(email);
+  };
+
+  const setPassword = async (data: ResetPassword) => {
+    await api.setPassword(data);
+  };
+
   return {
     // user: data,
     // isLoading,
@@ -53,6 +63,8 @@ const useAuth = () => {
     login,
     logout,
     signup,
+    forgetPassword,
+    setPassword,
     cookies,
   };
 };

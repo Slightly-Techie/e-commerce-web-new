@@ -1,8 +1,6 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { REGEXPATTERNS } from "../../../lib/constants";
 import { TextSizeStyles } from "../../../lib/styles";
-// import { useAlertStore } from "../../../store/alertStore";
-// import { useResetPasswordStageStore } from "../../../store/resetPasswordStageStore";
 import {
   //   AlertType,
   ButtonType,
@@ -24,10 +22,8 @@ const ResetPasswordForm = ({ code }: { code: number | null }) => {
     // reset,
     formState: { errors },
   } = useForm<ResetPasswordFormFields>();
-  // const { showAlert } = useAlertStore();
-  const loading = false;
 
-  //   const { changeStage } = useResetPasswordStageStore();
+  const loading = false;
 
   const onSubmit: SubmitHandler<ResetPasswordFormFields> = (data) => {
     console.log(data, code);

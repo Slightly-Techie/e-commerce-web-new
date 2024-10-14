@@ -1,9 +1,11 @@
+import SetPassword from "@/components/forms/auth/SetPassword";
 import { Routes } from "@/lib/routes";
 import { createBrowserRouter, redirect } from "react-router-dom";
 import Layout from "../layouts/Layout";
 import Main from "../layouts/Main";
 import Error404 from "./Error404";
 import Favorite from "./Favorite";
+import ForgotPassword from "./ForgotPassword";
 import { Login } from "./Login";
 import Referrals from "./Referrals";
 import Signup from "./Signup";
@@ -100,6 +102,14 @@ const AppRouter = createBrowserRouter([
   {
     path: Routes.SIGN_UP,
     element: <Signup />,
+  },
+  {
+    path: Routes.FORGOT_PASSWORD,
+    element: <ForgotPassword />,
+  },
+  {
+    path: "/set-password",
+    element: <SetPassword />,
   },
   {
     path: "account-setup",

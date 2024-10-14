@@ -1,13 +1,13 @@
-import { Order } from "@/types";
-import DeliveryAdrressMobile from "./DeliveryAdrressMobile";
-import OrderDetailsMobile from "./OrderDetailsMobile";
-import PaymentDetailsMobile from "./PaymentDetailsMobile";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "./ui/accordion";
+} from "@/components/ui/accordion";
+import { Order } from "@/types";
+import DeliveryAdrressMobile from "./DeliveryAdrressMobile";
+import OrderDetailsMobile from "./OrderDetailsMobile";
+import PaymentDetailsMobile from "./PaymentDetailsMobile";
 
 export default function OrderItemMobile({
   orderId,

@@ -1,5 +1,5 @@
+import coin from "@/assets/Coin.png";
 import { useState } from "react";
-import coin from "../assets/Coin.png";
 
 interface pendingInvites {
   id: number;

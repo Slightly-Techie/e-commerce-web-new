@@ -1,7 +1,8 @@
+import useAuth from "@/hooks/auth/useAuth";
+import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-// import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 import { REGEXPATTERNS } from "../../../lib/constants";
-// import { useAlertStore } from "../../../store/alertStore";
 import {
   AlertType,
   ButtonType,
@@ -16,20 +17,27 @@ import Input from "../../FormElements/Input";
 import InputGroup from "../../FormElements/InputGroup";
 
 const ForgotPasswordForm = () => {
-  // so that the jsx is not edited
-  const errors = { email: { message: false } };
-  const loading = false;
-  //   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+  const auth = useAuth();
+
   const {
     register,
     handleSubmit,
-    //     reset,
-    //     formState: { errors },
+    formState: { errors },
   } = useForm<ForgotPasswordFormFields>();
-  //   const { showAlert } = useAlertStore();
 
-  const onSubmit: SubmitHandler<ForgotPasswordFormFields> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<ForgotPasswordFormFields> = async (data) => {
+    setIsLoading(true);
+
+    try {
+      const response = await auth.forgetPassword(data);
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+      toast.error("An error occurred. Please try again later.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -61,12 +69,12 @@ const ForgotPasswordForm = () => {
       </InputGroup>
       <Button
         className="w-full"
-        disabled={loading}
+        disabled={isLoading}
         btnType={
-          errors.email || loading ? ButtonType.disabled : ButtonType.primary
+          errors.email || isLoading ? ButtonType.disabled : ButtonType.primary
         }
       >
-        {loading ? "Sending..." : "Continue"}
+        {isLoading ? "Sending..." : "Continue"}
       </Button>
     </Form>
   );
