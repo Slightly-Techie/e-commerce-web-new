@@ -99,8 +99,15 @@ export type ForgotPasswordFormFields = {
 };
 
 export type ResetPasswordFormFields = {
+  code: string;
   password: string;
   confirm_password: string;
+};
+
+export type ResetPassword = {
+  token: string;
+  code: string;
+  password: string;
 };
 
 export type Code = {

@@ -1,6 +1,6 @@
-import pay from "../assets/images/pay.png";
-import registration from "../assets/images/registration.png";
-import send from "../assets/images/send.png";
+import pay from "@/assets/images/pay.png";
+import registration from "@/assets/images/registration.png";
+import send from "@/assets/images/send.png";
 
 const steps = [
   {

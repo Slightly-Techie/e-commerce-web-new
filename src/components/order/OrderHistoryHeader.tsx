@@ -1,5 +1,5 @@
-import { Checkbox } from "./ui/checkbox";
-import { Table, TableHead, TableHeader, TableRow } from "./ui/table";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Table, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 export default function OrderHistoryHeader() {
   return (

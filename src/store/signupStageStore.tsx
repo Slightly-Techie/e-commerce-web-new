@@ -14,7 +14,7 @@ export const useSignupStageStore = create<StoreState>()(
         currentStage: "enter details",
         changeStage: (stage) => set(() => ({ currentStage: stage })),
       }),
-      { name: "signupStageStore" }
-    )
-  )
+      { name: "signupStageStore" },
+    ),
+  ),
 );

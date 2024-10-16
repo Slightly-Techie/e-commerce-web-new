@@ -1,11 +1,11 @@
-import referrals from "../assets/referrals.png";
+import referrals from "@/assets/referrals.png";
 
 export default function ReferralHeader() {
   return (
     <div>
-      <img src={referrals} alt="logo" />
+      <img src={referrals} alt="logo" className="w-full" />
 
-      <h1 className="text-darkPrimary text-xl font-bold">
+      <h1 className="text-xl font-bold text-darkPrimary">
         Refer friends and earn up to 40 STC coins
       </h1>
       <p className="mt-1 text-gray500">

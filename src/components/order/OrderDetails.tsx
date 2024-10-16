@@ -1,6 +1,6 @@
 import { Order } from "@/types";
+import { Checkbox } from "../ui/checkbox";
 import DeliveryStatus from "./DeliveryStatus";
-import { Checkbox } from "./ui/checkbox";
 
 export default function OrderDetails({
   orderDetails,

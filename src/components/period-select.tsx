@@ -1,6 +1,3 @@
-"use client";
-
-import * as React from "react";
 import {
   Select,
   SelectContent,
@@ -8,6 +5,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import * as React from "react";
 import { Period, display12HourValue, setDateByType } from "./time-picker-utils";
 
 export interface PeriodSelectorProps {
@@ -43,8 +41,8 @@ export const TimePeriodSelect = React.forwardRef<
           tempDate,
           hours.toString(),
           "12hours",
-          period === "AM" ? "PM" : "AM"
-        )
+          period === "AM" ? "PM" : "AM",
+        ),
       );
     }
   };
