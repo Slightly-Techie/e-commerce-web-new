@@ -25,6 +25,7 @@ enum Routes {
   CHECKOUT_DELIVERY_ADDRESS = "/checkout",
   CHECKOUT_DELIVERY_DATE_AND_TIME = "/checkout/delivery-date-and-time",
   CHECKOUT_PAYMENT = "/checkout/payment",
+  FILTER = "/filter",
 }
 
 export { Routes, SETUPACCOUNTROUTES };

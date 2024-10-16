@@ -5,6 +5,7 @@ import Layout from "../layouts/Layout";
 import Main from "../layouts/Main";
 import Error404 from "./Error404";
 import Favorite from "./Favorite";
+import FilterPage from "./FilterPage";
 import ForgotPassword from "./ForgotPassword";
 import { Login } from "./Login";
 import Referrals from "./Referrals";
@@ -54,6 +55,10 @@ const AppRouter = createBrowserRouter([
             element: <Referrals />,
           },
         ],
+      },
+      {
+        path: Routes.FILTER,
+        element: <FilterPage />,
       },
       {
         path: Routes.PRODUCT_DETAILS,

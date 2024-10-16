@@ -8,6 +8,7 @@ import STMember from "./STMember";
 
 const Sidebar = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -71,9 +72,11 @@ const Sidebar = () => {
         })}
       </ul>
 
-      <div className="mt-auto hidden lg:block">
-        <STMember />
-      </div>
+      {isAuthenticated && (
+        <div className="mt-auto hidden lg:block">
+          <STMember />
+        </div>
+      )}
     </div>
   );
 };
