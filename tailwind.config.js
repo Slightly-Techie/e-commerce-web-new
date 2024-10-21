@@ -22,6 +22,8 @@ export default {
       boxShadow: {
         custom: "0 9px 60px -12px rgba(0, 0, 0, 0.1)",
         coins: "0px 25px 50px -12px rgba(15, 23, 42, 0.05)",
+        order: "0 4px 6px 0 rgba(15, 23, 42, 0.05)",
+        accordionContent: "0 1px 2px 0 rgba(15, 23, 42, 0.06)",
       },
       colors: {
         // Error
