@@ -9,6 +9,7 @@ import FilterPage from "./FilterPage";
 import ForgotPassword from "./ForgotPassword";
 import { Login } from "./Login";
 import Referrals from "./Referrals";
+import Review from "./Review";
 import Signup from "./Signup";
 import Cart from "./cart/Cart";
 import Checkout from "./checkout/Checkout";
@@ -113,7 +114,7 @@ const AppRouter = createBrowserRouter([
     element: <ForgotPassword />,
   },
   {
-    path: "/set-password",
+    path: Routes.SET_PASSWORD,
     element: <SetPassword />,
   },
   {
@@ -129,6 +130,10 @@ const AppRouter = createBrowserRouter([
         element: <div>Setup Non ST Account</div>,
       },
     ],
+  },
+  {
+    path: Routes.REVIEW,
+    element: <Review />,
   },
   {
     path: "*",
