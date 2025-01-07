@@ -47,6 +47,10 @@ input[type="number"] {
   z-index: 0 !important;
 }
 
+.review-height {
+  height: calc(100vw - 50px);
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

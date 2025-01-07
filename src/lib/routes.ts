@@ -27,6 +27,7 @@ enum Routes {
   CHECKOUT_DELIVERY_DATE_AND_TIME = "/checkout/delivery-date-and-time",
   CHECKOUT_PAYMENT = "/checkout/payment",
   FILTER = "/filter",
+  REVIEW = "/review",
   ACCOUNT_SETUP = "/account-setup",
   ST_ACCOUNT = ACCOUNT_SETUP,
   NON_ST_ACCOUNT = ACCOUNT_SETUP + "/non-st-account",

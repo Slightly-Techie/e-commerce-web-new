@@ -12,6 +12,7 @@ import ForgotPassword from "./ForgotPassword";
 import { Login } from "./Login";
 import NonSTMemberSetup from "./NonSTMemberSetup";
 import Referrals from "./Referrals";
+import Review from "./Review";
 import Signup from "./Signup";
 import Cart from "./cart/Cart";
 import Checkout from "./checkout/Checkout";
@@ -137,6 +138,10 @@ const AppRouter = createBrowserRouter([
         element: <AccountSetupComplete />,
       },
     ],
+  },
+  {
+    path: Routes.REVIEW,
+    element: <Review />,
   },
   {
     path: "*",

@@ -1,9 +1,13 @@
-const TrackOrders = () => {
-  return (
-    <div className="h-[200vh] rounded-tl-2xl rounded-tr-2xl bg-white px-6 py-[1.625rem] lg:ml-[276px]">
-      TrackOrders
-    </div>
-  );
-};
+import OrderItem from "@/components/trackorders/OrderItem";
 
-export default TrackOrders;
+export default function TrackOrders() {
+  return (
+    <section className="h-[200vh] rounded-tl-2xl rounded-tr-2xl bg-white px-3 py-[1.625rem] md:px-6 lg:ml-[276px]">
+      <h1 className="text-[28px] font-bold text-darkPrimary">Open orders</h1>
+      <main className="mt-12 flex flex-col items-center gap-8">
+        <OrderItem />
+        <OrderItem />
+      </main>
+    </section>
+  );
+}
