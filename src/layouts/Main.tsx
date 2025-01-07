@@ -1,21 +1,19 @@
-import Container from "../components/Container";
+import Navbar from "@/components/navbar/Navbar";
 import { Outlet } from "react-router-dom";
+import Container from "../components/Container";
 import Sidebar from "../components/sidebar/Sidebar";
-// import { useState } from "react";
 
 const Main = () => {
-  // const [openSidebar, setOpenSidebar] = useState(false);
-
-  // const toggleSidebar = () => setOpenSidebar((prev) => !prev);
-
   return (
-    <Container>
-      <div className="mt-[10.375rem] md:mt-[11.25rem] lg:mx-4 xl:mx-0">
-        {/* <button onClick={toggleSidebar} className="fixed top-[10px] right-[100px] z-[999]">
-          Toggle
-        </button> */}
+    <Container className="">
+      <div className="lg:mx-4 xl:mx-0">
+        <Navbar />
+      </div>
+      <div>
         <Sidebar />
-        <Outlet />
+        <div className="pb-24">
+          <Outlet />
+        </div>
       </div>
     </Container>
   );
