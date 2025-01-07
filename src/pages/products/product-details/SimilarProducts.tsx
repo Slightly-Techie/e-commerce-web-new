@@ -1,15 +1,16 @@
-import { Swiper, SwiperSlide } from "swiper/react";
 import Acer from "../../../assets/images/products/Acer.png";
 import Asus from "../../../assets/images/products/Asus.png";
 import Dell from "../../../assets/images/products/Dell.png";
 import Mac from "../../../assets/images/products/Macbook.png";
 import Container from "../../../components/Container";
-import SwiperButton from "../../../components/SwiperButton";
-import useSwiper from "../../../hooks/useSwiper";
 
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
 import "swiper/css";
 import "swiper/css/navigation";
-import { Navigation } from "swiper/modules";
 import ProductItem from "../../../components/ProductItem";
 
 const similarProducts = [
@@ -76,9 +77,6 @@ const similarProducts = [
 ];
 
 const SimilarProducts = () => {
-  const { isPrevDisabled, isNextDisabled, prevRef, nextRef, swiperRef } =
-    useSwiper();
-
   return (
     <div className="mt-16 px-4 md:mt-[8.125rem] md:px-8 lg:px-12">
       <Container>
@@ -86,27 +84,20 @@ const SimilarProducts = () => {
           <h3 className="text-xl font-bold md:text-2xl">Similar Products</h3>
 
           <div className="flex gap-3">
-            <SwiperButton ref={prevRef} disabled={isPrevDisabled} />
-            <SwiperButton ref={nextRef} disabled={isNextDisabled} right />
+            {/* <SwiperButton ref={prevRef} disabled={isPrevDisabled} />
+            <SwiperButton ref={nextRef} disabled={isNextDisabled} right /> */}
           </div>
         </div>
 
-        <Swiper
-          ref={swiperRef}
-          modules={[Navigation]}
-          slidesPerView="auto"
-          className="mySwiper"
-        >
-          {similarProducts.map((product, index) => (
-            <SwiperSlide
-              key={index}
-              style={{ width: "auto" }}
-              className="mr-4 md:mr-8 lg:mr-12 last:mr-0"
-            >
-              <ProductItem {...product} />
-            </SwiperSlide>
-          ))}
-        </Swiper>
+        <Carousel>
+          <CarouselContent>
+            {similarProducts.map((product, index) => (
+              <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                <ProductItem {...product} />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
       </Container>
     </div>
   );

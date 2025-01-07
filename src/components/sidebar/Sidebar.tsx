@@ -24,7 +24,7 @@ const Sidebar = () => {
   return (
     <div
       className={cn(
-        "fixed bottom-0 z-20 flex max-h-[896px] w-full bg-white p-4 font-product-sans shadow-custom lg:bottom-auto lg:left-auto lg:top-auto lg:h-custom-height lg:w-[260px] lg:flex-col lg:rounded-2xl lg:shadow-none",
+        "fixed bottom-0 left-0 z-20 flex max-h-[896px] w-full bg-white p-4 font-product-sans shadow-custom lg:bottom-auto lg:left-auto lg:top-auto lg:h-custom-height lg:w-[260px] lg:flex-col lg:rounded-2xl lg:shadow-none",
       )}
     >
       <ul className="mx-auto flex w-full max-w-lg justify-between lg:max-w-none lg:flex-col lg:gap-3">

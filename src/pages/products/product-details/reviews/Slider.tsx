@@ -1,19 +1,17 @@
-import { Navigation } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
 import starIcon from "../../../../assets/icons/star.svg";
 import ReviewCard from "../../../../components/ReviewCard";
-import useSwiper from "../../../../hooks/useSwiper";
 
 import "swiper/css";
 import "swiper/css/navigation";
-import SwiperButton from "../../../../components/SwiperButton";
 
 const reviews = [0, 1, 2, 3, 4, 5, 6, 7];
 
 const Slider = () => {
-  const { isPrevDisabled, isNextDisabled, prevRef, nextRef, swiperRef } =
-    useSwiper();
-
   return (
     <>
       <div className="mb-4 flex items-center justify-between">
@@ -30,27 +28,20 @@ const Slider = () => {
         </div>
 
         <div className="flex gap-3">
-          <SwiperButton ref={prevRef} disabled={isPrevDisabled} />
-          <SwiperButton ref={nextRef} disabled={isNextDisabled} right />
+          {/* <SwiperButton ref={prevRef} disabled={isPrevDisabled} />
+          <SwiperButton ref={nextRef} disabled={isNextDisabled} right /> */}
         </div>
       </div>
 
-      <Swiper
-        ref={swiperRef}
-        modules={[Navigation]}
-        slidesPerView="auto"
-        className="mySwiper"
-      >
-        {reviews.map((_, index) => (
-          <SwiperSlide
-            key={index}
-            style={{ width: "100%" }}
-            className="mr-8 max-w-[366px] last:mr-0"
-          >
-            <ReviewCard />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      <Carousel>
+        <CarouselContent>
+          {reviews.map((_, index) => (
+            <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+              <ReviewCard />
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+      </Carousel>
     </>
   );
 };

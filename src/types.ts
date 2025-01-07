@@ -197,7 +197,46 @@ export enum MemberType {
   NON_TECHIE = "NT",
 }
 
+export enum Account {
+  /** Non ST Member */
+  NonTechie = "NON_TECHIE",
+  /** Slightly Techie Member */
+  Techie = "TECHIE",
+}
+
 export type LoginResponse = {
   token: string;
   user: User;
 };
+
+export type Profile = {
+  user: string;
+  first_name?: string;
+  last_name?: string;
+  role?: string;
+  role_name?: string;
+  address?: string;
+  address_name?: string;
+  gender: Gender;
+  dob: Date;
+  phone_number?: string;
+  profile_image?: string;
+};
+
+export type CreateProfileSchema = {
+  user: string;
+  first_name?: string;
+  last_name?: string;
+  role?: string;
+  address?: string;
+  gender: Gender;
+  dob?: string;
+  phone_number?: string;
+  profile_image?: string;
+};
+
+export enum Gender {
+  m = "male",
+  f = "female",
+  o = "other",
+}

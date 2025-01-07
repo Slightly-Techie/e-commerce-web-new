@@ -1,3 +1,5 @@
+import AccountSetupComplete from "@/components/AccountSetup/AccountSetupComplete";
+import STMemberSetup from "@/components/AccountSetup/STMemberSetup";
 import SetPassword from "@/components/forms/auth/SetPassword";
 import { Routes } from "@/lib/routes";
 import { createBrowserRouter, redirect } from "react-router-dom";
@@ -8,6 +10,7 @@ import Favorite from "./Favorite";
 import FilterPage from "./FilterPage";
 import ForgotPassword from "./ForgotPassword";
 import { Login } from "./Login";
+import NonSTMemberSetup from "./NonSTMemberSetup";
 import Referrals from "./Referrals";
 import Review from "./Review";
 import Signup from "./Signup";
@@ -57,13 +60,10 @@ const AppRouter = createBrowserRouter([
           },
         ],
       },
+
       {
         path: Routes.FILTER,
         element: <FilterPage />,
-      },
-      {
-        path: Routes.PRODUCT_DETAILS,
-        element: <ProductDetails />,
       },
       {
         path: Routes.CART,
@@ -102,6 +102,10 @@ const AppRouter = createBrowserRouter([
     ],
   },
   {
+    path: Routes.PRODUCT_DETAILS,
+    element: <ProductDetails />,
+  },
+  {
     path: Routes.LOGIN,
     element: <Login />,
   },
@@ -118,16 +122,20 @@ const AppRouter = createBrowserRouter([
     element: <SetPassword />,
   },
   {
-    path: "account-setup",
+    path: Routes.ACCOUNT_SETUP,
     children: [
       {
         index: true,
-        path: "st-account",
-        element: <div>Setup ST Account</div>,
+        path: Routes.ST_ACCOUNT,
+        element: <STMemberSetup />,
       },
       {
-        path: "non-st-account",
-        element: <div>Setup Non ST Account</div>,
+        path: Routes.NON_ST_ACCOUNT,
+        element: <NonSTMemberSetup />,
+      },
+      {
+        path: Routes.SETUP_COMPLETE,
+        element: <AccountSetupComplete />,
       },
     ],
   },

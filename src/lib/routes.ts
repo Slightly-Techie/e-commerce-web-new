@@ -28,6 +28,10 @@ enum Routes {
   CHECKOUT_PAYMENT = "/checkout/payment",
   FILTER = "/filter",
   REVIEW = "/review",
+  ACCOUNT_SETUP = "/account-setup",
+  ST_ACCOUNT = ACCOUNT_SETUP,
+  NON_ST_ACCOUNT = ACCOUNT_SETUP + "/non-st-account",
+  SETUP_COMPLETE = ACCOUNT_SETUP + "/complete",
 }
 
 export { Routes, SETUPACCOUNTROUTES };

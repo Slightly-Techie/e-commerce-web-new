@@ -25,7 +25,7 @@ const Navbar = () => {
   };
 
   return (
-    <header className="fixed left-0 top-0 z-40 w-full">
+    <header className="sticky left-0 top-0 z-40 w-full">
       <nav className="flex w-full items-center justify-between rounded-bl-2xl rounded-br-2xl bg-white p-4 md:rounded-bl-none md:rounded-br-none">
         <Container>
           <div className="flex items-center justify-between">
@@ -71,7 +71,7 @@ const Navbar = () => {
       </nav>
 
       {!isAuthenticated && (
-        <div className="hidden place-items-center bg-[#FCF5E3] px-4 py-5 text-[#726031] md:grid">
+        <div className="place-items-center bg-[#FCF5E3] px-4 py-5 text-[#726031] md:grid">
           <div className="flex items-center gap-2.5 font-semibold">
             <img src={starsImg} alt="" /> Hi, there, lets set you up quickly{" "}
             <button className="rounded-full bg-[#111] p-2 font-bold text-white hover:opacity-90">
