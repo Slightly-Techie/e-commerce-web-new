@@ -1,4 +1,5 @@
 import {
+  CreateProfileSchema,
   ForgotPasswordFormFields,
   ResetPassword,
   SignupFormFields,
@@ -17,7 +18,8 @@ interface ApiEndpoints {
   ) => Promise<AxiosResponse<unknown>>;
   setPassword: (data: ResetPassword) => Promise<AxiosResponse<unknown>>;
   getProfile: (id?: string) => Promise<AxiosResponse<unknown>>;
-  updateProfile: (data: object) => Promise<AxiosResponse<unknown>>;
+  updateProfile: (data: CreateProfileSchema) => Promise<AxiosResponse<unknown>>;
+  createProfile: (data: CreateProfileSchema) => Promise<AxiosResponse<unknown>>;
 }
 
 const useApi = (): ApiEndpoints => {
@@ -47,8 +49,12 @@ const useApi = (): ApiEndpoints => {
     return await axios.get(`${baseURL}/auth/profile/${id}`);
   };
 
-  const updateProfile = async (data: object) => {
+  const updateProfile = async (data: CreateProfileSchema) => {
     return await axios.put(`${baseURL}/auth/profile/`, data);
+  };
+
+  const createProfile = async (data: CreateProfileSchema) => {
+    return await axios.post(`${baseURL}/auth/profile/`, data);
   };
 
   return {
@@ -59,6 +65,7 @@ const useApi = (): ApiEndpoints => {
     setPassword,
     getProfile,
     updateProfile,
+    createProfile,
   };
 };
 
