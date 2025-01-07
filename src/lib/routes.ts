@@ -14,6 +14,7 @@ enum Routes {
   LOGIN = "/login",
   SIGN_UP = "/sign-up",
   FORGOT_PASSWORD = "/forgot-password",
+  SET_PASSWORD = "/set-password",
   EXPLORE = "/explore",
   FAVORITES = "/favorites",
   TRACK = "/track",
@@ -26,6 +27,10 @@ enum Routes {
   CHECKOUT_DELIVERY_DATE_AND_TIME = "/checkout/delivery-date-and-time",
   CHECKOUT_PAYMENT = "/checkout/payment",
   FILTER = "/filter",
+  ACCOUNT_SETUP = "/account-setup",
+  ST_ACCOUNT = ACCOUNT_SETUP,
+  NON_ST_ACCOUNT = ACCOUNT_SETUP + "/non-st-account",
+  SETUP_COMPLETE = ACCOUNT_SETUP + "/complete",
 }
 
 export { Routes, SETUPACCOUNTROUTES };

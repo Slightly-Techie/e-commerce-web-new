@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
-import { TextSizeStyles } from "../lib/styles";
-import { cn } from "../lib/utils";
+import { TextSizeStyles } from "@/lib/styles";
+import { cn } from "@/lib/utils";
+import { useSignupStageStore } from "@/store/signupStageStore";
+import { Link, useNavigate } from "react-router-dom";
 
 type Props = {
   children: React.ReactNode;
@@ -17,15 +18,22 @@ const SetupAccountLayout = ({
   description,
   icon,
   normal = true,
-  reroute = false,
+  reroute = true,
 }: Props) => {
+  const navigate = useNavigate();
+  const { currentStage } = useSignupStageStore();
+
+  //   useEffect(() => {
+  //     if (reroute) navigate(SETUPACCOUNTROUTES[currentStage]);
+  //   }, [currentStage, navigate, reroute]);
+
   return (
-    <div className="mx-auto flex min-h-screen max-w-screen-2xl flex-col px-[40px] lg:px-[60px]">
-      <Link to="/" className="header mt-6">
+    <div className="mx-auto flex min-h-screen max-w-screen-xl flex-col px-[40px] lg:px-[60px]">
+      <Link to="/" className="header mt-12">
         <img src="/assets/icons/Logo.svg" alt="logo" />
       </Link>
 
-      <div className="flex w-full flex-1 flex-col py-4 md:justify-center lg:justify-start lg:py-2">
+      <div className="flex flex-1 flex-col items-center justify-center py-20">
         {normal && (
           <div className="mb-6 w-full max-w-[410px] text-center">
             <div className="space-y-8">

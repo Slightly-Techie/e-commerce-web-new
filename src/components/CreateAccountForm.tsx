@@ -1,7 +1,8 @@
+import { Routes } from "@/lib/routes";
 import { SignUpContext } from "@/pages/Signup";
 import { useContext } from "react";
 import { SubmitHandler } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { REGEXPATTERNS } from "../lib/constants";
 import { TextSizeStyles } from "../lib/styles";
 import { useAlertStore } from "../store/alertStore";
@@ -20,7 +21,11 @@ import Input from "./FormElements/Input";
 import InputGroup from "./FormElements/InputGroup";
 
 const CreateAccountForm = () => {
+  const navigate = useNavigate();
   const onSubmit: SubmitHandler<SignupFormFields> = () => {
+    return;
+
+    // TODO: Implement the logic to submit the form
     toggleAccountType();
   };
 
@@ -36,10 +41,14 @@ const CreateAccountForm = () => {
     formState: { errors, isValid },
   } = form;
 
+  //   console.log("errors", errors);
+
   return (
     <Form
       title="Create Account"
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit(onSubmit, () => {
+        navigate(Routes.ST_ACCOUNT);
+      })}
       className="px-4 md:px-12"
     >
       {/* {errors && <Alert type={AlertType.error}>{errors.message}</Alert>} */}
