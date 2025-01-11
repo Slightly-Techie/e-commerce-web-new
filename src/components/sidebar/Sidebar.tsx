@@ -8,7 +8,7 @@ import STMember from "./STMember";
 
 const Sidebar = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
 
   useEffect(() => {
     const handleResize = () => {

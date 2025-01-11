@@ -1,5 +1,17 @@
+import { EllipsisVertical } from "lucide-react";
+import { Link } from "react-router-dom";
 import Button from "../Button";
-import dottedIcon from "../../assets/icons/sidebar/3dots.svg";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
+
+const dropdownLinks = [
+  { link: "/profile", name: "Profile", id: 1 },
+  { link: "/referrals", name: "Referrals", id: 2 },
+];
 
 const STMember = () => {
   return (
@@ -15,12 +27,23 @@ const STMember = () => {
           </h3>
           <Button
             label="ST Member"
-            className="rounded-full bg-[#FDF0D5] px-2.5 py-1.5 text-xs text-[#6F4400] font-semibold"
+            className="rounded-full bg-[#FDF0D5] px-2.5 py-1.5 text-xs font-semibold text-[#6F4400]"
           />
         </div>
       </div>
 
-      <img src={dottedIcon} alt="" className="cursor-pointer"/>
+      <DropdownMenu>
+        <DropdownMenuTrigger>
+          <EllipsisVertical color="#8C96A5" />
+        </DropdownMenuTrigger>
+        <DropdownMenuContent className="px-4 py-1">
+          {dropdownLinks.map((item) => (
+            <DropdownMenuItem key={item.id}>
+              <Link to={item.link}>{item.name} </Link>
+            </DropdownMenuItem>
+          ))}
+        </DropdownMenuContent>
+      </DropdownMenu>
     </div>
   );
 };
