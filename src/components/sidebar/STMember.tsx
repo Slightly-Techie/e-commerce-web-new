@@ -39,7 +39,9 @@ const STMember = () => {
         <DropdownMenuContent className="px-4 py-1">
           {dropdownLinks.map((item) => (
             <DropdownMenuItem key={item.id}>
-              <Link to={item.link}>{item.name} </Link>
+              <Link to={item.link} className="text-lg">
+                {item.name}{" "}
+              </Link>
             </DropdownMenuItem>
           ))}
         </DropdownMenuContent>
