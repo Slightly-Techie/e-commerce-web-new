@@ -1,3 +1,4 @@
+import { PenIcon } from "lucide-react";
 import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import closeIcon from "../../assets/icons/navbar/close.svg";
@@ -70,29 +71,31 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
           {isAuthenticated && <Balance />}
           {!isAuthenticated && <Button label="Sign In" icon={personIcon} />}
         </div>
+        <div className="space-y-10">
+          <Link
+            to="/favorites"
+            className="relative flex gap-4 text-lg"
+            onClick={closeMenuHandler}
+          >
+            <Heart /> <span>Favorites</span>
+            <div className="absolute right-0 top-1/2 -translate-y-1/2">
+              <NotificationBadge counter="6" small />
+            </div>
+          </Link>
 
-        <Link
-          to="/favorites"
-          className="relative flex gap-4 text-lg"
-          onClick={closeMenuHandler}
-        >
-          <Heart /> <span>Favorites</span>
-          <div className="absolute right-0 top-1/2 -translate-y-1/2">
-            <NotificationBadge counter="6" small />
+          <div className="mt-3 flex flex-col space-y-10">
+            {dropdownLinks.map((item) => (
+              <Link
+                to={item.link}
+                key={item.id}
+                className="relative flex w-full items-center gap-4 self-center text-lg"
+                onClick={closeMenuHandler}
+              >
+                <PenIcon size={24} />
+                <span>{item.name}</span>
+              </Link>
+            ))}
           </div>
-        </Link>
-
-        <div className="mt-3 flex flex-col space-y-2">
-          {dropdownLinks.map((item) => (
-            <Link
-              to={item.link}
-              key={item.id}
-              className="self-center text-lg"
-              onClick={closeMenuHandler}
-            >
-              {item.name}
-            </Link>
-          ))}
         </div>
       </div>
     </div>
