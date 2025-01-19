@@ -2,7 +2,7 @@ import avatar from "../assets/images/products/Avatar.png";
 
 const ReviewCard = () => {
   return (
-    <div className="max-w-[366px] rounded-3xl border border-gray200 bg-gray50 p-6">
+    <div className="max-w-[320px] md:max-w-[366px] w-full rounded-3xl border border-gray200 bg-gray50 p-6">
       <p className="mb-8 font-semibold text-gray600 md:mb-16">
         “Lorem, ipsum dolor sit amet consectetur adipisicing elit. Delectus,
         esse? Necessitatibus quidem aspernatur, fugiat tempore accusantium

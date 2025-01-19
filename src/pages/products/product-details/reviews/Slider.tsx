@@ -2,6 +2,8 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
 } from "@/components/ui/carousel";
 import starIcon from "../../../../assets/icons/star.svg";
 import ReviewCard from "../../../../components/ReviewCard";
@@ -13,7 +15,7 @@ const reviews = [0, 1, 2, 3, 4, 5, 6, 7];
 
 const Slider = () => {
   return (
-    <>
+    <Carousel>
       <div className="mb-4 flex items-center justify-between">
         <div className="flex items-end gap-2 md:gap-2.5">
           <div className="flex items-end gap-2 md:gap-2.5">
@@ -28,21 +30,19 @@ const Slider = () => {
         </div>
 
         <div className="flex gap-3">
-          {/* <SwiperButton ref={prevRef} disabled={isPrevDisabled} />
-          <SwiperButton ref={nextRef} disabled={isNextDisabled} right /> */}
+          <CarouselPrevious className="static" />
+          <CarouselNext className="static" />
         </div>
       </div>
 
-      <Carousel>
-        <CarouselContent>
-          {reviews.map((_, index) => (
-            <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-              <ReviewCard />
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-      </Carousel>
-    </>
+      <CarouselContent>
+        {reviews.map((_, index) => (
+          <CarouselItem key={index} className="basis-auto">
+            <ReviewCard />
+          </CarouselItem>
+        ))}
+      </CarouselContent>
+    </Carousel>
   );
 };
 
