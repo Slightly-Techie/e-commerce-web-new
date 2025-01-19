@@ -8,6 +8,8 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
 } from "@/components/ui/carousel";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -80,19 +82,19 @@ const SimilarProducts = () => {
   return (
     <div className="mt-16 px-4 md:mt-[8.125rem] md:px-8 lg:px-12">
       <Container>
-        <div className="mb-4 flex items-center justify-between md:mb-6">
-          <h3 className="text-xl font-bold md:text-2xl">Similar Products</h3>
-
-          <div className="flex gap-3">
-            {/* <SwiperButton ref={prevRef} disabled={isPrevDisabled} />
-            <SwiperButton ref={nextRef} disabled={isNextDisabled} right /> */}
-          </div>
-        </div>
-
         <Carousel>
+          <div className="mb-4 flex items-center justify-between md:mb-6">
+            <h3 className="text-xl font-bold md:text-2xl">Similar Products</h3>
+
+            <div className="flex gap-3">
+              <CarouselPrevious className="static translate-y-0" />
+              <CarouselNext className="static translate-y-0" />
+            </div>
+          </div>
+
           <CarouselContent>
             {similarProducts.map((product, index) => (
-              <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+              <CarouselItem key={index} className="basis-auto">
                 <ProductItem {...product} />
               </CarouselItem>
             ))}

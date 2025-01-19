@@ -5,13 +5,14 @@ import Sidebar from "../components/sidebar/Sidebar";
 
 const Main = () => {
   return (
-    <Container className="">
+    <Container>
       <div className="lg:mx-4 xl:mx-0">
         <Navbar />
       </div>
+
       <div>
         <Sidebar />
-        <div className="pb-24">
+        <div className="pb-24 pt-[11rem] md:pt-[6.5rem] lg:pb-0">
           <Outlet />
         </div>
       </div>
