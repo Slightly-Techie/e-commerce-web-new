@@ -1,5 +1,3 @@
-import { UseFormRegister } from "react-hook-form";
-
 export enum TextSize {
   small = "small",
   verySmall = "verySmall",
@@ -42,9 +40,6 @@ export type SignupStage =
   | "setup non st account"
   | "setup complete";
 
-type FormValues = {
-  [key: string]: unknown;
-};
 
 export enum ShadowType {
   xs = "xs",
@@ -56,12 +51,11 @@ export enum ShadowType {
   xxxl = "xxxl",
 }
 
-type RegisterFormValues = UseFormRegister<FormValues>;
-
-export type RHFInputExtension = {
-  register: RegisterFormValues;
-  required: boolean;
-};
+// The following types are currently unused but preserved for potential future use
+// export type RHFInputExtension = {
+//   register: RegisterFormValues;
+//   required: boolean;
+// };
 
 export type FilterFormFields = {
   categories?: string;
@@ -95,14 +89,6 @@ export type ResetPasswordStatus =
   | "code"
   | "resend_code";
 
-export type ForgotPasswordPayload = {
-  clientMutationId?: string;
-  errors: Array<{ message: string; property: string }>;
-  status: number;
-  success: boolean;
-};
-export type ErrorResponse = Array<{ message: string; property: string }>;
-
 export type Country = {
   flags: {
     png: string;
@@ -124,7 +110,6 @@ export type ActiveSelectedCountry = {
 };
 
 export type UserType = "NON_TECHIE" | "TECHIE";
-
 export type User = {
   accountType: UserType;
   createdAt: Date;
@@ -139,10 +124,6 @@ export type User = {
   };
   updatedAt: Date;
   username: string;
-};
-
-export type UserSignupDetails = Pick<User, "email" | "username"> & {
-  password: string;
 };
 
 export type AlertArgs = { alertType: AlertType; alertText: string };
@@ -171,32 +152,6 @@ export enum MemberType {
   TECHIE = "ST",
   NON_TECHIE = "NT",
 }
-
-export enum Account {
-  /** Non ST Member */
-  NonTechie = "NON_TECHIE",
-  /** Slightly Techie Member */
-  Techie = "TECHIE",
-}
-
-export type LoginResponse = {
-  token: string;
-  user: User;
-};
-
-export type Profile = {
-  user: string;
-  first_name?: string;
-  last_name?: string;
-  role?: string;
-  role_name?: string;
-  address?: string;
-  address_name?: string;
-  gender: Gender;
-  dob: Date;
-  phone_number?: string;
-  profile_image?: string;
-};
 
 export type CreateProfileSchema = {
   user: string;
