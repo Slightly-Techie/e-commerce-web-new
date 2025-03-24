@@ -1,5 +1,10 @@
 import { CompSVG } from "@/components/ui/compsvg";
 
+/**
+ * NOTE: All icons in this file (Bag, ClockHistory, Heart, Search, Truck) are
+ * currently unused in the application but are maintained for potential future development.
+ * These components may be required as the application evolves.
+ */
 const Bag = () => (
   <CompSVG
     pathsD={[
