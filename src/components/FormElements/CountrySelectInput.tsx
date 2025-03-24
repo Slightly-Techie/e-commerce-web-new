@@ -1,4 +1,4 @@
-import { fetchCountries, sortCountries } from "@/lib/utils";
+// import { fetchCountries, sortCountries } from "@/lib/utils";
 import { ChangeEvent, useCallback, useEffect, useRef, useState } from "react";
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 import { ActiveSelectedCountry, Country } from "../../types";
@@ -82,9 +82,9 @@ const CountrySelectInput = ({ handleChange }: Props) => {
   };
 
   useEffect(() => {
-    fetchCountries().then((response) => {
-      setCountriesList(sortCountries(response));
-    });
+    // fetchCountries().then((response) => {
+    //   setCountriesList(sortCountries(response));
+    // });
   }, []);
 
   const closeDropdown = () => {
