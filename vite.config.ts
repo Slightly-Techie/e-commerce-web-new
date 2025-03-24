@@ -3,22 +3,19 @@ import http from "https";
 import path from "path";
 import { defineConfig, loadEnv } from "vite";
 import svgr from "vite-plugin-svgr";
+import tailwindcss from "@tailwindcss/vite";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
   return {
-    plugins: [react(), svgr()],
+    plugins: [react(), svgr(), tailwindcss()],
     resolve: {
       alias: {
         "@": path.resolve(__dirname, "./src"),
       },
     },
     server: {
-      //   https: {
-      //     key: fs.readFileSync("./.cert/key.pem"),
-      //     cert: fs.readFileSync("./.cert/cert.pem"),
-      //   },
       port: 3000,
       proxy: {
         "/api": {
