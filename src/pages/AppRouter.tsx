@@ -3,27 +3,33 @@ import STMemberSetup from "@/components/AccountSetup/STMemberSetup";
 import SetPassword from "@/components/forms/auth/SetPassword";
 import { Routes } from "@/lib/routes";
 import { createBrowserRouter, redirect } from "react-router-dom";
-import Layout from "../layouts/Layout";
-import Main from "../layouts/Main";
-import Error404 from "./Error404";
-import Favorite from "./Favorite";
-import FilterPage from "./FilterPage";
-import ForgotPassword from "./ForgotPassword";
-import NonSTMemberSetup from "./NonSTMemberSetup";
-import Referrals from "./Referrals";
-import Review from "./Review";
-import Login from "./auth/login/Login";
-import Signup from "./auth/signup/Signup";
-import Cart from "./cart/Cart";
-import Checkout from "./checkout/Checkout";
-import DeliveryDateAndTimeForm from "./checkout/steps/DeliveryDateAndTime";
-import PaymentForm from "./checkout/steps/Payment";
-import DeliveryAddressForm from "./checkout/steps/delivery-address/DeliveryAddress";
-import Explore from "./explore/Explore";
-import OrderHistory from "./history/OrderHistory";
-import Products from "./products/Products";
-import ProductDetails from "./products/product-details/ProductDetails";
-import TrackOrders from "./track/TrackOrders";
+import { lazy } from "react";
+const Layout = lazy(() => import("../layouts/Layout"));
+const Main = lazy(() => import("../layouts/Main"));
+const Error404 = lazy(() => import("./Error404"));
+const Favorite = lazy(() => import("./Favorite"));
+const FilterPage = lazy(() => import("./FilterPage"));
+const ForgotPassword = lazy(() => import("./ForgotPassword"));
+const NonSTMemberSetup = lazy(() => import("./NonSTMemberSetup"));
+const Referrals = lazy(() => import("./Referrals"));
+const Review = lazy(() => import("./Review"));
+const Login = lazy(() => import("./auth/login/Login"));
+const Signup = lazy(() => import("./auth/signup/Signup"));
+const Cart = lazy(() => import("./cart/Cart"));
+const Checkout = lazy(() => import("./checkout/Checkout"));
+const DeliveryDateAndTimeForm = lazy(() => import("./checkout/steps/DeliveryDateAndTime"));
+const PaymentForm = lazy(() => import("./checkout/steps/Payment"));
+const DeliveryAddressForm = lazy(() => import("./checkout/steps/delivery-address/DeliveryAddress"));
+const Explore = lazy(() => import("./explore/Explore"));
+const OrderHistory = lazy(() => import("./history/OrderHistory"));
+const Products = lazy(() => import("./products/Products"));
+const ProductDetails = lazy(() => import("./products/product-details/ProductDetails"));
+const TrackOrders = lazy(() => import("./track/TrackOrders"));
+
+
+
+
+
 
 const AppRouter = createBrowserRouter([
   {
@@ -72,11 +78,6 @@ const AppRouter = createBrowserRouter([
       {
         path: Routes.CHECKOUT,
         element: <Checkout />,
-        action: () => {
-          console.log("Checkout route");
-
-          return null;
-        },
         children: [
           {
             index: true,
@@ -92,12 +93,6 @@ const AppRouter = createBrowserRouter([
             element: <PaymentForm />,
           },
         ],
-      },
-      {
-        path: "*",
-        loader: () => {
-          return redirect(Routes.HOME);
-        },
       },
     ],
   },
@@ -148,8 +143,9 @@ const AppRouter = createBrowserRouter([
   },
   {
     path: "*",
-    element: <Error404 />,
-  },
-]);
+      element: <Error404 />,
+    },
+  ],
+);
 
 export default AppRouter;
