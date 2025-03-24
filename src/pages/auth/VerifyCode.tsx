@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import AuthLayout from "../components/AuthLayout";
-import VerifyCodeForm from "../components/VerifyCodeForm";
+import AuthLayout from "@/components/AuthLayout";
+import VerifyCodeForm from "@/components/VerifyCodeForm";
 
 const VerifyCode = () => {
   const navigate = useNavigate();
