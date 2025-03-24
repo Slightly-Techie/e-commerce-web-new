@@ -1,5 +1,4 @@
-import { SignUpContext } from "@/pages/Signup";
-import { useContext } from "react";
+import { useSignUpContext } from "@/pages/auth/signup/sign-up-context";
 import { BsCodeSlash } from "react-icons/bs";
 import { PiUserBold } from "react-icons/pi";
 import { cn } from "../lib/utils";
@@ -13,7 +12,7 @@ const ChooseAccountType = () => {
     toggleMemberType,
     HandleSubmit,
     loading,
-  } = useContext(SignUpContext);
+  } = useSignUpContext();
 
   const ACCOUNTTYPES = [
     {
@@ -29,6 +28,13 @@ const ChooseAccountType = () => {
       icon: <PiUserBold size={20} />,
     },
   ];
+
+  // Handle submit with event prevention
+  const handleCreateAccount = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    HandleSubmit();
+  };
 
   return (
     <div className="mx-auto w-full max-w-[500px] rounded-lg bg-white px-8 py-8 text-black">
@@ -77,9 +83,10 @@ const ChooseAccountType = () => {
           Back
         </Button>
         <Button
-          onClick={HandleSubmit}
+          onClick={handleCreateAccount}
           btnType={loading ? ButtonType.disabled : ButtonType.primary}
           disabled={loading}
+          type="button"
         >
           {loading
             ? member_type == MemberType.TECHIE

@@ -7,7 +7,6 @@ import Label from "@/components/FormElements/Label";
 import SetupAccountLayout from "@/components/SetupAccountLayout";
 import useAuth from "@/hooks/auth/useAuth";
 import { REGEXPATTERNS } from "@/lib/constants";
-import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import {
@@ -30,21 +29,19 @@ const NonSTMemberSetup = () => {
     handleSubmit,
     setError,
     formState: { errors, isLoading },
+    getValues,
+    setValue,
   } = useForm<PersonalInfoFields>();
-
-  const [phone_number, setphone_number] = useState("");
 
   const navigate = useNavigate();
 
   const validatephone_number = () => {
-    return REGEXPATTERNS.phoneNumber.test(phone_number);
+    return REGEXPATTERNS.phoneNumber.test(getValues("phone_number"));
   };
 
   const auth = useAuth();
 
-  //   const [updateUser, { loading }] = useUpdataUserMutation()
-
-  const onSubmit: SubmitHandler<PersonalInfoFields> = (data) => {
+  const onSubmit: SubmitHandler<PersonalInfoFields> = async (data) => {
     if (!validatephone_number()) {
       setError("root", {
         message: "Enter a valid phone number. Eg: +233550000000",
@@ -52,22 +49,13 @@ const NonSTMemberSetup = () => {
       return;
     }
 
-    const id = auth.cookies.id;
-
-    if (!id) {
-      console.log("id not found");
-
-      return;
-    }
-
     const parsedData: CreateProfileSchema = {
       ...data,
-      user: id,
+      user: auth.cookies.id || "",
     };
 
-    // create profile
-    // const response = auth.createProfile(parsedData);
-    console.log(parsedData);
+    const response = await auth.createProfile(parsedData);
+    console.log(response);
   };
 
   return (
@@ -116,7 +104,7 @@ const NonSTMemberSetup = () => {
               <Label>Phone number</Label>
               <CountrySelectInput
                 handleChange={(number) => {
-                  setphone_number(number);
+                  setValue("phone_number", number);
                 }}
               />
 
@@ -145,12 +133,7 @@ const NonSTMemberSetup = () => {
               type="submit"
               disabled={isLoading}
               btnType={
-                errors.first_name ||
-                errors.last_name ||
-                errors.phone_number ||
-                isLoading
-                  ? ButtonType.disabled
-                  : ButtonType.primary
+                errors || isLoading ? ButtonType.disabled : ButtonType.primary
               }
             >
               {isLoading ? "Loading" : "Save and continue"}

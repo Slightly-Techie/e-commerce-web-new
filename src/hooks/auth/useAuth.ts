@@ -1,19 +1,24 @@
 import {
-  CreateProfileSchema,
-  ForgotPasswordFormFields,
-  ResetPassword,
   SignUpErrorResponse,
   SignupFormFields,
   SignUpResponse,
   SignUpSuccessResponse,
+} from "@/pages/auth/signup/signup.types";
+import {
+  CreateProfileSchema,
+  ForgotPasswordFormFields,
+  ResetPassword,
+  User,
 } from "@/types";
 import { AxiosError } from "axios";
 import { useCookies } from "react-cookie";
 import useSWR from "swr";
-import z from "zod";
 import useApi from "../api/useApi";
 
 interface Auth {
+  user: User;
+  isLoading: boolean;
+  error: Error;
   login: (email: string, password: string) => Promise<unknown>;
   signup: (formData: SignupFormFields) => Promise<SignUpResponse>;
   logout: () => Promise<unknown>;
@@ -26,14 +31,27 @@ interface Auth {
 const useAuth = (): Auth => {
   const api = useApi();
   const [cookies, setCookie] = useCookies(["token", "refreshToken", "id"]);
-  const { data, error, mutate, isLoading } = useSWR(cookies.id, api.getProfile);
+  const { data, error, mutate, isLoading } = useSWR(cookies.id, fetcher);
 
   const login = async (email: string, password: string) => {
     const response = await api.login({ email, password });
 
-    // mutate(); // Revalidate the SWR cache
+    if (response.status !== 200 && response.status !== 201) {
+      const errorData = response.data;
+      console.log("Login error response:", errorData);
+
+      return errorData as SignUpErrorResponse;
+    }
+
+    mutate();
     return response.data;
   };
+
+  async function fetcher() {
+    const response = await api.getProfile(cookies.id, cookies.token);
+    console.log("profile response", response);
+    return response.data as User;
+  }
 
   const signup = async (
     formData: SignupFormFields,
@@ -41,32 +59,42 @@ const useAuth = (): Auth => {
     try {
       const response = await api.signup(formData);
 
-      const data = response.data as SignUpResponse;
-      const signUpSuccess = z.custom<SignUpSuccessResponse>().parse(data);
+      if (response.status !== 200 && response.status !== 201) {
+        const errorData = response.data;
+        console.log("Signup error response:", errorData);
 
-      if (signUpSuccess.token) {
+        return errorData as SignUpErrorResponse;
+      }
+
+      const data = response.data as SignUpResponse;
+      console.log("Signup success data:", data);
+
+      if (SignUpSuccessResponse.safeParse(data).success) {
+        const signUpSuccess = SignUpSuccessResponse.parse(data);
+
         setCookie("id", signUpSuccess.id);
         setCookie("token", signUpSuccess.token.access);
         setCookie("refreshToken", signUpSuccess.token.refresh);
 
-        //   mutate(); // Revalidate the SWR cache
         return signUpSuccess;
       } else {
-        return response.data as SignUpErrorResponse;
+        return data as SignUpErrorResponse;
       }
     } catch (error) {
-      const axiosError = error as AxiosError;
-      const errors = axiosError.response?.data as SignUpErrorResponse;
+      if (error instanceof AxiosError && error.response) {
+        return error.response.data as SignUpErrorResponse;
+      }
 
-      //   console.log("axios errors", errors);
-
-      return errors;
+      // Return a generic error format if we can't extract proper error data
+      return {
+        detail: ["An unexpected error occurred during signup"],
+      } as unknown as SignUpErrorResponse;
     }
   };
 
   const logout = async () => {
     await api.logout();
-    // mutate(); // Revalidate the SWR cache
+    mutate();
   };
 
   const forgetPassword = async (email: ForgotPasswordFormFields) => {
@@ -78,13 +106,16 @@ const useAuth = (): Auth => {
   };
 
   const createProfile = async (data: CreateProfileSchema) => {
-    return await api.createProfile(data);
+    const response = await api.updateProfile(data, cookies.token);
+    await mutate();
+
+    return response.data;
   };
 
   return {
-    // user: data,
-    // isLoading,
-    // error,
+    user: data as User,
+    isLoading,
+    error,
     login,
     logout,
     signup,

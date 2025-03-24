@@ -1,4 +1,4 @@
-import ChooseAccountType from "../components/ChooseAccountType";
+import ChooseAccountType from "../../components/ChooseAccountType";
 
 const SetupAccount = () => {
   return <ChooseAccountType />;

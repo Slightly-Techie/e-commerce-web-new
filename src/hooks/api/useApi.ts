@@ -1,11 +1,10 @@
+import { SignupFormFields } from "@/pages/auth/signup/signup.types";
 import {
   CreateProfileSchema,
   ForgotPasswordFormFields,
   ResetPassword,
-  SignupFormFields,
 } from "@/types";
 import axios, { AxiosResponse } from "axios";
-
 interface ApiEndpoints {
   login: (credentials: {
     email: string;
@@ -17,44 +16,66 @@ interface ApiEndpoints {
     email: ForgotPasswordFormFields,
   ) => Promise<AxiosResponse<unknown>>;
   setPassword: (data: ResetPassword) => Promise<AxiosResponse<unknown>>;
-  getProfile: (id?: string) => Promise<AxiosResponse<unknown>>;
-  updateProfile: (data: CreateProfileSchema) => Promise<AxiosResponse<unknown>>;
-  createProfile: (data: CreateProfileSchema) => Promise<AxiosResponse<unknown>>;
+  getProfile: (id?: string, token?: string) => Promise<AxiosResponse<unknown>>;
+  updateProfile: (
+    data: CreateProfileSchema,
+    token: string,
+  ) => Promise<AxiosResponse<unknown>>;
+  createProfile: (
+    data: CreateProfileSchema,
+    token: string,
+  ) => Promise<AxiosResponse<unknown>>;
 }
 
+const apiClient = axios.create({
+  validateStatus: () => true,
+});
+
 const useApi = (): ApiEndpoints => {
-  const baseURL = "api";
+  const baseURL = "/api";
 
   const login = async (credentials: { email: string; password: string }) => {
-    return await axios.post(`${baseURL}/auth/login/`, credentials);
+    return await apiClient.post(`${baseURL}/auth/login/`, credentials);
   };
 
   const signup = async (data: SignupFormFields) => {
-    return await axios.post(`${baseURL}/auth/signup/`, data);
+    return await apiClient.post(`${baseURL}/auth/signup/`, data);
   };
 
   const logout = async () => {
-    return await axios.post(`${baseURL}/auth/logout/`);
+    return await apiClient.post(`${baseURL}/auth/logout/`);
   };
 
   const forgetPassword = async (email: ForgotPasswordFormFields) => {
-    return await axios.post(`${baseURL}/auth/forget-password`, email);
+    return await apiClient.post(`${baseURL}/auth/forget-password/`, email);
   };
 
   const setPassword = async (data: ResetPassword) => {
-    return await axios.post(`${baseURL}/auth/reset-password`, data);
+    return await apiClient.post(`${baseURL}/auth/reset-password/`, data);
   };
 
-  const getProfile = async (id?: string) => {
-    return await axios.get(`${baseURL}/auth/profile/${id}`);
+  const getProfile = async (id?: string, token?: string) => {
+    return await apiClient.get(`${baseURL}/profile/`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
   };
 
-  const updateProfile = async (data: CreateProfileSchema) => {
-    return await axios.put(`${baseURL}/auth/profile/`, data);
+  const updateProfile = async (data: CreateProfileSchema, token: string) => {
+    return await apiClient.patch(`${baseURL}/profile/`, data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
   };
 
-  const createProfile = async (data: CreateProfileSchema) => {
-    return await axios.post(`${baseURL}/auth/profile/`, data);
+  const createProfile = async (data: CreateProfileSchema, token: string) => {
+    return await apiClient.post(`${baseURL}/profile/`, data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
   };
 
   return {

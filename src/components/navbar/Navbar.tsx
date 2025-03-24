@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import personIcon from "../../assets/icons/navbar/person.svg";
-import starsImg from "../../assets/images/stars.png";
 import logo from "../../assets/logo.svg";
 import Button from "../Button.tsx";
 import Container from "../Container.tsx";
@@ -26,7 +25,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="flex w-full items-center justify-between rounded-bl-2xl rounded-br-2xl bg-white p-4 md:rounded-bl-none md:rounded-br-none fixed top-0 left-0 z-50">
+      <nav className="fixed left-0 top-0 z-50 flex w-full items-center justify-between rounded-bl-2xl rounded-br-2xl bg-white p-4 md:rounded-bl-none md:rounded-br-none">
         <Container>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4 md:w-full md:max-w-sm md:gap-8 lg:max-w-[540px] xl:max-w-5xl">
@@ -52,7 +51,9 @@ const Navbar = () => {
                 {isAuthenticated ? (
                   <Balance />
                 ) : (
-                  <Button label="Sign In" icon={personIcon} />
+                  <Link to="/login">
+                    <Button label="Sign In" icon={personIcon} />
+                  </Link>
                 )}
               </div>
             </div>

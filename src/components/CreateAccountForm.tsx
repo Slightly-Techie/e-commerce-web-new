@@ -1,18 +1,11 @@
-import { Routes } from "@/lib/routes";
-import { SignUpContext } from "@/pages/Signup";
-import { useContext } from "react";
+import { useSignUpContext } from "@/pages/auth/signup/sign-up-context";
+import { SignupFormFields } from "@/pages/auth/signup/signup.types";
 import { SubmitHandler } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { REGEXPATTERNS } from "../lib/constants";
 import { TextSizeStyles } from "../lib/styles";
 import { useAlertStore } from "../store/alertStore";
-import {
-  AlertType,
-  ButtonType,
-  FormHelperType,
-  SignupFormFields,
-  TextSize,
-} from "../types";
+import { AlertType, ButtonType, FormHelperType, TextSize } from "../types";
 import Alert from "./Alert";
 import Button from "./Button";
 import Form from "./FormElements/Form";
@@ -21,17 +14,13 @@ import Input from "./FormElements/Input";
 import InputGroup from "./FormElements/InputGroup";
 
 const CreateAccountForm = () => {
-  const navigate = useNavigate();
-  const onSubmit: SubmitHandler<SignupFormFields> = () => {
-    return;
+  const { toggleAccountType, form } = useSignUpContext();
 
-    // TODO: Implement the logic to submit the form
+  const onSubmit: SubmitHandler<SignupFormFields> = () => {
     toggleAccountType();
   };
 
   const { showAlert } = useAlertStore();
-
-  const { toggleAccountType, form } = useContext(SignUpContext);
 
   if (form === undefined) return null;
 
@@ -41,15 +30,11 @@ const CreateAccountForm = () => {
     formState: { errors, isValid },
   } = form;
 
-  //   console.log("errors", errors);
-
   return (
     <Form
       title="Create Account"
-      onSubmit={handleSubmit(onSubmit, () => {
-        navigate(Routes.ST_ACCOUNT);
-      })}
       className="px-4 md:px-12"
+      onSubmit={handleSubmit(onSubmit)}
     >
       {/* {errors && <Alert type={AlertType.error}>{errors.message}</Alert>} */}
       <Alert
@@ -150,6 +135,7 @@ const CreateAccountForm = () => {
       <Button
         className="w-full"
         btnType={!isValid ? ButtonType.disabled : ButtonType.primary}
+        disabled={!isValid}
       >
         Continue
       </Button>

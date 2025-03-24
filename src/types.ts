@@ -1,4 +1,4 @@
-import { UseFormRegister } from "./../node_modules/react-hook-form/dist/types/form.d";
+import { UseFormRegister } from "react-hook-form";
 
 export enum TextSize {
   small = "small",
@@ -62,31 +62,6 @@ export type RHFInputExtension = {
   register: RegisterFormValues;
   required: boolean;
 };
-
-export type SignupFormFields = {
-  email: string;
-  username: string;
-  password: string;
-  password2: string;
-  referral_code?: string;
-  member_type: MemberType;
-};
-
-export type SignUpSuccessResponse = {
-  id: string;
-  email: string;
-  token: {
-    access: string;
-    refresh: string;
-  };
-  username: string;
-};
-
-export type SignUpErrorResponse = {
-  [key: string]: string[];
-};
-
-export type SignUpResponse = SignUpSuccessResponse | SignUpErrorResponse;
 
 export type FilterFormFields = {
   categories?: string;

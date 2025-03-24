@@ -9,11 +9,11 @@ import Error404 from "./Error404";
 import Favorite from "./Favorite";
 import FilterPage from "./FilterPage";
 import ForgotPassword from "./ForgotPassword";
-import { Login } from "./Login";
 import NonSTMemberSetup from "./NonSTMemberSetup";
 import Referrals from "./Referrals";
 import Review from "./Review";
-import Signup from "./Signup";
+import Login from "./auth/login/Login";
+import Signup from "./auth/signup/Signup";
 import Cart from "./cart/Cart";
 import Checkout from "./checkout/Checkout";
 import DeliveryDateAndTimeForm from "./checkout/steps/DeliveryDateAndTime";
@@ -112,6 +112,9 @@ const AppRouter = createBrowserRouter([
   {
     path: Routes.SIGN_UP,
     element: <Signup />,
+    loader: async () => {
+      return null;
+    },
   },
   {
     path: Routes.FORGOT_PASSWORD,

@@ -1,0 +1,624 @@
+{
+  "apiInfo": {
+    "title": "E-commerce API",
+    "description": "API for managing an e-commerce platform including products, users, orders, and more",
+    "baseUrl": "https://ecommerce-api-2-4aq8.onrender.com",
+    "version": "v1"
+  },
+  "endpoints": {
+    "authentication": {
+      "login": {
+        "path": "/auth/login/",
+        "method": "POST",
+        "description": "Authenticate a user and return a token",
+        "requestBody": {
+          "email": "string",
+          "password": "string"
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully authenticated",
+            "content": {
+              "token": "string"
+            }
+          },
+          "401": {
+            "description": "Authentication failed"
+          }
+        }
+      },
+      "signup": {
+        "path": "/auth/signup/",
+        "method": "POST",
+        "description": "Register a new user",
+        "requestBody": {
+          "email": "string",
+          "password": "string",
+          "firstName": "string",
+          "lastName": "string"
+        },
+        "responses": {
+          "201": {
+            "description": "User successfully created"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "logout": {
+        "path": "/auth/logout/",
+        "method": "POST",
+        "description": "Logout the current user",
+        "responses": {
+          "200": {
+            "description": "Successfully logged out"
+          }
+        }
+      },
+      "forgetPassword": {
+        "path": "/auth/forget-password",
+        "method": "POST",
+        "description": "Request password reset for a user",
+        "requestBody": {
+          "email": "string"
+        },
+        "responses": {
+          "200": {
+            "description": "Password reset email sent"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "resetPassword": {
+        "path": "/auth/reset-password",
+        "method": "POST",
+        "description": "Reset user password with token",
+        "requestBody": {
+          "token": "string",
+          "password": "string",
+          "confirmPassword": "string"
+        },
+        "responses": {
+          "200": {
+            "description": "Password reset successful"
+          },
+          "400": {
+            "description": "Invalid input or token"
+          }
+        }
+      },
+      "getProfile": {
+        "path": "/auth/profile/{id}",
+        "method": "GET",
+        "description": "Get user profile information",
+        "parameters": {
+          "path": {
+            "id": "string (optional)"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User profile retrieved",
+            "content": "user profile object"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      },
+      "updateProfile": {
+        "path": "/auth/profile/",
+        "method": "PUT",
+        "description": "Update user profile information",
+        "requestBody": {
+          "firstName": "string",
+          "lastName": "string",
+          "email": "string",
+          "phoneNumber": "string",
+          "address": "object"
+        },
+        "responses": {
+          "200": {
+            "description": "Profile updated successfully"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "createProfile": {
+        "path": "/auth/profile/",
+        "method": "POST",
+        "description": "Create user profile information",
+        "requestBody": {
+          "firstName": "string",
+          "lastName": "string",
+          "email": "string",
+          "phoneNumber": "string",
+          "address": "object"
+        },
+        "responses": {
+          "201": {
+            "description": "Profile created successfully"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "products": {
+      "list": {
+        "path": "/products/",
+        "method": "GET",
+        "description": "List all products",
+        "parameters": {
+          "query": {
+            "page": "integer",
+            "limit": "integer",
+            "search": "string",
+            "category": "string",
+            "minPrice": "number",
+            "maxPrice": "number",
+            "sort": "string"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "List of products",
+            "content": {
+              "total": "integer",
+              "page": "integer",
+              "limit": "integer",
+              "products": "array of product objects"
+            }
+          }
+        }
+      },
+      "retrieve": {
+        "path": "/products/{id}",
+        "method": "GET",
+        "description": "Get a specific product by ID",
+        "parameters": {
+          "path": {
+            "id": "string"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Product details",
+            "content": "product object"
+          },
+          "404": {
+            "description": "Product not found"
+          }
+        }
+      },
+      "featured": {
+        "path": "/products/featured",
+        "method": "GET",
+        "description": "Get featured products",
+        "responses": {
+          "200": {
+            "description": "List of featured products",
+            "content": "array of product objects"
+          }
+        }
+      },
+      "topDeals": {
+        "path": "/products/deals",
+        "method": "GET",
+        "description": "Get product deals",
+        "responses": {
+          "200": {
+            "description": "List of product deals",
+            "content": "array of product objects"
+          }
+        }
+      }
+    },
+    "categories": {
+      "list": {
+        "path": "/categories/",
+        "method": "GET",
+        "description": "List all product categories",
+        "responses": {
+          "200": {
+            "description": "List of categories"
+          }
+        }
+      },
+      "retrieve": {
+        "path": "/api/categories/{id}/",
+        "method": "GET",
+        "description": "Get a specific category",
+        "parameters": {
+          "path": {
+            "id": "integer"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Category details"
+          },
+          "404": {
+            "description": "Category not found"
+          }
+        }
+      },
+      "create": {
+        "path": "/api/categories/",
+        "method": "POST",
+        "description": "Create a new category",
+        "requestBody": {
+          "name": "string",
+          "description": "string"
+        },
+        "responses": {
+          "201": {
+            "description": "Category created"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "update": {
+        "path": "/api/categories/{id}/",
+        "method": "PUT",
+        "description": "Update a category",
+        "parameters": {
+          "path": {
+            "id": "integer"
+          }
+        },
+        "requestBody": {
+          "name": "string",
+          "description": "string"
+        },
+        "responses": {
+          "200": {
+            "description": "Category updated"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "404": {
+            "description": "Category not found"
+          }
+        }
+      },
+      "partial_update": {
+        "path": "/api/categories/{id}/",
+        "method": "PATCH",
+        "description": "Partially update a category",
+        "parameters": {
+          "path": {
+            "id": "integer"
+          }
+        },
+        "requestBody": {
+          "name": "string (optional)",
+          "description": "string (optional)"
+        },
+        "responses": {
+          "200": {
+            "description": "Category updated"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "404": {
+            "description": "Category not found"
+          }
+        }
+      },
+      "delete": {
+        "path": "/api/categories/{id}/",
+        "method": "DELETE",
+        "description": "Delete a category",
+        "parameters": {
+          "path": {
+            "id": "integer"
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Category deleted"
+          },
+          "404": {
+            "description": "Category not found"
+          }
+        }
+      }
+    },
+    "orders": {
+      "list": {
+        "path": "/api/orders/",
+        "method": "GET",
+        "description": "List all orders for the authenticated user",
+        "responses": {
+          "200": {
+            "description": "List of orders"
+          }
+        }
+      },
+      "retrieve": {
+        "path": "/api/orders/{id}/",
+        "method": "GET",
+        "description": "Get a specific order by ID",
+        "parameters": {
+          "path": {
+            "id": "integer"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Order details"
+          },
+          "404": {
+            "description": "Order not found"
+          }
+        }
+      },
+      "create": {
+        "path": "/api/orders/",
+        "method": "POST",
+        "description": "Create a new order",
+        "requestBody": {
+          "items": "array of order items",
+          "shipping_address": "string",
+          "payment_method": "string"
+        },
+        "responses": {
+          "201": {
+            "description": "Order created"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "update_status": {
+        "path": "/api/orders/{id}/status/",
+        "method": "PATCH",
+        "description": "Update order status",
+        "parameters": {
+          "path": {
+            "id": "integer"
+          }
+        },
+        "requestBody": {
+          "status": "string (e.g., 'pending', 'processing', 'shipped', 'delivered')"
+        },
+        "responses": {
+          "200": {
+            "description": "Order status updated"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "404": {
+            "description": "Order not found"
+          }
+        }
+      }
+    },
+    "cart": {
+      "retrieve": {
+        "path": "/cart",
+        "method": "GET",
+        "description": "Get the current user's cart",
+        "responses": {
+          "200": {
+            "description": "Cart details"
+          }
+        }
+      },
+      "add_item": {
+        "path": "/api/cart/items/",
+        "method": "POST",
+        "description": "Add an item to the cart",
+        "requestBody": {
+          "product_id": "integer",
+          "quantity": "integer"
+        },
+        "responses": {
+          "201": {
+            "description": "Item added to cart"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "update_item": {
+        "path": "/api/cart/items/{id}/",
+        "method": "PUT",
+        "description": "Update a cart item",
+        "parameters": {
+          "path": {
+            "id": "integer"
+          }
+        },
+        "requestBody": {
+          "quantity": "integer"
+        },
+        "responses": {
+          "200": {
+            "description": "Cart item updated"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "404": {
+            "description": "Cart item not found"
+          }
+        }
+      },
+      "remove_item": {
+        "path": "/api/cart/items/{id}/",
+        "method": "DELETE",
+        "description": "Remove an item from the cart",
+        "parameters": {
+          "path": {
+            "id": "integer"
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Cart item removed"
+          },
+          "404": {
+            "description": "Cart item not found"
+          }
+        }
+      },
+      "clear": {
+        "path": "/api/cart/clear/",
+        "method": "POST",
+        "description": "Clear the cart",
+        "responses": {
+          "200": {
+            "description": "Cart cleared"
+          }
+        }
+      }
+    },
+    "users": {
+      "retrieve_profile": {
+        "path": "/api/user/profile/",
+        "method": "GET",
+        "description": "Get the current user's profile",
+        "responses": {
+          "200": {
+            "description": "User profile"
+          }
+        }
+      },
+      "update_profile": {
+        "path": "/api/user/profile/",
+        "method": "PUT",
+        "description": "Update the user's profile",
+        "requestBody": {
+          "first_name": "string",
+          "last_name": "string",
+          "email": "string",
+          "phone": "string",
+          "avatar": "file"
+        },
+        "responses": {
+          "200": {
+            "description": "Profile updated"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "change_password": {
+        "path": "/api/user/change-password/",
+        "method": "POST",
+        "description": "Change the user's password",
+        "requestBody": {
+          "old_password": "string",
+          "new_password": "string",
+          "confirm_password": "string"
+        },
+        "responses": {
+          "200": {
+            "description": "Password changed"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "reviews": {
+      "list_for_product": {
+        "path": "/products/{productId}/reviews",
+        "method": "GET",
+        "description": "List all reviews for a product",
+        "parameters": {
+          "path": {
+            "product_id": "integer"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "List of reviews"
+          }
+        }
+      },
+      "create": {
+        "path": "/api/products/{product_id}/reviews/",
+        "method": "POST",
+        "description": "Create a review for a product",
+        "parameters": {
+          "path": {
+            "product_id": "integer"
+          }
+        },
+        "requestBody": {
+          "rating": "integer (1-5)",
+          "comment": "string"
+        },
+        "responses": {
+          "201": {
+            "description": "Review created"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "update": {
+        "path": "/api/reviews/{id}/",
+        "method": "PUT",
+        "description": "Update a review",
+        "parameters": {
+          "path": {
+            "id": "integer"
+          }
+        },
+        "requestBody": {
+          "rating": "integer (1-5)",
+          "comment": "string"
+        },
+        "responses": {
+          "200": {
+            "description": "Review updated"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "404": {
+            "description": "Review not found"
+          }
+        }
+      },
+      "delete": {
+        "path": "/api/reviews/{id}/",
+        "method": "DELETE",
+        "description": "Delete a review",
+        "parameters": {
+          "path": {
+            "id": "integer"
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Review deleted"
+          },
+          "404": {
+            "description": "Review not found"
+          }
+        }
+      }
+    }
+  }
+}
