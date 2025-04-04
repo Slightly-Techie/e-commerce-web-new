@@ -17,6 +17,7 @@ import Form from "../../FormElements/Form";
 import FormHelper from "../../FormElements/FormHelper";
 import Input from "../../FormElements/Input";
 import InputGroup from "../../FormElements/InputGroup";
+import { SetPasswordErrorResponse } from "@/pages/auth/login/login.types";
 
 export default function SetPassword() {
   const [isLoading, setisLoading] = useState(false);
@@ -26,6 +27,7 @@ export default function SetPassword() {
     register,
     handleSubmit,
     watch,
+   setError,
     formState: { errors },
   } = useForm<ResetPasswordFormFields>();
 
@@ -39,7 +41,14 @@ export default function SetPassword() {
 
     try {
       const response = await auth.setPassword(credentials);
-      console.log(response);
+      
+      if (SetPasswordErrorResponse.safeParse(response).success) {
+        const errorData = response as SetPasswordErrorResponse
+        setError("code", {
+        message: errorData[0]
+      })
+    
+      }
     } catch (error) {
       console.error(error);
       toast.error("An error occurred. Please try again later.");

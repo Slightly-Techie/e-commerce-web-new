@@ -108,7 +108,8 @@ const Signup = () => {
     <SignUpContext.Provider value={value}>
       <AuthLayout
         buttonRoute="/login"
-        buttonText="Already have an account? Login"
+        buttonText="Already have an account? Login" 
+      
       >
         <AnimatePresence initial={false}>
           {showAccountType ? (

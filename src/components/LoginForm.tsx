@@ -1,7 +1,7 @@
 import useAuth from "@/hooks/auth/useAuth";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { REGEXPATTERNS } from "../lib/constants";
 import { AlertType, FormHelperType } from "../types";
@@ -13,6 +13,8 @@ import FormHelper from "./FormElements/FormHelper";
 import Input from "./FormElements/Input";
 import InputGroup from "./FormElements/InputGroup";
 import Label from "./FormElements/Label";
+import { SignInErrorResponse, SignInSuccessResponse } from "@/pages/auth/login/login.types";
+import { Routes } from "@/lib/routes";
 
 type FormValues = {
   email: string;
@@ -21,6 +23,7 @@ type FormValues = {
 
 const LoginForm = () => {
   const [isLoading, setisLoading] = useState(false);
+  const navigate = useNavigate()
   const auth = useAuth();
 
   const {
@@ -34,7 +37,17 @@ const LoginForm = () => {
 
     try {
       const response = await auth.login(formData.email, formData.password);
-      console.log(response);
+      if (SignInSuccessResponse.safeParse(response).success) {
+        navigate(Routes.HOME)
+        return;
+      } else if (SignInErrorResponse.safeParse(response).success) {
+        const errorData = response as SignInErrorResponse
+        toast.error(errorData?.detail);
+        return;
+      } else {
+         toast.error("An error occurred. Please try again later.");
+      }
+     
     } catch (error) {
       console.error(error);
       toast.error("An error occurred. Please try again later.");

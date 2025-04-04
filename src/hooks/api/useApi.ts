@@ -20,6 +20,7 @@ interface ApiEndpoints {
   updateProfile: (
     data: CreateProfileSchema,
     token: string,
+    id: string
   ) => Promise<AxiosResponse<unknown>>;
   createProfile: (
     data: CreateProfileSchema,
@@ -62,8 +63,8 @@ const useApi = (): ApiEndpoints => {
     });
   };
 
-  const updateProfile = async (data: CreateProfileSchema, token: string) => {
-    return await apiClient.patch(`${baseURL}/profile/`, data, {
+  const updateProfile = async (data: CreateProfileSchema, token: string, id: string) => {
+    return await apiClient.patch(`${baseURL}/profile/${id}/`, data, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

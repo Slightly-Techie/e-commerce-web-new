@@ -14,6 +14,7 @@ import { AxiosError } from "axios";
 import { useCookies } from "react-cookie";
 import useSWR from "swr";
 import useApi from "../api/useApi";
+import { ResetPasswordResponse, SetPasswordErrorResponse, SignInSuccessResponse } from "@/pages/auth/login/login.types";
 
 interface Auth {
   user: User;
@@ -24,13 +25,13 @@ interface Auth {
   logout: () => Promise<unknown>;
   forgetPassword: (email: ForgotPasswordFormFields) => Promise<unknown>;
   setPassword: (data: ResetPassword) => Promise<unknown>;
-  cookies: { token?: string; refreshToken?: string; id?: string };
+  cookies: { token?: string; refreshToken?: string; id?: string, profile_id?: string, resetToken?: string };
   createProfile: (data: CreateProfileSchema) => Promise<unknown>;
 }
 
 const useAuth = (): Auth => {
   const api = useApi();
-  const [cookies, setCookie] = useCookies(["token", "refreshToken", "id"]);
+  const [cookies, setCookie] = useCookies(["token", "refreshToken", "id", "profile_id", "resetToken"]);
   const { data, error, mutate, isLoading } = useSWR(cookies.id, fetcher);
 
   const login = async (email: string, password: string) => {
@@ -38,18 +39,28 @@ const useAuth = (): Auth => {
 
     if (response.status !== 200 && response.status !== 201) {
       const errorData = response.data;
-      console.log("Login error response:", errorData);
+      // console.log("Login error response:", errorData);
 
       return errorData as SignUpErrorResponse;
     }
 
+    const data = response.data as SignInSuccessResponse
+
+  
+    setCookie("token", data.access)
+    setCookie("refreshToken", data.refresh)
+    
+
     mutate();
-    return response.data;
+    return data;
   };
 
   async function fetcher() {
     const response = await api.getProfile(cookies.id, cookies.token);
-    console.log("profile response", response);
+   
+    const profileData = response.data as { results: { id: string }[] };
+
+    setCookie("profile_id", profileData.results[0]?.id);
     return response.data as User;
   }
 
@@ -98,15 +109,48 @@ const useAuth = (): Auth => {
   };
 
   const forgetPassword = async (email: ForgotPasswordFormFields) => {
-    await api.forgetPassword(email);
+
+    try {
+      const response = await api.forgetPassword(email);
+      const data = response.data as ResetPasswordResponse
+      setCookie("resetToken", data.token)
+      return data
+    } catch (error) {
+      if (error instanceof AxiosError && error.response) {
+        return error.response.data as SignUpErrorResponse;
+      }
+
+      // Return a generic error format if we can't extract proper error data
+      return {
+        detail: ["An unexpected error occurred during signup"],
+      } as SignUpErrorResponse
+    }
   };
 
   const setPassword = async (data: ResetPassword) => {
-    await api.setPassword(data);
+    try {
+      const token = cookies.resetToken
+      const response = await api.setPassword({
+        ...data,
+        token
+      });
+      
+      if (response.status !== 200 && response.status !== 201) {
+        const errorData = response.data;
+       
+
+        return errorData as SetPasswordErrorResponse;
+      }
+      
+      return response.data
+    } catch (error) {
+      console.error(error)
+    }
+   
   };
 
   const createProfile = async (data: CreateProfileSchema) => {
-    const response = await api.updateProfile(data, cookies.token);
+    const response = await api.updateProfile(data, cookies.token, cookies.profile_id);
     await mutate();
 
     return response.data;

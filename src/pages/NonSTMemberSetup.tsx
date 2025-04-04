@@ -15,6 +15,7 @@ import {
   FormHelperType,
   Gender,
 } from "../types";
+import { Routes } from "@/lib/routes";
 
 type PersonalInfoFields = {
   first_name: string;
@@ -55,12 +56,13 @@ const NonSTMemberSetup = () => {
     };
 
     const response = await auth.createProfile(parsedData);
-    console.log(response);
+   navigate(Routes.SETUP_COMPLETE)
+    
   };
 
   return (
     <SetupAccountLayout>
-      <div className="mx-auto">
+      <div className="mx-auto pb-10">
         <div className="mb-6">
           <h1 className="text-2xl font-bold">Personal Information</h1>
           <small className="font-bold text-gray500">
