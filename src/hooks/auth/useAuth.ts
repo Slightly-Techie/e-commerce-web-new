@@ -57,9 +57,6 @@ const useAuth = (): Auth => {
 
   async function fetcher() {
     const response = await api.getProfile(cookies.id, cookies.token);
-   
-
-
     return response.data as User;
   }
 
