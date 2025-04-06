@@ -25,13 +25,13 @@ interface Auth {
   logout: () => Promise<unknown>;
   forgetPassword: (email: ForgotPasswordFormFields) => Promise<unknown>;
   setPassword: (data: ResetPassword) => Promise<unknown>;
-  cookies: { token?: string; refreshToken?: string; id?: string, profile_id?: string, resetToken?: string };
+  cookies: { token?: string; refreshToken?: string; id?: string, resetToken?: string };
   createProfile: (data: CreateProfileSchema) => Promise<unknown>;
 }
 
 const useAuth = (): Auth => {
   const api = useApi();
-  const [cookies, setCookie] = useCookies(["token", "refreshToken", "id", "profile_id", "resetToken"]);
+  const [cookies, setCookie] = useCookies(["token", "refreshToken", "id", "resetToken"]);
   const { data, error, mutate, isLoading } = useSWR(cookies.id, fetcher);
 
   const login = async (email: string, password: string) => {
@@ -58,9 +58,8 @@ const useAuth = (): Auth => {
   async function fetcher() {
     const response = await api.getProfile(cookies.id, cookies.token);
    
-    const profileData = response.data as { results: { id: string }[] };
 
-    setCookie("profile_id", profileData.results[0]?.id);
+
     return response.data as User;
   }
 
@@ -149,11 +148,14 @@ const useAuth = (): Auth => {
    
   };
 
-  const createProfile = async (data: CreateProfileSchema) => {
-    const response = await api.updateProfile(data, cookies.token, cookies.profile_id);
-    await mutate();
+  const createProfile = async (user: CreateProfileSchema) => {
+    if (data?.id) {
+      const response = await api.updateProfile(user, cookies.token, data?.id);
+      await mutate();
+      return response.data;
 
-    return response.data;
+    }
+
   };
 
   return {

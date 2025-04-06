@@ -111,6 +111,7 @@ export type ActiveSelectedCountry = {
 
 export type UserType = "NON_TECHIE" | "TECHIE";
 export type User = {
+  user: string;
   accountType: UserType;
   createdAt: Date;
   email: string;
