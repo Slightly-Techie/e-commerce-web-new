@@ -17,7 +17,9 @@ import Form from "../../FormElements/Form";
 import FormHelper from "../../FormElements/FormHelper";
 import Input from "../../FormElements/Input";
 import InputGroup from "../../FormElements/InputGroup";
-import { SetPasswordErrorResponse } from "@/pages/auth/login/login.types";
+import { SetPasswordErrorResponse, SetPasswordSuccessResponse } from "@/pages/auth/login/login.types";
+import { useNavigate } from "react-router-dom";
+import { Routes } from "@/lib/routes";
 
 export default function SetPassword() {
   const [isLoading, setisLoading] = useState(false);
@@ -30,8 +32,10 @@ export default function SetPassword() {
    setError,
     formState: { errors },
   } = useForm<ResetPasswordFormFields>();
+  const navigate = useNavigate()
 
   const onSubmit: SubmitHandler<ResetPasswordFormFields> = async (data) => {
+
     const credentials = {
       token: "",
       code: data.code,
@@ -41,14 +45,18 @@ export default function SetPassword() {
 
     try {
       const response = await auth.setPassword(credentials);
-      
+      // console.log(response)
       if (SetPasswordErrorResponse.safeParse(response).success) {
         const errorData = response as SetPasswordErrorResponse
-        setError("code", {
-        message: errorData[0]
-      })
-    
-      }
+          setError("code", {
+            message: errorData[0],
+          });
+        } else if (SetPasswordSuccessResponse.safeParse(response).success) {
+          const successData = response as SetPasswordSuccessResponse
+          toast(successData.message)
+          navigate(Routes.HOME)
+        }
+        
     } catch (error) {
       console.error(error);
       toast.error("An error occurred. Please try again later.");

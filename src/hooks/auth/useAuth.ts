@@ -14,7 +14,7 @@ import { AxiosError } from "axios";
 import { useCookies } from "react-cookie";
 import useSWR from "swr";
 import useApi from "../api/useApi";
-import { ResetPasswordResponse, SetPasswordErrorResponse, SignInSuccessResponse } from "@/pages/auth/login/login.types";
+import { ResetPasswordResponse, SetPasswordErrorResponse, SetPasswordSuccessResponse, SignInSuccessResponse } from "@/pages/auth/login/login.types";
 
 interface Auth {
   user: User;
@@ -138,7 +138,7 @@ const useAuth = (): Auth => {
         return errorData as SetPasswordErrorResponse;
       }
       
-      return response.data
+      return response.data as SetPasswordSuccessResponse
     } catch (error) {
       console.error(error)
     }
