@@ -15,9 +15,13 @@ import Form from "../../FormElements/Form";
 import FormHelper from "../../FormElements/FormHelper";
 import Input from "../../FormElements/Input";
 import InputGroup from "../../FormElements/InputGroup";
+import { ResetPasswordResponse } from "@/pages/auth/login/login.types";
+import { Routes } from "@/lib/routes";
+import { useNavigate } from "react-router-dom";
 
 const ForgotPasswordForm = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate()
   const auth = useAuth();
 
   const {
@@ -30,8 +34,10 @@ const ForgotPasswordForm = () => {
     setIsLoading(true);
 
     try {
-      const response = await auth.forgetPassword(data);
-      console.log(response);
+      const response = await auth.forgetPassword(data) as ResetPasswordResponse;
+      if (response.token) {
+        navigate(Routes.SET_PASSWORD)
+      }
     } catch (error) {
       console.error(error);
       toast.error("An error occurred. Please try again later.");
@@ -43,8 +49,7 @@ const ForgotPasswordForm = () => {
   return (
     <Form title="Forgot password?" onSubmit={handleSubmit(onSubmit)}>
       <Alert type={AlertType.info}>
-        If the email address exists, you will be sent an email with instructions
-        on how to reset your password.
+        If the email address exists, you will receive and email and redirected to a page to set your password
       </Alert>
 
       <InputGroup>

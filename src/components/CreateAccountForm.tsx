@@ -33,7 +33,7 @@ const CreateAccountForm = () => {
   return (
     <Form
       title="Create Account"
-      className="px-4 md:px-12"
+      className="px-4  md:px-12"
       onSubmit={handleSubmit(onSubmit)}
     >
       {/* {errors && <Alert type={AlertType.error}>{errors.message}</Alert>} */}

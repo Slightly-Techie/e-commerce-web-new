@@ -13,7 +13,7 @@ const AuthLayout = ({ children, buttonRoute, buttonText }: AuthLayoutProps) => {
   const navigate = useNavigate();
 
   return (
-    <div className="bg-signup flex min-h-svh flex-col bg-cover bg-center bg-no-repeat text-white">
+    <div className="bg-signup pb-10 flex min-h-svh flex-col bg-cover bg-center bg-no-repeat text-white">
       <div className="py-8 pr-4 md:pr-[40px]">
         <div className="header grid place-content-end">
           {buttonText && buttonRoute && (
