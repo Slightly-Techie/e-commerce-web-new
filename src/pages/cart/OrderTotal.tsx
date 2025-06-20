@@ -42,7 +42,7 @@ const OrderTotal = () => {
         <Button
           disabled={cart.length === 0}
           label="Check out now"
-          className="font-semibold disabled:opacity-100"
+          className="font-semibold disabled:opacity-100 cursor-pointer"
           onClick={() => navigate("/checkout")}
         />
       </div>

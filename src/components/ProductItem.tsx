@@ -105,7 +105,7 @@ const ProductItem = ({
             btnType={ButtonType.secondary}
             invert
             icon={cartIcon}
-            className="w-full font-semibold"
+            className="w-full font-semibold cursor-pointer"
             onClick={addToCartHandler}
           />
         ) : (

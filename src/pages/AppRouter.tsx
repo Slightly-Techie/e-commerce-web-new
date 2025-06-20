@@ -2,7 +2,7 @@ import AccountSetupComplete from "@/components/AccountSetup/AccountSetupComplete
 import STMemberSetup from "@/components/AccountSetup/STMemberSetup";
 import SetPassword from "@/components/forms/auth/SetPassword";
 import { Routes } from "@/lib/routes";
-import { createBrowserRouter, redirect } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import { lazy } from "react";
 const Layout = lazy(() => import("../layouts/Layout"));
 const Main = lazy(() => import("../layouts/Main"));
