@@ -132,6 +132,7 @@ export type AlertArgs = { alertType: AlertType; alertText: string };
 export type OrderStatus = "Delivered" | "Pending";
 
 export interface Order {
+  id: string;
   productName: string;
   category: string;
   orderId: string;

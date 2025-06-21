@@ -52,6 +52,15 @@ input[type="number"] {
   height: calc(100vw - 50px);
 }
 
+tbody::before {
+  content: "";
+  display: block;
+  height: 16px;
+}
+
+
+
+
 @layer base {
   :root {
     --background: 0 0% 100%;
